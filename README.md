@@ -4,7 +4,7 @@ Simple (fast and bad done) php automated script for download and pack card image
 ## How to run
 You only need **php** binary (instaled in your system or uncompressed) with **curl** and **zip** extensions enabled (if not an error message will show and script ends his execution).
 
-#### GNU/Unix based
+### GNU/Unix based
 Download the script where you want, for example using:
 ```
 wget xxx
@@ -15,7 +15,7 @@ php scryfalldler -l
 ```
 This will show a list with the avaiable sets.
 
-#### Windows based
+### Windows based
 Download the script where you want, for example using (this is Windows PowerShell):
 ```
 wget xxx -OutFile scryfalldler
