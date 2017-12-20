@@ -1,5 +1,5 @@
 # scryfalldler
-Simple (fast and bad coded) php automated script for download and pack card images using [scryfall.com](http://scryfall.com) API site ready for XMage.
+Simple (fast and bad coded) php automated script for download and zip card images using [scryfall.com](http://scryfall.com) API site ready for XMage.
 
 This script is a simply php cli coded. I wanted to practice a bit with php cli scripts and this is what I made. This way, we can take advantage of php multi-platform and easy curl (http download) and zip tools.
 
