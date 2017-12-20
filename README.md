@@ -34,12 +34,12 @@ If you don't have php installed or path in file system, you could invoke pointin
 ```
 
 ## Example commands
-* This will download "Commander 2017" set cards and zip to "C17.zip" in base folder:
+* This will download "Commander 2017" set cards (in large size) and zip to "C17.zip" in base folder:
   * `php scryfalldler -s c17`
 * This will download "Commander 2017" set cards and zip to "C17.zip" in specified folder:
-  * `php scryfalldler -s c17 -f /home/user/xmage/myImages`
+  * `php scryfalldler -set c17 -f /home/user/xmage/myImages`
 * This will download "Commander 2017" cards art crop image set:
-  * `php scryfalldler -s c17 -z art_crop`
+  * `php scryfalldler -set c17 -size art_crop`
 * This will download "Commander 2017" set cards behind proxy:
   * `php scryfalldler -s c17 -p http://myproxy:8888`
 * This will download "Commander 2017" cards from Wizards Gatherer:
