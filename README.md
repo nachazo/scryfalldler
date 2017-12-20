@@ -1,8 +1,10 @@
 # scryfalldler
 Simple (fast and bad done) php automated script for download and pack card images using [scryfall.com](http://scryfall.com) API site ready for XMage.
 
+This script is a simply php cli coded. I wanted to practice a bit with php cli scripts and this is what I made. This way, we can take advantage of php multi-platform and easy curl (http download) and zip tools.
+
 ## How to run
-You only need **php** binary (instaled in your system or uncompressed) with **curl** and **zip** extensions enabled, if not an error message will show and script ends his execution. Normally comes installed and enabled in most lamps and similar. If not, for Debian based GNU/Unix you simply can execute with `sudo apt install php-zip php-curl`.
+You only need **php** binary (instaled in your system or uncompressed) with **curl** and **zip** extensions enabled, if not an error message will show and script ends his execution. Normally comes installed and enabled in most lamps and similar. If not, for Debian based GNU/Unix, you simply can do it with `sudo apt install php-zip php-curl`.
 
 ### GNU/Unix based
 Download the script where you want, for example using:
