@@ -1,14 +1,14 @@
 # scryfalldler
 Simple (fast and bad coded) php automated script for download and zip card images using the open [scryfall.com](http://scryfall.com) API site ready for XMage.
 
-This script is a simply php cli coded. I wanted to practice a bit with php cli scripts and this is what I made. This way, we can take advantage of php multi-platform and easy curl (http download) and zip tools.
+This script is a simply php cli coded. I wanted to practice a bit with php cli scripts and this is what I made. This way, we can take advantage of php multi-platform, executable in clients to avoid request and size limitations and easy curl (http download) and zip tools.
 
 Use [Issues](https://github.com/nachazo/scryfalldler/issues) for feature request or bugs.
 
 ## How to run
 You only need **php** 5.3+ (instaled in your system or uncompressed) with **curl** extension enabled, if not an error message will show and script ends its execution. Normally comes installed and enabled in most lamps and similar. If not, for Debian based GNU/Unix, you simply can do it with `sudo apt install php-curl`. For Windows, search over there :P
 
-Btw, script don't need php-zip extension, I'm using built-in phar to compress in zip (one requeriment less) and in my tests result size is the same.
+Btw, script doesn't need php-zip extension, I'm using built-in phar to compress in zip (one requirement less) and in my tests result size is the same.
 
 ### GNU/Unix based
 Download the script where you want, for example using:
