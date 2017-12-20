@@ -7,7 +7,7 @@ You only need **php** binary (instaled in your system or uncompressed) with **cu
 ### GNU/Unix based
 Download the script where you want, for example using:
 ```
-wget xxx
+wget https://raw.githubusercontent.com/nachazo/scryfalldler/master/scryfalldler
 ```
 And then simply run it with the desired options (this is a test command):
 ```
@@ -18,7 +18,7 @@ This will show a list with the avaiable sets.
 ### Windows based
 Download the script where you want, for example using (this is Windows PowerShell):
 ```
-wget xxx -OutFile scryfalldler
+wget https://raw.githubusercontent.com/nachazo/scryfalldler/master/scryfalldler -OutFile scryfalldler
 ```
 And then simply run it with the desired options (this is a test command):
 ```
