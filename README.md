@@ -1,5 +1,5 @@
 # scryfalldler
-Simple (fast and bad done) php automated script for download and pack card images using scryfall.com API site ready for XMage.
+Simple (fast and bad done) php automated script for download and pack card images using [scryfall.com](http://scryfall.com) API site ready for XMage.
 
 ## How to run
 You only need **php** binary (instaled in your system or uncompressed) with **curl** and **zip** extensions enabled (if not an error message will show and script ends his execution).
@@ -7,28 +7,28 @@ You only need **php** binary (instaled in your system or uncompressed) with **cu
 ### GNU/Unix based
 Download the script where you want, for example using:
 ```
-wget https://raw.githubusercontent.com/nachazo/scryfalldler/master/scryfalldler
+> wget https://raw.githubusercontent.com/nachazo/scryfalldler/master/scryfalldler
 ```
 And then simply run it with the desired options (this is a test command):
 ```
-php scryfalldler -l
+> php scryfalldler -l
 ```
 This will show a list with the avaiable sets.
 
 ### Windows based
 Download the script where you want, for example using (this is Windows PowerShell):
 ```
-wget https://raw.githubusercontent.com/nachazo/scryfalldler/master/scryfalldler -OutFile scryfalldler
+> wget https://raw.githubusercontent.com/nachazo/scryfalldler/master/scryfalldler -OutFile scryfalldler
 ```
 And then simply run it with the desired options (this is a test command):
 ```
-php scryfalldler -l
+> php scryfalldler -l
 ```
 This will show a list with the avaiable sets.
 
 If you don't have php installed or path in file system, you could invoke pointing php.exe file, for example using:
 ```
-C:\myPhpFolder\php scryfalldler -l
+> C:\myPhpFolder\php scryfalldler -l
 ```
 
 ## Example commands
