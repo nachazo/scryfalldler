@@ -1,0 +1,550 @@
+<?php
+new Cli($argv);
+
+class Cli
+{
+    private $arguments;
+    private $scryfall;
+    
+    public $title = "Scryfall Downloader";
+    public $version = "1.0";
+    public $description = "is a simple (fast and bad coded) php automated script for download and zip <b>card images</b> using the open scryfall.com API site ready for XMage.";
+    public $command = " php scryfalldler [arguments]";
+    public $author = " https://github.com/nachazo/scryfalldler";
+
+    private $options = array(
+        "help" => array(
+            "short" => "h",
+            "large" => "help",
+            "description" => "Shows help (this info)."
+        ),
+        "list" => array(
+            "short" => "l",
+            "large" => "list",
+            "description" => "List avaiable sets for download with codes from Scryfall."
+        ),
+        "set" => array(
+            "short" => "s",
+            "large" => "set",
+            "description" => "Launch download cards operation from the specified set from the site."
+        ),
+        "size" => array(
+            "short" => "z",
+            "large" => "size",
+            "description" => "The size for downloaded images (\"image_uris\" from Scryfall API).\n\t\tSpecial value \"<cyan>gatherer</cyan>\" downloads Wizards Gatherer image if avaiable.",
+            "default" => "large",
+            "valid_options" => array("small", "normal", "large", "png", "art_crop", "border_crop", "gatherer")
+        ),
+        "folder" => array(
+            "short" => "f",
+            "large" => "folder",
+            "description" => "Destination folder for the zip file (not tested with relative ones)."
+        ),
+        "force" => array(
+            "short" => "r",
+            "large" => "force",
+            "description" => "Force zip and inside folder name (for tokens download, for example)."
+        ),
+        "debug" => array(
+            "short" => "d",
+            "large" => "debug",
+            "description" => "With this, script only show messages but not download or create folder."
+        ),
+        "test" => array(
+            "short" => "t",
+            "large" => "test",
+            "description" => "Test your connection with Scryfall."
+        ),
+        "proxy" => array(
+            "short" => "p",
+            "large" => "proxy",
+            "description" => "Set proxy for connections (format http://proxy:port)."
+        )
+    );
+
+    public function __construct($arguments)
+    {
+        $this->scryfall = new Scryfall;
+        $this->arguments = $arguments;
+        $this->doTheJob();
+    }
+
+    private function doTheJob()
+    {
+        $this->title();
+        if (count($this->arguments)<2 or $this->optionExist("help")) {
+            $this->help();
+            $this->end();
+        }
+        File::cleanDir();
+        $this->checkCurl();
+
+        $this->setProxy();        
+        $this->setSize();
+        $this->setFolder();
+        $this->setForce();
+        $this->setDebug();
+
+        if ($this->optionExist("test")) $this->scryfall->checkConnection();
+
+        if ($this->optionExist("list")) {
+            $this->scryfall->listSets();
+            echo $this->line("");
+            if (!$setInput = $this->lineRead("So, with selected options, <b>type the set code you want</b>: ", null, null, false, false)) {
+                $this->end();
+            }
+            echo $this->line("");
+        }
+
+        if ($set = $this->optionExist("set") or $setInput) {
+            if ($setInput) $set = $setInput;
+            if ($cards = $this->scryfall->getSet($set)) {
+                echo $this->line("I have cards, so going to start downloading! ☺", "green", "none", true, true);
+                $this->scryfall->processCards($cards, $set);
+            }
+            $this->end();
+        }
+
+        $this->end();
+    }
+
+    private function checkCurl()
+    {
+        if (function_exists('curl_init')) {
+            echo $this->line("Extension curl for php is activated ✓", "green", "none", true);
+        } else {
+            echo $this->line("Error!: Extension curl for php is NOT activated, you need it! ✗", "cyan", "none", true); die;
+        }
+    }
+
+    private function setProxy()
+    {
+        if ($proxyCli = $this->optionExist("proxy")) {
+            global $proxy;
+            $proxy = $proxyCli;
+            return true;
+        }
+        return false;
+    }
+
+    private function setSize()
+    {
+        global $size;
+        $sizeCli = $this->optionExist("size");
+        if ($sizeCli and in_array($sizeCli, $this->options['size']['valid_options'])) {
+            $size = $sizeCli;
+        } else {
+            $size = $this->options['size']['default'];
+        }
+        return true;
+    }
+
+    private function setFolder()
+    {
+        if ($folderCli = $this->optionExist("folder")) {
+            global $folder;
+            $folder = $folderCli;
+            return true;
+        }
+        return false;
+    }
+
+    private function setForce()
+    {
+        if ($forceCli = $this->optionExist("force")) {
+            global $force;
+            $force = $forceCli;
+            return true;
+        }
+        return false;
+    }
+
+    private function setDebug()
+    {
+        if ($debugCli = $this->optionExist("debug")) {
+            global $debug;
+            $debug = $debugCli;
+            return true;
+        }
+        return false;
+    }
+
+    private function optionExist($what)
+    {
+        if ($what and $this->options and $this->arguments) {
+            if ($this->options[$what]) {
+                if ($res = $this->getArgument($this->options[$what]['short']) or $res = $this->getArgument($this->options[$what]['large'])) {
+                    return $res;
+                }
+            }
+        }
+        return false;
+    }
+
+    private function getArgument($what)
+    {
+        if ($what and $this->arguments) {
+            $pos = null;
+            foreach ($this->arguments as $key=>$value) {
+                if ($value == "-".$what or $value == "--".$what) {
+                    if (@$this->arguments[$key+1]) {
+                        return $this->arguments[$key+1];
+                    }
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    private function title()
+    {
+        echo $this->line(" ", "none", "none");
+        echo $this->line("                     ", "red", "yellow");
+        echo $this->line(" SCRYFALL DOWNLOADER ", "red", "yellow");
+        echo $this->line("                v".$this->version." ", "red", "yellow");
+        echo $this->line("                     ", "red", "yellow");
+        echo $this->line(" ", "none", "none");
+    }
+
+    public function end()
+    {
+        echo self::line(" ", "none", "none");
+        die;
+    }
+
+    public function line($text, $colorText = null, $colorBackground = null, $addDate = false, $breakLine = true)
+    {
+        $res = null;
+        if ($addDate==true) {
+            $res .= date("Y-m-d H:i:s").":";
+        }
+        $spaces = null;
+        if ($breakLine==true) $spaces = " ";
+        $res .= Colors::getColoredString($spaces.$text.$spaces, $colorText, $colorBackground);
+        if ($breakLine==true) $res .= "\n";
+        return $res;
+    }
+
+    public function lineRead($text, $colorText = null, $colorBackground = null, $addDate = false, $breakLine = true)
+    {
+        echo self::line($text, $colorText, $colorBackground, $addDate, $breakLine);
+        return trim(fgets(STDIN));
+    }
+
+    private function help()
+    {
+        echo $this->line("<yellow>{$this->title}</yellow> {$this->description}");
+        echo $this->line("");
+        echo $this->line("<yellow>Usage:</yellow>");
+        echo $this->line("{$this->command}");
+        echo $this->line("");
+        echo $this->line("<yellow>Arguments:</yellow>");
+        echo $this->line(" All arguments also accept \"--\".");
+        foreach ($this->options as $option) {
+            echo $this->line(" <green>-".$option['short'].", -".$option['large']."</green>\t".$option['description']);
+            if (@$option['default']) echo $this->line("\t\t  Default value: <red>".$option['default']."</red>.");
+            if (@is_array($option['valid_options'])) {
+                echo $this->line("\t\t  Possible values: ", null, null, false, false);
+                foreach ($option['valid_options'] as $valid_option) {
+                    echo $this->line("<cyan>".$valid_option."</cyan>", null, null, false, false);
+                    if (end($option['valid_options'])!=$valid_option) echo $this->line(", ", null, null, false, false);
+                }
+                echo $this->line(".", null, null, false, false);
+                echo $this->line("");
+            }
+        }
+        echo $this->line("");
+        echo $this->line("<yellow>Site:</yellow>");
+        echo $this->line("{$this->author}");
+    }
+}
+
+class Scryfall
+{
+    private $baseUrl = "https://api.scryfall.com/";
+    private $gathererUrl = "http://gatherer.wizards.com/Handlers/Image.ashx?type=card&multiverseid=";    
+
+    public function getSets()
+    {
+        echo Cli::line("Downloading list of sets...", null, null, true);
+        if ($data = Http::get($this->baseUrl."sets")) {
+            return array_reverse($data->data);
+        }
+        return false;
+    }
+
+    public function listSets()
+    {
+        if ($sets = $this->getSets()) {
+            foreach ($sets as $set) {
+                $line = $set->code."\t<b>".$set->name."</b>  -  <purple>".$set->card_count." cards</purple>";
+                if (@$set->released_at) $line .= "  -  <cyan>".$set->released_at."</cyan>";
+                echo Cli::line($line);
+            }
+        }
+    }
+
+    public function getSet($set)
+    {
+        if ($set) {
+            echo Cli::line("Requested set \"<red>".$set."</red>\"", null, null, true);
+            if ($data = Http::get($this->baseUrl."sets/".$set)) {
+                if ($data->code=="not_found") {
+                    echo Cli::line("Set not found, process ends ✗", "red", "none", true);
+                    Cli::end();
+                }
+                $line_set_info = null;
+                $line_set_info = "Found set <b>".$data->name."</b> (";
+                if (@$data->released_at) $line_set_info .= "Released at <cyan>".$data->released_at."</cyan>. ";
+                if (@$data->card_count) $line_set_info .= "Card count: <light_cyan>".$data->card_count."</light_cyan>";
+                $line_set_info .= ")";
+                echo Cli::line($line_set_info, null, null, true);
+                echo Cli::line("Now, I'm going to start requesting cards and info...", null, null, true);
+                if ($data->search_uri) {
+                    $cards = array();
+                    $pageData = Http::get($data->search_uri);
+                    echo Cli::line("Got page...", null, null, true);
+                    $cards = array_merge($cards, $pageData->data);
+                    do {
+                        echo Cli::line("Got one more page...", null, null, true);
+                        $pageData = Http::get(@$pageData->next_page);
+                        if (@$pageData->data) $cards = array_merge($cards, $pageData->data);
+                    } while(@$pageData->has_more==true);
+                }
+                echo Cli::line("Total cards gotten: <b>".count($cards)."</b>", null, null, true);
+                return $cards;
+            }
+        }
+        return false;
+    }
+
+    public function processCards($cards, $set)
+    {
+        global $size;
+        global $folder;
+        global $force;
+        global $debug;
+        if ($force) {
+            $setNameForZip = $force;
+        } else {
+            $setNameForZip = $set;
+        }
+        if (is_array($cards)) {
+            echo Cli::line("Size for cards is: <b>".$size."</b>", null, null, true);
+            $setNameForZip = strtoupper($setNameForZip);
+            File::makeDir("tmp");
+            File::makeDir("tmp/".$setNameForZip);
+            $route = "tmp/".$setNameForZip."/";
+
+            $total = 0;
+            $cual = 0;
+
+            $sum_list = array();
+            $plain_list = array();
+            foreach ($cards as $card) {
+                array_push($plain_list, $card->name);
+            }
+            $plain_list = array_count_values($plain_list);
+
+            foreach ($cards as $card) {
+                $name = $card->name;
+
+                if (@$plain_list[$name]>1 and is_numeric($card->collector_number)) {
+                    @$sum_list[$name] = $sum_list[$name]+1;
+                    $name .= " ".$sum_list[$name];
+                }
+
+                if ($this->isLand($card->type_line) or !is_numeric($card->collector_number)) {
+                    $name .= ".".$card->collector_number;
+                }
+                $name .= ".full.jpg";
+
+                if (!$debug) {
+                    $url = null;
+                    if ($size=="gatherer") {
+                        if (@$card->multiverse_ids[0]) {
+                            $url = $this->gathererUrl.$card->multiverse_ids[0];
+                        } else {
+                            echo Cli::line(" - No gatherer image for <red>".$card->name."</red> ", null, null, true);
+                            continue;
+                        }
+                    } else {
+                        $url = $card->image_uris->{$size};
+                    }
+                    $img = Http::get($url, false);
+                    file_put_contents($route.$name, $img);
+                    $total++;             
+                }
+                $cual++;
+                echo Cli::line(" + Saving ".$cual."/".count($cards)." <cyan>".$name."</cyan> ", null, null, true);
+            }
+            if ($total==0) {
+                echo Cli::line("No cards downloaded... So no more execution to do. ✗", "red", "none", true);
+                Cli::end();
+            }
+            echo Cli::line("All images downloaded, going to create zip file: <b>".$set.".zip</b>", null, null, true);
+            $destination_folder = null;
+            if ($folder) {
+                if (!is_dir($folder) and !$debug) File::makeDir($folder);
+                $destination_folder = $folder."/";
+            }
+            if (!$debug) {
+                File::zip("tmp", $destination_folder.$setNameForZip.".zip");
+            }
+            File::cleanDir();
+            echo Cli::line("Zip created and temporal files cleaned", "green", "none", true);            
+            echo Cli::line("<b>Process ends OK! ☺☺☺ </b> ", "green", "magenta", true);
+        }
+    }
+
+    public function isLand($type)
+    {
+        if ($type) {
+            if (strpos($type, "Basic Land") !== false) {
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public function checkConnection()
+    {
+        $data = Http::get($this->baseUrl);
+        if ($data->code=="not_found") {
+            echo Cli::line("Connection OK with Scryfall ✓", "green", "none", true);
+        } else {
+            echo Cli::line("Error!: Connection with Scryfall not working ✗", "red", "none", true);
+        }
+    }
+}
+
+class File
+{
+    public static function deleteDir($dirPath) {
+        if (! is_dir($dirPath)) {
+            throw new InvalidArgumentException("$dirPath must be a directory");
+        }
+        if (substr($dirPath, strlen($dirPath) - 1, 1) != '/') {
+            $dirPath .= '/';
+        }
+        $files = glob($dirPath . '*', GLOB_MARK);
+        foreach ($files as $file) {
+            if (is_dir($file)) {
+                self::deleteDir($file);
+            } else {
+                unlink($file);
+            }
+        }
+        rmdir($dirPath);
+    }
+
+    public static function makeDir($name)
+    {
+        if ($name) {
+            mkdir($name);
+        }
+        return true;
+    }
+
+    public static function cleanDir()
+    {
+        if (is_dir("tmp")) {
+            self::deleteDir("tmp");
+        }
+    }
+
+    function zip($source, $destination)
+    {
+        $phar = new PharData($destination);
+        $phar->buildFromDirectory($source, '~[.][0-9a-z]+$~i');
+        return true;
+    }
+}
+
+class Http
+{
+    public function save() {
+        $ch = curl_init();    
+        curl_setopt($ch, CURLOPT_FILE, $out); 
+        curl_setopt($ch, CURLOPT_HEADER, 0); 
+        curl_setopt($ch, CURLOPT_URL, $file);
+        curl_exec($ch);    
+        curl_close($ch);
+    }
+
+    public function get($route, $json_decoded = true) {
+        global $proxy;
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_URL, $route);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        if ($proxy) curl_setopt($ch, CURLOPT_PROXY, $proxy);
+        $res = curl_exec($ch);
+        curl_close($ch);
+        if ($res) {
+            if ($json_decoded==true) $res = json_decode($res);
+            return $res;
+        } else {
+            return false;
+        }
+    }
+}
+
+class Colors
+{
+    private static $foreground_colors = array(
+        'black' => '0;30',
+        'gray' => '0;30',
+        'dark_gray' => '1;30',
+        'blue' => '0;34',
+        'light_blue' => '1;34',
+        'green' => '0;32',
+        'light_green' => '1;32',
+        'cyan' => '0;36',
+        'light_cyan' => '1;36',
+        'red' => '0;31',
+        'light_red' => '1;31',
+        'purple' => '0;35',
+        'light_purple' => '1;35',
+        'brown' => '0;33',
+        'yellow' => '0;33',
+        'light_yellow' => '1;33',
+        'light_gray' => '0;37',
+        'white' => '1;37',
+        'b' => '1'
+    );
+    private static $background_colors = array(
+        'black' => '40',
+        'red' => '41',
+        'green' => '42',
+        'yellow' => '43',
+        'blue' => '44',
+        'magenta' => '45',
+        'cyan' => '46',
+        'light_gray' => '47'
+    );
+
+    public function getColoredString($string, $foreground_color = null, $background_color = null) {
+        $colored_string = "";
+
+        if (isset(self::$foreground_colors[$foreground_color])) {
+            $colored_string .= "\033[" . self::$foreground_colors[$foreground_color] . "m";
+        }
+        if (isset(self::$background_colors[$background_color])) {
+            $colored_string .= "\033[" . self::$background_colors[$background_color] . "m";
+        }
+
+        $colored_string .=  $string . "\033[0m";
+
+        foreach (self::$foreground_colors as $color=>$value) {
+            if (strpos($colored_string, "<".$color.">") !== false ) {
+                $colored_string = str_replace("<".$color.">", "\033[".$value."m", $colored_string);
+                $colored_string = str_replace("</".$color.">", "\033[0m", $colored_string);
+            }
+        }
+
+        return $colored_string;
+    }
+}
