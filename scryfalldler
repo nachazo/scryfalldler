@@ -96,7 +96,7 @@ class Cli
             echo $this->line("");
         }
 
-        if ($set = $this->optionExist("set") or $setInput) {
+        if ($set = $this->optionExist("set") or @$setInput) {
             if ($setInput) $set = $setInput;
             if ($cards = $this->scryfall->getSet($set)) {
                 echo $this->line("I have cards, so going to start downloading! ☺", "green", "none", true, true);
@@ -278,7 +278,7 @@ class Scryfall
     {
         if ($sets = $this->getSets()) {
             foreach ($sets as $set) {
-                $line = $set->code."\t<b>".$set->name."</b>  -  <purple>".$set->card_count." cards</purple>";
+                $line = $set->code."\t<b>".$set->name."</b>  -  <light_cyan>".$set->card_count." cards</light_cyan>";
                 if (@$set->released_at) $line .= "  -  <cyan>".$set->released_at."</cyan>";
                 echo Cli::line($line);
             }
