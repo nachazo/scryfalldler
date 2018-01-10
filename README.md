@@ -63,7 +63,7 @@ Of course you can combine parameters, also using short or large reserved words, 
   * `php scryfalldler -s c17 -p http://myproxy:8888`
 * This will download "Commander 2017" card images from Wizards Gatherer:
   * `php scryfalldler -s c17 -z gatherer`
-* This will download "Commander 2017" tokens and zip subfolder "C17", you could drag&drop to TOK.zip:
+* This will download "Commander 2017" tokens and zip into a subfolder named "C17", you could drag&drop to TOK.zip:
   * `php scryfalldler -set tc17 -r C17`
 
 ## Help
