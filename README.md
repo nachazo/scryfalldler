@@ -75,6 +75,7 @@ Usage:
 Arguments: 
   All arguments also accept "--". 
     -h, -help	Shows help (this info). 
+    -v, -versionShow version from your downloaded script.
     -l, -list	List avaiable sets for download with codes from Scryfall. 
     -s, -set	Launch download cards operation from the specified set from the site. 
     -z, -size	The size for downloaded images ("image_uris" from Scryfall API).
