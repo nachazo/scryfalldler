@@ -31,7 +31,7 @@ If you don't have php path configured in file system, you could invoke pointing 
 ```cmd
 > /etc/bin/php scryfalldler -l
 ```
-Also, if you want, you can give execute permissions with `chmod +x scryfalldler` to use without "php" word in the commands, just `> scryfalldler` (or depending your system `> ./scryfalldler`). Depending how you saved the file, maybe you need to convert line endings with `> sed -i s/\\r//g scryfalldler`.
+Also, if you want, you can give execute permissions with `chmod +x scryfalldler` to use without "php" word in the commands, just `scryfalldler` (or depending your system `./scryfalldler`). Depending how you saved the file, maybe you need to convert line endings with `sed -i s/\\r//g scryfalldler`.
 
 ### Windows based
 Download the script where you want, save the path to a file or, for example, using Windows PowerShell (<kbd>Win</kbd> + <kbd>r</kbd>, then `powershell`):
