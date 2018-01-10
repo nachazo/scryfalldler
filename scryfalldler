@@ -6,6 +6,7 @@ class Cli
 {
     private $arguments;
     private $scryfall;
+    private $curl;
     
     public $title = "Scryfall Downloader";
     public $version = "1.0";
@@ -221,17 +222,19 @@ class Cli
 
     private function checkForUpdate($onNormalExecute = true)
     {
-        if ($res = Http::get($this->master, false)) {
+        $ch = Http::curl_init();
+        if ($res = Http::get($this->master, $ch, false)) {
             $version = $this->get_string_between($res, 'public $version = "', '";');
             $msg = "Your version: ".$this->version.". Last version: ".$version;
             if (version_compare($version, $this->version) == 0) {
-                echo $this->line("<green>You have the last version</green> (".$msg.")", "none", "none", $onNormalExecute);
+                echo $this->line("<green>You have the latest version</green> (".$msg.")", "none", "none", $onNormalExecute);
             } else if (version_compare($version, $this->version) > 0) {
                 echo $this->line("There are a new version! (".$msg.")", "white", "red", $onNormalExecute);
             } else {
                 echo $this->line("<green>You have the updated version</green> (".$msg.")", "none", "none", $onNormalExecute);
             }
         }
+        Http::curl_close($ch);
         return true;
     }
 
@@ -316,9 +319,11 @@ class Scryfall
     public function getSets()
     {
         echo Cli::line("Downloading list of sets...", null, null, true);
-        if ($data = Http::get($this->baseUrl."sets")) {
+        $ch = Http::curl_init();
+        if ($data = Http::get($this->baseUrl."sets", $ch)) {
             return array_reverse($data->data);
         }
+        Http::curl_close($ch);
         return false;
     }
 
@@ -337,7 +342,8 @@ class Scryfall
     {
         if ($set) {
             echo Cli::line("Requested set \"<red>".$set."</red>\"", null, null, true);
-            if ($data = Http::get($this->baseUrl."sets/".$set)) {
+            $ch = Http::curl_init();
+            if ($data = Http::get($this->baseUrl."sets/".$set, $ch)) {
                 if ($data->code=="not_found") {
                     echo Cli::line("Set not found, process ends ✗", "red", "none", true);
                     Cli::end();
@@ -351,19 +357,20 @@ class Scryfall
                 echo Cli::line("Now, I'm going to start requesting cards and info...", null, null, true);
                 if ($data->search_uri) {
                     $cards = array();
-                    $pageData = Http::get($data->search_uri);
+                    $pageData = Http::get($data->search_uri, $ch);
                     echo Cli::line("Got page...", null, null, true);
                     $cards = array_merge($cards, $pageData->data);
                     do {
                         echo Cli::line("Got one more page...", null, null, true);
-                        $pageData = Http::get(@$pageData->next_page);
+                        $pageData = Http::get(@$pageData->next_page, $ch);
                         if (@$pageData->data) $cards = array_merge($cards, $pageData->data);
                     } while(@$pageData->has_more==true);
                 }
                 $cards = $this->fixCardFaces($cards);
-                echo Cli::line("Total cards gotten: <b>".count($cards)."</b>", null, null, true);
+                echo Cli::line("Total cards/files to download: <b>".count($cards)."</b>", null, null, true);
                 return $cards;
             }
+            Http::curl_close($ch);
         }
         return false;
     }
@@ -421,6 +428,8 @@ class Scryfall
             }
             $plain_list = array_count_values($plain_list);
 
+            $ch = Http::curl_init();
+
             foreach ($cards as $card) {
                 $name = $card->name;
 
@@ -446,13 +455,14 @@ class Scryfall
                     } else {
                         $url = $card->image_uris->{$size};
                     }
-                    $img = Http::get($url, false);
+                    $img = Http::get($url, $ch, false);
                     file_put_contents($route.$name, $img);
                     $total++;             
                 }
                 $cual++;
                 echo Cli::line(" + Saving ".$cual."/".count($cards)." <cyan>".$name."</cyan> ", null, null, true);
             }
+            Http::curl_close($ch);
             if ($total==0) {
                 echo Cli::line("No cards downloaded... So no more execution to do. ✗", "red", "none", true);
                 Cli::end();
@@ -484,12 +494,14 @@ class Scryfall
     
     public function checkConnection()
     {
-        $data = Http::get($this->baseUrl);
+        $ch = Http::curl_init();
+        $data = Http::get($this->baseUrl, $ch);
         if ($data->code=="not_found") {
             echo Cli::line("Connection OK with Scryfall ✓", "green", "none", true);
         } else {
             echo Cli::line("Error!: Connection with Scryfall not working ✗", "red", "none", true);
         }
+        Http::curl_close($ch);
     }
 }
 
@@ -538,25 +550,25 @@ class File
 
 class Http
 {
-    public function save() {
-        $ch = curl_init();    
-        curl_setopt($ch, CURLOPT_FILE, $out); 
-        curl_setopt($ch, CURLOPT_HEADER, 0); 
-        curl_setopt($ch, CURLOPT_URL, $file);
-        curl_exec($ch);    
-        curl_close($ch);
+    public function curl_init()
+    {
+        return curl_init();
     }
 
-    public function get($route, $json_decoded = true) {
+    public function curl_close($ch)
+    {
+        if ($ch) curl_close($ch);
+    }
+
+    public function get($route, $ch, $json_decoded = true) {
         global $proxy;
-        $ch = curl_init();
+        if (!$ch) return false;
         curl_setopt($ch, CURLOPT_HEADER, 0);
         curl_setopt($ch, CURLOPT_URL, $route);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         if ($proxy) curl_setopt($ch, CURLOPT_PROXY, $proxy);
         $res = curl_exec($ch);
-        curl_close($ch);
         if ($res) {
             if ($json_decoded==true) $res = json_decode($res);
             return $res;
