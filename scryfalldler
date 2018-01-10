@@ -1,3 +1,4 @@
+#!/usr/bin/env php
 <?php
 new Cli($argv);
 
@@ -312,11 +313,32 @@ class Scryfall
                         if (@$pageData->data) $cards = array_merge($cards, $pageData->data);
                     } while(@$pageData->has_more==true);
                 }
+                $cards = $this->fixCardFaces($cards);
                 echo Cli::line("Total cards gotten: <b>".count($cards)."</b>", null, null, true);
                 return $cards;
             }
         }
         return false;
+    }
+
+    public function fixCardFaces($cards)
+    {
+        if (is_array($cards)) {
+            foreach ($cards as $card) {
+                if (is_array(@$card->card_faces)) {
+                    foreach ($card->card_faces as $face) {
+                        $face->collector_number = $card->collector_number;
+                        $aux_cards[] = $face;
+                    }
+                } else {
+                    $aux_cards[] = $card;
+                }
+            }
+            unset($cards);
+            $cards = $aux_cards;
+            unset($aux_cards);
+        }
+        return $cards;
     }
 
     public function processCards($cards, $set)
