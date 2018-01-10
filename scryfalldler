@@ -12,6 +12,7 @@ class Cli
     public $description = "is a simple (fast and bad coded) php automated script for download and zip <b>card images</b> using the open scryfall.com API site ready for XMage.";
     public $command = " php scryfalldler [arguments]";
     public $author = " https://github.com/nachazo/scryfalldler";
+    public $master = "https://raw.githubusercontent.com/nachazo/scryfalldler/master/scryfalldler";
 
     private $options = array(
         "help" => array(
@@ -65,6 +66,11 @@ class Cli
             "short" => "p",
             "large" => "proxy",
             "description" => "Set proxy for connections (format http://proxy:port)."
+        ),
+        "no-check" => array(
+            "short" => "n",
+            "large" => "no-check",
+            "description" => "By default, script check for updates each execution (requesting to GitHub).\n\t\tA message will warn you on new versions. You can avoid it with this option."
         )
     );
 
@@ -91,6 +97,8 @@ class Cli
         $this->setFolder();
         $this->setForce();
         $this->setDebug();
+        
+        if (!$this->optionExist("no-check")) $this->checkForUpdate();
 
         if ($this->optionExist("test")) $this->scryfall->checkConnection();
 
@@ -207,7 +215,24 @@ class Cli
     private function showVersion()
     {
         echo $this->line("This scryfalldler version is: <green>".$this->version."</green>", "none", "none");
+        if (!$this->optionExist("no-check")) $this->checkForUpdate(false);
         $this->end();
+    }
+
+    private function checkForUpdate($onNormalExecute = true)
+    {
+        if ($res = Http::get($this->master, false)) {
+            $version = $this->get_string_between($res, 'public $version = "', '";');
+            $msg = "Your version: ".$this->version.". Last version: ".$version;
+            if (version_compare($version, $this->version) == 0) {
+                echo $this->line("<green>You have the last version</green> (".$msg.")", "none", "none", $onNormalExecute);
+            } else if (version_compare($version, $this->version) > 0) {
+                echo $this->line("There are a new version! (".$msg.")", "white", "red", $onNormalExecute);
+            } else {
+                echo $this->line("<green>You have the updated version</green> (".$msg.")", "none", "none", $onNormalExecute);
+            }
+        }
+        return true;
     }
 
     private function title()
@@ -270,6 +295,16 @@ class Cli
         echo $this->line("");
         echo $this->line("<yellow>Site:</yellow>");
         echo $this->line("{$this->author}");
+    }
+
+    function get_string_between($string, $start, $end)
+    {
+        $string = ' ' . $string;
+        $ini = strpos($string, $start);
+        if ($ini == 0) return '';
+        $ini += strlen($start);
+        $len = strpos($string, $end, $ini) - $ini;
+        return substr($string, $ini, $len);
     }
 }
 
