@@ -79,16 +79,16 @@ Arguments:
     -l, -list		List avaiable sets for download with codes from Scryfall. 
     -s, -set		Launch download cards operation from the specified set from the site. 
     -z, -size		The size for downloaded images ("image_uris" from Scryfall API).
-               		 Special value "gatherer" downloads Wizards Gatherer image if avaiable. 
-               		 Default value: large. 
-               		 Possible values: small, normal, large, png, art_crop, border_crop, gatherer.  
+                Special value "gatherer" downloads Wizards Gatherer image if avaiable. 
+                Default value: large. 
+                Possible values: small, normal, large, png, art_crop, border_crop, gatherer.  
     -f, -folder		Destination folder for the zip file (not tested with relative ones). 
     -r, -force		Force zip and inside folder name (for tokens download, for example).
     -d, -debug		With this, script only show messages but not download or create folder. 
     -t, -test		Test your connection with Scryfall. 
     -p, -proxy		Set proxy for connections (format http://proxy:port).
     -n, -no-check	By default, script check for updates each execution (requesting to GitHub).
-                	A message will warn you on new versions. You can avoid it with this option.
+                A message will warn you on new versions. You can avoid it with this option.
 
 Site: 
   https://github.com/nachazo/scryfalldler 
