@@ -97,7 +97,7 @@ class Cli
         }
 
         if ($set = $this->optionExist("set") or @$setInput) {
-            if ($setInput) $set = $setInput;
+            if (@$setInput) $set = $setInput;
             if ($cards = $this->scryfall->getSet($set)) {
                 echo $this->line("I have cards, so going to start downloading! ☺", "green", "none", true, true);
                 $this->scryfall->processCards($cards, $set);
