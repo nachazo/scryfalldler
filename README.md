@@ -34,11 +34,11 @@ If you don't have php path configured in file system, you could invoke pointing 
 Also, if you want, you can give execute permissions with `chmod +x scryfalldler` to use without "php" word in the commands, just `> scryfalldler` or (depending your system) `> ./scryfalldler`.
 
 ### Windows based
-Download the script where you want, for example using Windows PowerShell (<kbd>Win</kbd> + <kbd>r</kbd>, then `powershell`):
+Download the script where you want, save the path to a file or for example using Windows PowerShell (<kbd>Win</kbd> + <kbd>r</kbd>, then `powershell`):
 ```cmd
 > wget https://raw.githubusercontent.com/nachazo/scryfalldler/master/scryfalldler -OutFile scryfalldler
 ```
-And then simply run it in the same console with the desired options (this is a test command):
+And then simply run it in a console (<kbd>Win</kbd> + <kbd>r</kbd>, then `cmd`) with the desired options (this is a test command):
 ```cmd
 > php scryfalldler -l
 ```
