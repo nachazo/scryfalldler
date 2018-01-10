@@ -19,6 +19,11 @@ class Cli
             "large" => "help",
             "description" => "Shows help (this info)."
         ),
+        "version" => array(
+            "short" => "v",
+            "large" => "version",
+            "description" => "Show version from your downloaded script."
+        ),
         "list" => array(
             "short" => "l",
             "large" => "list",
@@ -77,6 +82,7 @@ class Cli
             $this->help();
             $this->end();
         }
+        if ($this->optionExist("version")) $this->showVersion();
         File::cleanDir();
         $this->checkCurl();
 
@@ -198,6 +204,12 @@ class Cli
         return false;
     }
 
+    private function showVersion()
+    {
+        echo $this->line("This scryfalldler version is: <green>".$this->version."</green>", "none", "none");
+        $this->end();
+    }
+
     private function title()
     {
         echo $this->line(" ", "none", "none");
@@ -297,7 +309,7 @@ class Scryfall
                 }
                 $line_set_info = null;
                 $line_set_info = "Found set <b>".$data->name."</b> (";
-                if (@$data->released_at) $line_set_info .= "Released at <cyan>".$data->released_at."</cyan>. ";
+                if (@$data->released_at) $line_set_info .= "Release date: <cyan>".$data->released_at."</cyan>. ";
                 if (@$data->card_count) $line_set_info .= "Card count: <light_cyan>".$data->card_count."</light_cyan>";
                 $line_set_info .= ")";
                 echo Cli::line($line_set_info, null, null, true);
@@ -326,8 +338,13 @@ class Scryfall
         if (is_array($cards)) {
             foreach ($cards as $card) {
                 if (is_array(@$card->card_faces)) {
+                    $pos = 0;
                     foreach ($card->card_faces as $face) {
                         $face->collector_number = $card->collector_number;
+                        if (count(@$card->multiverse_ids)>0) {
+                            $face->multiverse_ids[0] = $card->multiverse_ids[$pos];
+                            $pos++;
+                        }
                         $aux_cards[] = $face;
                     }
                 } else {
