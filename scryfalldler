@@ -127,9 +127,9 @@ class Cli
     private function checkCurl()
     {
         if (function_exists('curl_init')) {
-            echo $this->line("Extension curl for php is activated ✓", "green", "none", true);
+            echo $this->line("Extension curl for php is activated ☺", "green", "none", true);
         } else {
-            echo $this->line("Error!: Extension curl for php is NOT activated, you need it! ✗", "cyan", "none", true); die;
+            echo $this->line("Error!: Extension curl for php is NOT activated, you need it!", "cyan", "none", true); die;
         }
     }
 
@@ -229,7 +229,7 @@ class Cli
             if (version_compare($version, $this->version) == 0) {
                 echo $this->line("<green>You have the latest version</green> (".$msg.")", "none", "none", $onNormalExecute);
             } else if (version_compare($version, $this->version) > 0) {
-                echo $this->line("There are a new version! (".$msg.")", "white", "red", $onNormalExecute);
+                echo $this->line("There is a new version! (".$msg.")", "white", "red", $onNormalExecute);
             } else {
                 echo $this->line("<green>You have the updated version</green> (".$msg.")", "none", "none", $onNormalExecute);
             }
@@ -345,7 +345,7 @@ class Scryfall
             $ch = Http::curl_init();
             if ($data = Http::get($this->baseUrl."sets/".$set, $ch)) {
                 if ($data->code=="not_found") {
-                    echo Cli::line("Set not found, process ends ✗", "red", "none", true);
+                    echo Cli::line("Set not found, process ends", "red", "none", true);
                     Cli::end();
                 }
                 $line_set_info = null;
@@ -464,7 +464,7 @@ class Scryfall
             }
             Http::curl_close($ch);
             if ($total==0) {
-                echo Cli::line("No cards downloaded... So no more execution to do. ✗", "red", "none", true);
+                echo Cli::line("No cards downloaded... So no more execution to do.", "red", "none", true);
                 Cli::end();
             }
             echo Cli::line("All images downloaded, going to create zip file: <b>".$setNameForZip.".zip</b>", null, null, true);
@@ -497,9 +497,9 @@ class Scryfall
         $ch = Http::curl_init();
         $data = Http::get($this->baseUrl, $ch);
         if ($data->code=="not_found") {
-            echo Cli::line("Connection OK with Scryfall ✓", "green", "none", true);
+            echo Cli::line("Connection OK with Scryfall ☺", "green", "none", true);
         } else {
-            echo Cli::line("Error!: Connection with Scryfall not working ✗", "red", "none", true);
+            echo Cli::line("Error!: Connection with Scryfall not working", "red", "none", true);
         }
         Http::curl_close($ch);
     }
