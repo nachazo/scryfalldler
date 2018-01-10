@@ -1,20 +1,20 @@
 # scryfalldler
 Simple (fast and probably *bad* coded) php client automated script for download and zip card images using the open [scryfall.com](http://scryfall.com) API site ready for XMage.
 
-This script is a simply php cli coded. I wanted to practice a bit with php cli scripts and this is what I made. This way, we can take advantage of php multi-platform, client executed (not web server, to avoid requests and filesize limitations), easy curl (http download) and zip tools.
+This script is a simply php cli coded. I wanted to practice a bit with php cli scripts and this is what I made. With php we can take advantage of expanded php multi-platform, client executed (not web server, to avoid requests and filesize limitations), easy curl (http download) and zip tools.
 
 Use [Issues](https://github.com/nachazo/scryfalldler/issues) for feature request or bugs.
 
 Don't forget to support [scryfall.com](http://scryfall.com).
 
 ## How to run
-You only need **php** 5.3+ (instaled in your system or uncompressed, for example from [php downloads page](http://php.net/downloads.php) or LAMP folder - note: **no** web server required) with **curl extension enabled**. Normally comes installed and enabled in most lamps or similar. If not, for Debian based GNU/Unix like Ubuntu, you simply can do it with `sudo apt install php-curl`. For Windows, search over there :P
+You only need **php** 5.3+ (instaled in your system or uncompressed, for example from [php downloads page](http://php.net/downloads.php) or LAMP folder - note: **no** web server required, noly php) with **curl extension enabled**. Normally comes installed and enabled in most lamps or similar. If not, for Debian based GNU/Unix like Ubuntu, you simply can do it with `sudo apt install php-curl`. For Windows, search over there (could be done just editing two lines in php.ini file) :P
 
-So just execute command and place resultant zip in your XMage images folder. For tokens you can drag&drop to TOK.zip file.
+So, just execute command and place resultant zip in your XMage images folder. For tokens you can drag&drop to TOK.zip file.
 
-Btw, script doesn't need php-zip extension, I'm using built-in phar to compress in zip (one requirement less) and in my tests result size is the same (bundles with php 5.3+).
+Btw, script doesn't need php-zip extension, I'm using built-in phar to compress in zip (one requirement less) and in my tests result size is the same (phar bundles with php 5.3+).
 
-Don't forget to test set results on XMage "Viewer". There you can see bad or errored named cards. With common Zip filemanagers (like 7Zip or WinRAR) you could just edit the name with it for fix.
+Don't forget to test set results on XMage "Viewer". There you can see bad or errored named cards. With common Zip filemanagers (like 7Zip or WinRAR) you could edit the name with it for fix.
 
 ### GNU/Unix based
 Download the script where you want, for example using:
@@ -25,24 +25,26 @@ And then simply run it with the desired options (this is a test command):
 ```cmd
 > php scryfalldler -l
 ```
-This will show a list with the avaiable sets. Bellow you have some example commands.
+This example will show a list with the avaiable sets. Bellow you have some example commands.
 
 If you don't have php path configured in file system, you could invoke pointing php binary file, for example using:
 ```cmd
 > /etc/bin/php scryfalldler -l
 ```
-Also, if you want, you can give execute permissions with `chmod +x scryfalldler` to use without "php" word in the commands, just `> scryfalldler` or (depending your system) `> ./scryfalldler`.
+Also, if you want, you can give execute permissions with `chmod +x scryfalldler` to use without "php" word in the commands, just `> scryfalldler` (or depending your system `> ./scryfalldler`).
 
 ### Windows based
-Download the script where you want, save the path to a file or for example using Windows PowerShell (<kbd>Win</kbd> + <kbd>r</kbd>, then `powershell`):
+Download the script where you want, save the path to a file or, for example, using Windows PowerShell (<kbd>Win</kbd> + <kbd>r</kbd>, then `powershell`):
 ```cmd
 > wget https://raw.githubusercontent.com/nachazo/scryfalldler/master/scryfalldler -OutFile scryfalldler
 ```
-And then simply run it in a console (<kbd>Win</kbd> + <kbd>r</kbd>, then `cmd`) with the desired options (this is a test command):
+And then simply run the command with the desired options (this is a test command):
 ```cmd
 > php scryfalldler -l
 ```
-This will show a list with the avaiable sets.
+This example will show a list with the avaiable sets.
+
+> *Note*: If you see weird symbols instead colors in the console, it's because [a problem with Windows ANSI encoding and php version](https://github.com/symfony/symfony/issues/19520). With lastest versions you will avoid it. Anyways, the image download works aswell :)
 
 If you don't have php path configured in file system, you could invoke pointing binary php.exe file, for example using:
 ```cmd
