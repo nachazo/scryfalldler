@@ -1,14 +1,14 @@
 # scryfalldler
 Simple (fast and *bad* coded) php automated script for download and zip card images using the open [scryfall.com](http://scryfall.com) API site ready for XMage.
 
-This script is a simply php cli coded. I wanted to practice a bit with php cli scripts and this is what I made. This way, we can take advantage of php multi-platform, client executed (not web, to avoid request and filesize limitations), easy curl (http download) and zip tools.
+This script is a simply php cli coded. I wanted to practice a bit with php cli scripts and this is what I made. This way, we can take advantage of php multi-platform, client executed (not web, to avoid requests and filesize limitations), easy curl (http download) and zip tools.
 
 Use [Issues](https://github.com/nachazo/scryfalldler/issues) for feature request or bugs.
 
 Don't forget to support [scryfall.com](http://scryfall.com).
 
 ## How to run
-You only need **php** 5.3+ (instaled in your system or uncompressed, for example from [php downloads page](http://php.net/downloads.php) or LAMP folder) with **curl extension enabled**. Normally comes installed and enabled in most lamps or similar. If not, for Debian based GNU/Unix like Ubuntu, you simply can do it with `sudo apt install php-curl`. For Windows, search over there :P
+You only need **php** 5.3+ (instaled in your system or uncompressed, for example from [php downloads page](http://php.net/downloads.php) or LAMP folder - note: **no** web server required) with **curl extension enabled**. Normally comes installed and enabled in most lamps or similar. If not, for Debian based GNU/Unix like Ubuntu, you simply can do it with `sudo apt install php-curl`. For Windows, search over there :P
 
 So just execute command and place the zip result in your XMage images folder. For tokens you can drag&drop to TOK.zip file.
 
