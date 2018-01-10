@@ -93,3 +93,5 @@ Arguments:
 Site: 
   https://github.com/nachazo/scryfalldler 
 ```
+
+<p align="center"><img src="https://i.imgur.com/I7QEYF6.gif" data-canonical-src="https://i.imgur.com/I7QEYF6.gif" width="500" /></p>
