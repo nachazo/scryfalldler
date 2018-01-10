@@ -467,7 +467,7 @@ class Scryfall
                 echo Cli::line("No cards downloaded... So no more execution to do. ✗", "red", "none", true);
                 Cli::end();
             }
-            echo Cli::line("All images downloaded, going to create zip file: <b>".$set.".zip</b>", null, null, true);
+            echo Cli::line("All images downloaded, going to create zip file: <b>".$setNameForZip.".zip</b>", null, null, true);
             $destination_folder = null;
             if ($folder) {
                 if (!is_dir($folder) and !$debug) File::makeDir($folder);
