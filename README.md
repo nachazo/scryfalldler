@@ -65,6 +65,11 @@ Of course you can combine parameters, also using short or large reserved words, 
   * `php scryfalldler -s c17 -z gatherer`
 * This will download "Commander 2017" tokens and zip into a subfolder named "C17", you could drag&drop to TOK.zip:
   * `php scryfalldler -set tc17 -r C17`
+  
+## Changelog
+
+* **1.1**: Fixed a relevant bug with basic land naming.
+* **1.0**: Initial release.
 
 ## Help
 Command `php scryfalldler -h` shows:
