@@ -433,7 +433,7 @@ class Scryfall
             foreach ($cards as $card) {
                 $name = $card->name;
 
-                if (@$plain_list[$name]>1 and is_numeric($card->collector_number)) {
+                if (@$plain_list[$name]>1 and is_numeric($card->collector_number) and !$this->isLand($card->type_line)) {
                     @$sum_list[$name] = $sum_list[$name]+1;
                     $name .= " ".$sum_list[$name];
                 }
