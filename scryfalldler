@@ -9,7 +9,7 @@ class Cli
     private $curl;
     
     public $title = "Scryfall Downloader";
-    public $version = "1.1";
+    public $version = "1.2";
     public $description = "is a simple (fast and bad coded) php automated script for download and zip <b>card images</b> using the open scryfall.com API site ready for XMage.";
     public $command = " php scryfalldler [arguments]";
     public $author = " https://github.com/nachazo/scryfalldler";
@@ -72,6 +72,12 @@ class Cli
             "short" => "n",
             "large" => "no-check",
             "description" => "By default, script check for updates each execution (requesting to GitHub).\n\t\tA message will warn you on new versions. You can avoid it with this option."
+        ),
+        "extension" => array(
+            "short" => "x",
+            "large" => "ext",
+            "default" => "jpg",
+            "description" => "Extension for card images. Instead .jpg (default value) that XMage uses,\n\t\tyou could force what will be used, for example \"png\""
         )
     );
 
@@ -98,6 +104,7 @@ class Cli
         $this->setFolder();
         $this->setForce();
         $this->setDebug();
+        $this->setExt();
         
         if (!$this->optionExist("no-check")) $this->checkForUpdate();
 
@@ -183,6 +190,19 @@ class Cli
             return true;
         }
         return false;
+    }
+
+    private function setExt()
+    {
+        $extCli = $this->optionExist("extension");
+        if ($extCli) {
+            global $ext;
+            $ext = $extCli;
+        } else {
+            global $ext;
+            $ext = $this->options['extension']['default'];
+        }
+        return true;
     }
 
     private function optionExist($what)
@@ -379,7 +399,7 @@ class Scryfall
     {
         if (is_array($cards)) {
             foreach ($cards as $card) {
-                if (is_array(@$card->card_faces)) {
+                if (is_array(@$card->card_faces) and @$card->layout!="split") {
                     $pos = 0;
                     foreach ($card->card_faces as $face) {
                         $face->collector_number = $card->collector_number;
@@ -406,11 +426,14 @@ class Scryfall
         global $folder;
         global $force;
         global $debug;
+        global $ext;
+
         if ($force) {
             $setNameForZip = $force;
         } else {
             $setNameForZip = $set;
         }
+
         if (is_array($cards)) {
             echo Cli::line("Size for cards is: <b>".$size."</b>", null, null, true);
             $setNameForZip = strtoupper($setNameForZip);
@@ -433,6 +456,13 @@ class Scryfall
             foreach ($cards as $card) {
                 $name = $card->name;
 
+                if (@!$card->collector_number and $card->card_faces) {
+                    $card->collector_number = $card->card_faces[0]->collector_number;
+                }
+                if (@!$card->type_line and $card->card_faces) {
+                    $card->type_line = $card->card_faces[0]->type_line;
+                }
+
                 if (@$plain_list[$name]>1 and is_numeric($card->collector_number) and !$this->isLand($card->type_line)) {
                     @$sum_list[$name] = $sum_list[$name]+1;
                     $name .= " ".$sum_list[$name];
@@ -441,7 +471,8 @@ class Scryfall
                 if ($this->isLand($card->type_line) or !is_numeric($card->collector_number)) {
                     $name .= ".".$card->collector_number;
                 }
-                $name .= ".full.jpg";
+                $name = $this->fixName($name);
+                $name .= ".full.".$ext;
 
                 if (!$debug) {
                     $url = null;
@@ -480,6 +511,16 @@ class Scryfall
             echo Cli::line("Zip created and temporal files cleaned", "green", "none", true);            
             echo Cli::line("<b>Process ends OK! ☺☺☺ </b> ", "green", "magenta", true);
         }
+    }
+
+    public function fixName($name)
+    {
+        if ($name) {
+            $name = str_replace(":", "", $name);
+            $name = str_replace("*", "", $name);
+            $name = str_replace("//", "-", $name);
+        }
+        return $name;
     }
 
     public function isLand($type)
