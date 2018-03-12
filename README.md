@@ -70,6 +70,9 @@ Of course you can combine parameters, also using short or large reserved words, 
   
 ## Changelog
 
+* **1.3.1** (12/03/18):
+  * Fixed error saving cards with " in the name. Until now, these cards doesn't download.
+  * Corrected version naming.
 * **1.3** (12/03/18):
   * Added optional feature for download card images from a file list (deck file, for example).
 * **1.2** (12/03/18):
