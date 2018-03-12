@@ -68,8 +68,12 @@ Of course you can combine parameters, also using short or large reserved words, 
   
 ## Changelog
 
-* **1.1**: Fixed a relevant bug with basic land naming.
-* **1.0**: Initial release.
+* **1.2** (12/03/18):
+  * Fixed error saving split cards (the cards with "//"). Until now, these cards doesn't download.
+  * Fixed error saving cards with ":" and " * " in name. Replaced by blank, like XMage does. As strange chars in some systems, until now it caused that images with that doesn't download.
+  * Added option (-x, -ext) for force the image extension for the cards.
+* **1.1** (09/02/18): Fixed a relevant bug with basic land naming.
+* **1.0** (10/01/18): Initial release.
 
 ## Help
 Command `php scryfalldler -h` shows:
@@ -94,6 +98,9 @@ Arguments:
     -p, -proxy		Set proxy for connections (format http://proxy:port).
     -n, -no-check	By default, script check for updates each execution (requesting to GitHub).
                         A message will warn you on new versions. You can avoid it with this option.
+    -x, -ext		Extension for card images. Instead .jpg (default value) that XMage uses,
+                        you could force what will be used, for example "png" 
+                         Default value: jpg.
 
 Site: 
   https://github.com/nachazo/scryfalldler 
