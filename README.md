@@ -72,8 +72,10 @@ Of course you can combine parameters, also using short or large reserved words, 
   * Fixed error saving split cards (the cards with "//"). Until now, these cards doesn't download.
   * Fixed error saving cards with ":" and " * " in name. Replaced by blank, like XMage does. As strange chars in some systems, until now it caused that images with that doesn't download.
   * Added option (-x, -ext) for force the image extension for the cards.
-* **1.1** (09/02/18): Fixed a relevant bug with basic land naming.
-* **1.0** (10/01/18): Initial release.
+* **1.1** (09/02/18):
+  * Fixed a relevant bug with basic land naming.
+* **1.0** (10/01/18):
+  * Initial release.
 
 ## Help
 Command `php scryfalldler -h` shows:
