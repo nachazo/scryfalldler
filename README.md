@@ -65,9 +65,13 @@ Of course you can combine parameters, also using short or large reserved words, 
   * `php scryfalldler -s c17 -z gatherer`
 * This will download "Commander 2017" tokens and zip into a subfolder named "C17", you could drag&drop to TOK.zip:
   * `php scryfalldler -set tc17 -r C17`
+* This will read each line of "My deck file.text" and search in Scryfall for cards, then save that in the script format, in a zip "MYDECKRESULT.zip". Useful for common deck files, for example:
+  * `php scryfalldler -file "My deck file.txt" -r MYDECKRESULT`
   
 ## Changelog
 
+* **1.3** (12/03/18):
+  * Added optional feature for download card images from a file list (deck file, for example).
 * **1.2** (12/03/18):
   * Fixed error saving split cards (the cards with "//"). Until now, these cards doesn't download.
   * Fixed error saving cards with ":" and " * " in name. Replaced by blank, like XMage does. As strange chars in some systems, until now it caused that images with that doesn't download.
@@ -103,6 +107,10 @@ Arguments:
     -x, -ext		Extension for card images. Instead .jpg (default value) that XMage uses,
                         you could force what will be used, for example "png" 
                          Default value: jpg.
+    -i, -file		Optional file location, with cards-per-line for export a concrete group of
+                        cards (a deck for example) like a set.
+                        As scryfall does, will download last published version from each card. 
+
 
 Site: 
   https://github.com/nachazo/scryfalldler 
