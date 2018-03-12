@@ -550,6 +550,7 @@ class Scryfall
             $name = str_replace(":", "", $name);
             $name = str_replace("*", "", $name);
             $name = str_replace("//", "-", $name);
+            $name = str_replace('"', "'", $name);
         }
         return $name;
     }
