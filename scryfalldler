@@ -78,6 +78,11 @@ class Cli
             "large" => "ext",
             "default" => "jpg",
             "description" => "Extension for card images. Instead .jpg (default value) that XMage uses,\n\t\tyou could force what will be used, for example \"png\""
+        ),
+        "file" => array(
+            "short" => "i",
+            "large" => "file",
+            "description" => "Optional file location, with cards-per-line for export a concrete group of\n\t\tcards (a deck for example) like a set.\n\t\tAs scryfall does, will download last published version from each card."
         )
     );
 
@@ -105,6 +110,7 @@ class Cli
         $this->setForce();
         $this->setDebug();
         $this->setExt();
+        $this->setFile();
         
         if (!$this->optionExist("no-check")) $this->checkForUpdate();
 
@@ -124,6 +130,21 @@ class Cli
             if ($cards = $this->scryfall->getSet($set)) {
                 echo $this->line("I have cards, so going to start downloading! ☺", "green", "none", true, true);
                 $this->scryfall->processCards($cards, $set);
+            }
+            $this->end();
+        }
+
+        if ($file = $this->optionExist("file")) {
+            if ($fileData = File::readFile($file)) {
+                echo Cli::line("You passed a file to search for cards.", null, null, true);
+                if ($cards = $this->scryfall->doSearch($fileData)) {
+                    echo $this->line("I have ".count($cards)." cards, so going to start downloading! ☺", "green", "none", true, true);
+                    $this->scryfall->processCards($cards, "file");
+                } else {
+                    echo $this->line("Error!: No cards found in file ".$file."", "red", "none", true);
+                }
+            } else {
+                echo $this->line("Error!: File ".$file." not found", "red", "none", true);
             }
             $this->end();
         }
@@ -203,6 +224,16 @@ class Cli
             $ext = $this->options['extension']['default'];
         }
         return true;
+    }
+
+    private function setFile()
+    {
+        if ($fileCli = $this->optionExist("file")) {
+            global $file;
+            $file = $fileCli;
+            return true;
+        }
+        return false;
     }
 
     private function optionExist($what)
@@ -544,6 +575,48 @@ class Scryfall
         }
         Http::curl_close($ch);
     }
+
+    public function doSearch($data)
+    {
+        if ($data) {
+            if ($search = $this->dataToCards($data)) {
+                echo Cli::line("Searching list of cards to scryfall...", null, null, true);
+                $ch = Http::curl_init();
+                if ($data = Http::get($this->baseUrl."cards/search?q=".$search, $ch)) {
+                    $res = $data->data;
+                }
+                Http::curl_close($ch);
+                return $res;
+            }
+        }
+        return false;
+    }
+
+    public function dataToCards($data)
+    {
+        if ($data) {
+            $data = explode(PHP_EOL, $data);
+            if (is_array($data) and count($data)>0) {
+                $final = null;
+                foreach ($data as $line) {
+                    $working = explode(' ',trim($line));
+                    if (is_numeric($working[0])) {
+                        array_shift($working);
+                    }
+                    $working = implode(" ", $working);
+                    $final .= '!"'.$working.'"';
+                    if (end($data)!=$line) {
+                        $final .= ' or ';
+                    }
+                }
+                $final = str_replace(" ", "+", $final);
+                $final = str_replace("!", "%21", $final);
+                $final = str_replace('"', "%22", $final);
+                return $final;
+            }
+        }
+        return false;
+    }
 }
 
 class File
@@ -581,11 +654,19 @@ class File
         }
     }
 
-    function zip($source, $destination)
+    public function zip($source, $destination)
     {
         $phar = new PharData($destination);
         $phar->buildFromDirectory($source, '~[.][0-9a-z]+$~i');
         return true;
+    }
+
+    public function readFile($file)
+    {
+        if (file_exists($file)) {
+            return file_get_contents($file);
+        }
+        return false;
     }
 }
 
