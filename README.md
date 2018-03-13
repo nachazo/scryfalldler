@@ -70,6 +70,8 @@ Of course you can combine parameters, also using short or large reserved words, 
   
 ## Changelog
 
+* **1.3.2** (13/03/18):
+  * Improved the new file list option. Now you could specify the set you want for the card edition with "card|set" (i.e: Opt|INV) (useful for lands also you can use collector number with #, i.e. Forest|bfz#273). Also, can read the XMage .dck format.
 * **1.3.1** (12/03/18):
   * Fixed error saving cards with " in the name. Until now, these cards doesn't download.
   * Corrected version naming.
@@ -111,9 +113,10 @@ Arguments:
                         you could force what will be used, for example "png" 
                          Default value: jpg.
     -i, -file		Optional file location, with cards-per-line for export a concrete group of
-                        cards (a deck for example) like a set.
-                        As scryfall does, will download last published version from each card. 
-
+                        cards (a deck for example - allows XMage .dck format) like a set.
+                        You could specify optionally the set for card edition (card|set) and collector
+                        number (card|set#collnum) (for example, for lands). If not, last published
+                        edition of the card will be downloaded. 
 
 Site: 
   https://github.com/nachazo/scryfalldler 

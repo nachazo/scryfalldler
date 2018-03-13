@@ -9,7 +9,7 @@ class Cli
     private $curl;
     
     public $title = "Scryfall Downloader";
-    public $version = "1.3.1";
+    public $version = "1.3.2";
     public $description = "is a simple (fast and bad coded) php automated script for download and zip <b>card images</b> using the open scryfall.com API site ready for XMage.";
     public $command = " php scryfalldler [arguments]";
     public $author = " https://github.com/nachazo/scryfalldler";
@@ -82,7 +82,7 @@ class Cli
         "file" => array(
             "short" => "i",
             "large" => "file",
-            "description" => "Optional file location, with cards-per-line for export a concrete group of\n\t\tcards (a deck for example) like a set.\n\t\tAs scryfall does, will download last published version from each card."
+            "description" => "Optional file location, with cards-per-line for export a concrete group of\n\t\tcards (a deck for example - allows XMage .dck format) like a set.\n\t\tYou could specify optionally the set for card edition (card|set) and collector\n\t\tnumber (card|set#collnum) (for example, for lands). If not, last published\n\t\tedition of the card will be downloaded."
         )
     );
 
@@ -144,7 +144,7 @@ class Cli
                     echo $this->line("Error!: No cards found in file ".$file."", "red", "none", true);
                 }
             } else {
-                echo $this->line("Error!: File ".$file." not found", "red", "none", true);
+                echo $this->line("Error!: File ".$file." not found or empty", "red", "none", true);
             }
             $this->end();
         }
@@ -294,7 +294,7 @@ class Cli
         echo $this->line(" ", "none", "none");
         echo $this->line("                     ", "red", "yellow");
         echo $this->line(" SCRYFALL DOWNLOADER ", "red", "yellow");
-        echo $this->line("                v".$this->version." ", "red", "yellow");
+        echo $this->line("              v".$this->version." ", "red", "yellow");
         echo $this->line("                     ", "red", "yellow");
         echo $this->line(" ", "none", "none");
     }
@@ -583,9 +583,20 @@ class Scryfall
             if ($search = $this->dataToCards($data)) {
                 echo Cli::line("Searching list of cards to scryfall...", null, null, true);
                 $ch = Http::curl_init();
-                if ($data = Http::get($this->baseUrl."cards/search?q=".$search, $ch)) {
-                    $res = $data->data;
-                }
+                $res = array();
+                $times = 0;
+                foreach ($search as $page) {
+                    if ($times>0) {
+                        echo Cli::line("Due card search limit, making another search to scryfall...", null, null, true);
+                    }
+                    if ($data = Http::get($this->baseUrl."cards/search?q=".$page, $ch)) {
+                        $aux = @$data->data;
+                    }
+                    if ($aux) {
+                        $res = array_merge($res, $aux);
+                    }
+                    $times++;
+                }                    
                 Http::curl_close($ch);
                 return $res;
             }
@@ -599,25 +610,116 @@ class Scryfall
             $data = explode(PHP_EOL, $data);
             if (is_array($data) and count($data)>0) {
                 $final = null;
+                $i = 0;
                 foreach ($data as $line) {
+                    $set = null;
+                    $cn = null;             
+
+                    $aux = null;
+                    $aux = explode(":", $line);
+                    if ($aux[0]=="NAME" or $aux[0]=="LAYOUT MAIN" or $aux[0]=="LAYOUT SIDEBOARD") {
+                        continue;
+                    }
+                    if ($aux[0]=="SB") {
+                        $line = str_replace("SB: ", "", $line);
+                    }
+
                     $working = explode(' ',trim($line));
                     if (is_numeric($working[0])) {
+                        $number = $working[0];
                         array_shift($working);
                     }
+
                     $working = implode(" ", $working);
-                    $final .= '!"'.$working.'"';
-                    if (end($data)!=$line) {
-                        $final .= ' or ';
+
+                    if (self::isMyStringIn("|", $working)) {
+                        $aux = null;
+                        $aux_cn = null;
+                        $aux = explode("|", $working);
+                        if ($aux[count($aux)-1]) {
+                            if (self::isMyStringIn("#", $aux[count($aux)-1])) {
+                                $aux_cn = explode("#", $aux[count($aux)-1]);
+                                $set = $aux_cn[0];
+                                if (is_numeric($aux_cn[1])) $cn = $aux_cn[1];
+                            } else {
+                                $set = $aux[count($aux)-1];
+                            }
+                            
+                        }
+                        $working = $aux[0];
+                    }
+                    if (self::isMyStringIn("]", $working)) {
+                        $aux = null;
+                        $aux = explode("]", $working);
+                        $working = ltrim($aux[count($aux)-1]);
+
+                        $aux = str_replace("[", "", $aux[0]);
+                        
+                        if (self::isMyStringIn(":", $aux)) {
+                            $aux = explode(":", $aux);
+                            $set = $aux[0];
+                            $cn = $aux[1];
+                        } else {
+                            $set = $aux;
+                        }
+                    }
+                    if ($cn) $cards[$i]['cn'] = $cn;
+                    if ($set) $cards[$i]['set'] = $set;
+                    $cards[$i]['name'] = $working;                    
+                    $i++;
+                }
+
+                $c = 0;
+                $fn = 0;
+                $final = null;
+
+                foreach ($cards as $card) {
+                    $c++;
+                    if ($c>=20) {
+                        $fn++;
+                        $c = 0;
+                    }
+
+                    if (@$card['set']) {
+                        @$final[$fn] .= "(";
+                    }
+
+                    @$final[$fn] .= '!"'.$card['name'].'"';
+
+                    if (@$card['cn']) {
+                        $final[$fn] .= " and cn:".$card['cn']."";
+                    }
+                    if (@$card['set']) {
+                        $final[$fn] .= " and set:".$card['set'].")";
+                    }
+
+                    if (end($cards)!=$card) {
+                        $final[$fn] .= ' or ';
                     }
                 }
-                $final = str_replace(" ", "+", $final);
-                $final = str_replace("!", "%21", $final);
-                $final = str_replace('"', "%22", $final);
+
+                for ($j=0; $j<count($final); $j++) {
+                    if (substr($final[$j], -4)==" or ") {
+                        $final[$j] = substr($final[$j], 0, strlen($final[$j])-4);
+                    }
+                    $final[$j] = str_replace(" ", "+", $final[$j]);
+                    $final[$j] = str_replace("!", "%21", $final[$j]);
+                    $final[$j] = str_replace('"', "%22", $final[$j]);
+                }
+
                 return $final;
             }
         }
         return false;
     }
+
+    private function isMyStringIn($myString, $phrase)
+    {
+        if (strpos($phrase, $myString) !== false) {
+            return true;
+        }
+        return false;
+    }    
 }
 
 class File
