@@ -70,6 +70,8 @@ Of course you can combine parameters, also using short or large reserved words, 
   
 ## Changelog
 
+* **1.3.3** (02/04/18):
+  * Configured error reporting for avoid showing in output high number of warnings and so on. Now only important errors will be shown.
 * **1.3.2** (13/03/18):
   * Improved the new file list option. Now you could specify the set you want for the card edition with "card|set" (i.e: Opt|INV) (useful for lands also you can use collector number with #, i.e. Forest|bfz#273). Also, can read the XMage .dck format.
 * **1.3.1** (12/03/18):
