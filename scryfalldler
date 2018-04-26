@@ -10,7 +10,7 @@ class Cli
     private $curl;
     
     public $title = "Scryfall Downloader";
-    public $version = "1.3.3";
+    public $version = "1.3.4";
     public $description = "is a simple (fast and bad coded) php automated script for download and zip <b>card images</b> using the open scryfall.com API site ready for XMage.";
     public $command = " php scryfalldler [arguments]";
     public $author = " https://github.com/nachazo/scryfalldler";
@@ -36,6 +36,11 @@ class Cli
             "short" => "s",
             "large" => "set",
             "description" => "Launch download cards operation from the specified set from the site."
+        ),
+        "url" => array(
+            "short" => "u",
+            "large" => "url",
+            "description" => "Download a set with the Wizards official site URL."
         ),
         "size" => array(
             "short" => "z",
@@ -124,6 +129,17 @@ class Cli
                 $this->end();
             }
             echo $this->line("");
+        }
+
+        if ($url = $this->optionExist("url")) {
+            if (!filter_var($url, FILTER_VALIDATE_URL)) {
+                echo $this->line("Error!: You used a not valid URL (".$url.")", "red", "none", true);
+            }
+            $wizardsSite = new WizardsSite();
+            if ($cards = $wizardsSite->getFromUrl($url)) {
+                $wizardsSite->downloadCards($cards);
+            }
+            $this->end();
         }
 
         if ($set = $this->optionExist("set") or @$setInput) {
@@ -714,13 +730,145 @@ class Scryfall
         return false;
     }
 
-    private function isMyStringIn($myString, $phrase)
+    public function isMyStringIn($myString, $phrase)
     {
         if (strpos($phrase, $myString) !== false) {
             return true;
         }
         return false;
-    }    
+    }
+}
+
+class WizardsSite
+{
+    public function getFromUrl($url)
+    {
+        if ($url) {
+            $ch = Http::curl_init();
+            if ($data = Http::get($url, $ch, false)) {
+                echo Cli::line("URL found, checking cards", null, null, true);
+                $doc = new DOMDocument();
+                $doc->loadHTML($data);
+                $imageTags = $doc->getElementsByTagName('img');
+                $i = 0;
+                foreach($imageTags as $tag) {
+                    if ($tag->getAttribute('alt') and $tag->parentNode->getAttribute('class')=="rtecenter") {
+                        $res[$i]['name'] = $this->fixName($tag->getAttribute('alt'));
+                        $res[$i]['url'] = $tag->getAttribute('src');
+                        $i++;
+                    }
+                }
+                Http::curl_close($ch);
+                if (is_array($res)) {
+                    $res = $this->fixMultiNames($res);
+                    echo Cli::line("Total cards/files to download: <b>".count($cards)."</b>", null, null, true);
+                    return $res;
+                } else {
+                    echo Cli::line("No cards found", "red", "none", true);
+                    return false;
+                }
+            }
+            Http::curl_close($ch);
+        }
+        return false;
+    }
+
+    public function downloadCards($cards)
+    {
+        global $folder;
+        global $force;
+        global $ext;
+
+        if ($cards) {
+            if ($force) {
+                $setNameForZip = $force;
+            } else {
+                $setNameForZip = "WZR";
+            }
+
+            $setNameForZip = strtoupper($setNameForZip);
+            File::makeDir("tmp");
+            File::makeDir("tmp/".$setNameForZip);
+            $route = "tmp/".$setNameForZip."/";
+
+            $ch = Http::curl_init();
+            $total_array = count($cards);
+            $cual = 1;
+            $total = 0;
+            foreach ($cards as $card) {
+                echo Cli::line(" + Saving ".$cual."/".$total_array." <cyan>".$card['name']."</cyan> ", null, null, true);
+                $img = Http::get($card['url'], $ch, false);
+                file_put_contents($route.$card['name'].".full.".$ext, $img);
+                $cual++;
+                $total++;
+            }
+            Http::curl_close($ch);
+
+            if ($total==0) {
+                echo Cli::line("No cards downloaded... So no more execution to do.", "red", "none", true);
+                Cli::end();
+            }
+            echo Cli::line("All images downloaded, going to create zip file: <b>".$setNameForZip.".zip</b>", null, null, true);
+
+            $destination_folder = null;
+            if ($folder) {
+                if (!is_dir($folder) and !$debug) File::makeDir($folder);
+                $destination_folder = $folder."/";
+            }
+            if (!$debug) {
+                File::zip("tmp", $destination_folder.$setNameForZip.".zip");
+            }
+            File::cleanDir();
+
+            echo Cli::line("Zip created and temporal files cleaned", "green", "none", true);            
+            echo Cli::line("<b>Process ends OK! ☺☺☺ </b> ", "green", "magenta", true);            
+            return true;
+        }
+        return false;
+    }
+
+    private function fixMultiNames($cards)
+    {
+        if (is_array($cards)) {
+            $scryfall = new Scryfall();
+            for ($i=0; $i<count($cards); $i++) {
+                $aux = null;
+                $toCheck = null;
+                $number = null;
+                if ($scryfall->isMyStringIn(".", $cards[$i-1]['name'])) {
+                    $aux = explode(".", $cards[$i-1]['name']);
+                    $toCheck = $aux[0];
+                    $number = $aux[1];
+                } else {
+                    $toCheck = $cards[$i-1]['name'];
+                }
+
+                if ($toCheck==$cards[$i]['name']) {
+                    if (!$number) {
+                        $number = 1;
+                    } else {
+                        $number = $number+1;
+                    }
+                    $cards[$i]['name'] = $cards[$i]['name'].".".$number;
+                } else {
+                    if ($cards[$i+1]['name']==$cards[$i]['name']) {
+                        $cards[$i]['name'] = $cards[$i]['name'].".1";
+                    }
+                }
+            }
+            return $cards;
+        }
+        return false;
+    }
+
+    private function fixName($name)
+    {
+        if ($name) {
+            $name = str_replace("’", "'", $name);
+            return $name;
+        }
+        return false;
+    }
 }
 
 class File
