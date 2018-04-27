@@ -37,16 +37,6 @@ class Cli
             "large" => "set",
             "description" => "Launch download cards operation from the specified set from the site."
         ),
-        "url" => array(
-            "short" => "u",
-            "large" => "url",
-            "description" => "Download a set with the Wizards official site URL."
-        ),
-        "gatherer" => array(
-            "short" => "g",
-            "large" => "gatherer",
-            "description" => "Download a set from Wizards Gatherer searched by name."
-        ),
         "size" => array(
             "short" => "z",
             "large" => "size",
@@ -54,6 +44,16 @@ class Cli
             "default" => "large",
             "valid_options" => array("small", "normal", "large", "png", "art_crop", "border_crop", "gatherer")
         ),
+        "url" => array(
+            "short" => "u",
+            "large" => "url",
+            "description" => "Download a set from the Wizards official site URL.\n\t\tUsefull for new spoilers and for tokens pages."
+        ),
+        "gatherer" => array(
+            "short" => "g",
+            "large" => "gatherer",
+            "description" => "Download a set from Wizards Gatherer searched by name."
+        ),        
         "folder" => array(
             "short" => "f",
             "large" => "folder",
@@ -840,6 +840,7 @@ class WizardsSite
     public function getSetFromGatherer($set)
     {
         if ($set) {
+            $set = ucwords(strtolower($set));
             $set = urlencode($set);
             $url = "http://gatherer.wizards.com/Pages/Search/Default.aspx?action=advanced&output=checklist&set=+[%22".$set."%22]";
             $ch = Http::curl_init();
@@ -945,7 +946,7 @@ class WizardsSite
             $cual = 1;
             $total = 0;
             foreach ($cards as $card) {
-                echo Cli::line(" + Saving ".$cual."/".$total_array." <cyan>".$card['name']."</cyan> ", null, null, true);
+                $name = null;                
                 $img = Http::get($card['url'], $ch, false);
                 $landNaming = null;
                 $numbering = null;
@@ -957,7 +958,10 @@ class WizardsSite
                     }
                     $landNaming = ".".$numbering;
                 }
-                file_put_contents($route.$card['name'].$landNaming.".full.".$ext, $img);
+                $name = $card['name'].$landNaming.".full.".$ext;
+
+                echo Cli::line(" + Saving ".$cual."/".$total_array." <cyan>".$name."</cyan> ", null, null, true);   
+                file_put_contents($route.$name, $img);
                 $cual++;
                 $total++;
             }
