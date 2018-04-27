@@ -67,9 +67,21 @@ Of course you can combine parameters, also using short or large reserved words, 
   * `php scryfalldler -set tc17 -r C17`
 * This will read each line of "My deck file.text" and search in Scryfall for cards, then save that in the script format, in a zip "MYDECKRESULT.zip". Useful for common deck files, for example:
   * `php scryfalldler -file "My deck file.txt" -r MYDECKRESULT`
-  
+* This will download "Future Sight" set from Gatherer and generate correctly with "FTS.zip" name:
+  * `php scryfalldler -g "Future Sight" -r FTS`
+* This will download "Exodus" set from Gatherer:
+  * `php scryfalldler -g exodus`
+* This will download card images from official Wizards product set images, this case for Dominaria. Missing images would be taken from Gatherer:
+  * `php scryfalldler -u https://magic.wizards.com/en/products/dominaria/cards -r DOM`
+* This will download token images from official Wizards product images, this case for Dominaria. As it have not names, could be unnamed (you may rename):
+  * `php scryfalldler -u https://magic.wizards.com/en/articles/archive/card-preview/tokens-dominaria-2018-04-12 -r TOK`
+
+  
 ## Changelog
 
+* **1.4** (27/04/18):
+  * Added "-g" option for download from Wizards Gatherer without taking any info from Scryfall. Doing it searching by set name.
+  * Added "-u" option for download from Wizards official set site card page. Empty cards comes from Gatherer. Also tokens, but "unnamed". Not works as good as Scryfall, needs some post-renaming, but usefull in early launched sets.
 * **1.3.3** (02/04/18):
   * Configured error reporting for avoid showing in output high number of warnings and so on. Now only important errors will be shown.
 * **1.3.2** (13/03/18):
@@ -104,6 +116,9 @@ Arguments:
                         Special value "gatherer" downloads Wizards Gatherer image if avaiable. 
                          Default value: large. 
                          Possible values: small, normal, large, png, art_crop, border_crop, gatherer.  
+    -u, -url		Download a set from the Wizards official site URL.
+                        Usefull for new spoilers and for tokens pages. 
+    -g, -gatherer	Download a set from Wizards Gatherer searched by name. 
     -f, -folder		Destination folder for the zip file (not tested with relative ones). 
     -r, -force		Force zip and inside folder name (for tokens download, for example).
     -d, -debug		With this, script only show messages but not download or create folder. 
