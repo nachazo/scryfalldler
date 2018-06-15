@@ -79,6 +79,8 @@ Of course you can combine parameters, also using short or large reserved words, 
   
 ## Changelog
 
+* **1.4.1** (15/06/18):
+  * Small fix for cards with foil versions causing bad exporting.
 * **1.4** (27/04/18):
   * Added "-g" option for download from Wizards Gatherer without taking any info from Scryfall. Doing it searching by set name.
   * Added "-u" option for download from Wizards official set site card page. Empty cards comes from Gatherer. Also tokens, but "unnamed". Not works as good as Scryfall, needs some post-renaming, but usefull in early launched sets.
