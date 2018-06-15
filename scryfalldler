@@ -10,7 +10,7 @@ class Cli
     private $curl;
     
     public $title = "Scryfall Downloader";
-    public $version = "1.4";
+    public $version = "1.4.1";
     public $description = "is a simple (fast and bad coded) php automated script for download and zip <b>card images</b> using the open scryfall.com API site ready for XMage.";
     public $command = " php scryfalldler [arguments]";
     public $author = " https://github.com/nachazo/scryfalldler";
@@ -324,7 +324,7 @@ class Cli
         echo $this->line(" ", "none", "none");
         echo $this->line("                     ", "red", "yellow");
         echo $this->line(" SCRYFALL DOWNLOADER ", "red", "yellow");
-        echo $this->line("                v".$this->version." ", "red", "yellow");
+        echo $this->line("              v".$this->version." ", "red", "yellow");
         echo $this->line("                     ", "red", "yellow");
         echo $this->line(" ", "none", "none");
     }
@@ -470,8 +470,10 @@ class Scryfall
                         }
                         $aux_cards[] = $face;
                     }
-                } else {
-                    $aux_cards[] = $card;
+                } else {                	
+                	if (!self::isMyStringIn("★", $card->collector_number)) {
+                		$aux_cards[] = $card;
+                	}                 
                 }
             }
             unset($cards);
@@ -581,6 +583,7 @@ class Scryfall
             $name = str_replace("*", "", $name);
             $name = str_replace("//", "-", $name);
             $name = str_replace('"', "'", $name);
+            $name = str_replace('★', '', $name);
         }
         return $name;
     }
