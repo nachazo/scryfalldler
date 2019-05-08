@@ -3,7 +3,7 @@
 A tool to quickly download Magic: The Gathering card images.   
 * Download by...   
   * a list in a text file
-  * set
+  * all cards in a set
   * spoilers from a URL
 * Of Size... 
   * 6 options from the [Scryfall site](http://scryfall.com) (20%, 65%, 90%, or 100% size, 100% size Art-Crop, 100% size Border-Crop)
