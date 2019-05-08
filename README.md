@@ -42,9 +42,9 @@ The base command that all scryfaddler processes are run off of is
    `php scryfaddler`   
 From there you can add arguments, declaring what card images to download and how to download them.
 
-First will be an explanation of the [arguments](#arguments), then specific [examples](#examples)
+First will be an explanation of the [arguments](#source-arguments), then specific [examples](#examples), and finally some [further information](#further-information).
 
-### Arguments
+### Source Arguments
 
 You can add _at most 1_ argument from the fallowing table to declare the cards you want downloaded.
 
@@ -55,7 +55,10 @@ You can add _at most 1_ argument from the fallowing table to declare the cards y
 | `-url <url location>` | Only for wizards official spoilers and recent releases.  <br /> `<url location>` should be of the form https://magic.wizards.com/en/products/dominaria/cards  <br /> By default downloads and compresses the images into a zip file, <br />  named  `WZR`, and places it in the same directory as scryfalldler|
 | `-gatherer <set name>` | __Broken.__ Downloads all cards from a given set, `<set name>` should be of the form `"Future Sight"`  <br /> By default downloads and compresses the images into a zip file, <br />  named  `???`, and places it in the same directory as scryfalldler |
  
+ ### Additional Arguments
+ 
  You can add _any number_ of arguments from the fallowing table.
+
 
 |   Arguments, Additional   | Notes |
 | ------------------------------| ----- |
@@ -65,6 +68,8 @@ You can add _at most 1_ argument from the fallowing table to declare the cards y
 | `-ext <imageExtension>` | Force the extension of each image downloaded to be `<imageExtionsion>` <br /> Default image extension is `jpg` |
 | `-proxy <proxySite>` | Downloads the images through a proxy, <br /> `<proxySite>` should be of the form: http://proxy:port |
 | `-no-check` | Do not download the latest version of scryfalldler from GitHub on this execution |
+
+### Stand-Alone Arguments
 
 The fallowing table lists the stand-alone arguments
 
@@ -79,6 +84,8 @@ The fallowing table lists the stand-alone arguments
 ---------------
 
 ### Examples
+
+Return to: [Usage](#usage)
 
 The fallowing are example commands typed into a command prompt within the scryfalldler directory.
  
@@ -147,6 +154,8 @@ The fallowing are example commands typed into a command prompt within the scryfa
     
 ## Further Information
 
+Return to: [Usage](#usage)
+
 Each command has a shortened, 1 letter, abreviation and short functional description.  These are built into Scryfalldler and can be found through a `php scryfallder` or `php scryfallder -help` command, or found below.
 
 ```yaml
@@ -192,7 +201,9 @@ Site:
 
 ### Image Size Details
 
-Further explaining the size keywords of the [argument](#arguments) `-size <sizeKeyword>`
+Return to: [additonal arguments](#additional-arguments)
+
+Further explaining the keywords of the argument `-size <sizeKeyword>`
 
 Each keyword will download cards at a particular size and resolution, that size does not match actual card size, so below that information is the resolution of the image if image editing software is used to set the card image size to the size of actual cards.
 
@@ -229,7 +240,9 @@ Only downloadable through URL
 
 ### Text File Format
 
-Further explaining of the file format required by the [arguments](#arguments) `-file <fileName>.txt`
+Return to: [source arguments](#source-arguments)
+
+Further explaining of the file format required by the argument `-file <fileName>.txt`
 
 Text files used to declare the cards to download should have each line in the form...   
 * `<amount> <card name>`   
