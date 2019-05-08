@@ -1,14 +1,14 @@
 # Scryfalldler
 
-A tool to quickly download Magic: The Gathering card images.   
+A simple fast tool to download Magic: The Gathering card images.   
 * Download by...   
   * a list in a text file
   * all cards in a set
-  * spoilers on the [official Wizards url](https://magic.wizards.com/en/products/warofthespark/cards)
+  * all cards on an [official Wizards product page](https://magic.wizards.com/en/products/warofthespark/cards)
 * Of Size... 
-  * 6 options from the [Scryfall site](http://scryfall.com) (20%, 65%, 90%, or 100% size, 100% size Art-Crop, 100% size Border-Crop)
-  * 1 option from [Wizard's Gatherer](https://gatherer.wizards.com/Pages/Default.aspx) (35% size)
-
+  * 6 options from the [Scryfall site](http://scryfall.com) (20%, 65%, 90%, or 100% resolution, 100% Art-Crop, 100% Border-Crop)
+  * 1 option from [Wizard's Gatherer](https://gatherer.wizards.com/Pages/Default.aspx) or [product page](https://magic.wizards.com/en/products/warofthespark/cards) (35% resolution)
+  
 ## Requirements
 1. __PhP version 5.3 or higher, with curl extensions enabled__    
  * _Installing on Windows_   
@@ -50,7 +50,7 @@ You can add _at most 1_ argument from the fallowing table to declare the cards y
 
 |   Arguments, Additional   | Notes |
 | ------------------------------| ----- |
-| `-size <sizeKeyword>` | Declare the size of image to download from a `-set` or `-file` call.  Default is `large`. <br />  The valid values for `<sizeKeyword>` are: `small` for 20% size, <br /> `medium` for 65% size, `large` for 90% size, `png` for 100% size, <br /> `art_crop` for 100% size art only, `border_crop` for 100% size no-art, <br /> and `gatherer` for 35% size |
+| `-size <sizeKeyword>` | Declare the size of image to download from a `-set` or `-file` call.  Default is `large`. <br />  See __Image Size Details__ section for more info on keywords. <br /> Valid values for `<sizeKeyword>` are: `small`, `medium`, `large`, <br /> `png`, `art_crop`, `border_crop`, and `gatherer` |
 | `-folder <folder>` | Downloads the images into a zip file of default name `1` <br /> and then places it in a folder named `<folder>` within the scryfalldler directory|
 | `-force <zipName>` | Forces the zip file name to be `<zipName>` |
 | `-ext <imageExtension>` | Force the extension of each image downloaded to be `<imageExtionsion>` <br /> Default image extension is `jpg` |
@@ -75,8 +75,36 @@ The fallowing table lists the stand-alone arguments
 `php scryfalldler -set C17`   
 `php scryfalldler -set C17 -size art_crop -force C17ArtCrop -ext png`   
 `php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards`   
-`php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards -folder cards/dominaria`   
+`php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards -folder cards/dominaria`  
 
+### Image Size Details
+For each image size there is (1) the size and resolution it is downloaded at (2) the resolution of the image if image editing software is used to set the card image to the size of actual cards
+
+Note: `"` donotes inches
+
+For Referance   
+* Real Magic: The Gathering cards   
+   2.45" wide, 3.42" long printed at 1200 pixels/inch   
+   
+Download-able sizes   
+* `small`   
+ 2" by 2.83" at 72 pixels/inch   
+  * 60 pixels/inch if resized to real card size   
+* `normal`   
+  3.7" by 5.1" at 72 pixels/inch.
+  * 108 pixels/inch if resized to real card size   
+* `large`   
+  6.77" by 9.44" at 72 pixels/inch   
+  * 200 pixels/inch if resized to real card size   
+* `png`   
+  10.3" by 14.4" at 72 pixels/inch   
+  * 300 pixels/inch if resized to real card size   
+* `art_crop`   
+  The `png` sized card image's art. A varying sized imprecise cutout of the art at 72 pixels/inch.   
+* `border_crop`   
+  A 105% scaled `normal` card image with the black border partially cropped out removing the rounded edges.   
+* `gatherer`   
+  Doesn't seem to work.   
 
 ### Text File Format
 Text files used to declare the cards to download should have each line in the form...   
