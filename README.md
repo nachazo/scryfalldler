@@ -77,6 +77,7 @@ The fallowing table lists the stand-alone arguments
  * then it asks for a set to name to download all the cards of
     * no additional arguments can be added
     * the result is the same as a `php scryfalldler -set <setName>` call  
+    * entering no text then pressing `ENTER` ends the process without downloading
  
 `php scryfalldler -file myDeck.txt`     
  * Creates a zip file of card images, the amounts and names of each card to download are listed in the text file, `myDeck.txt`
