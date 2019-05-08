@@ -71,9 +71,8 @@ The fallowing table lists the stand-alone arguments
 ### Examples
 
 These are example commands typed into a command prompt within the scryfalldler directory.
-
-`php scryfalldler`      
- * returns help information, all the possible arguments and a brief description 
+ 
+ ---------------
  
 `php scryfalldler -file myDeck.txt`     
  * Creates a zip file of card images, the amounts and names of each card to download are listed in the text file, `myDeck.txt`
@@ -92,6 +91,8 @@ These are example commands typed into a command prompt within the scryfalldler d
     * The extension on each image in the zip file is changed to `png`
     * On this run, scryfalldler will not check for github updates
     
+    -------------
+    
 `php scryfalldler -set C17`   
  * Createss a zip file of cards images, this will contain 1 of each card from the set `C17`  
     * The card images are of default size, `large`  
@@ -107,6 +108,8 @@ These are example commands typed into a command prompt within the scryfalldler d
     * the card image size is changed to `art_crop`   
     * the extension on each image in the zip file is changed to `.png`
     
+    ----------
+    
 `php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards` 
 * Creates a zip file of card images from Wizard's web page of `dominaria` cards   
     * The card images are of default size, `gatherer`  
@@ -119,6 +122,11 @@ These are example commands typed into a command prompt within the scryfalldler d
 `php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards -folder cards/dominaria`  
 * As above except... 
      * The zip file is placed in the folder `.../scryfalldlerDirectory/decks/deck1/archive/`  
+     
+     ---------------
+     
+ `php scryfalldler`      
+ * returns help information, all the possible arguments and a brief description 
      
  `php scryfalldler -list`   
  * in the command window, lists all of the card sets on Scryfall and the number of cards in each of those sets.
