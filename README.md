@@ -42,7 +42,7 @@ You can add _at most 1_ argument from this table.
 | Arguments, cards to download   | Notes |
 | ------------------------------| ----- |
 | `-file <fileName.txt>` | Uses a file of name `<filename.txt>` as the list of cards to download. <br /> The text file must fallow the form outlined below in __Text File Format__.   <br /> By default downloads and compresses the images into a zip file, <br />  named `FILE`,  and places it in the same directory as scryfalldler|
-| `-set <setAcronym>` | Downloads all files from the given set, `<setAcronym>` correspond to [this table](https://mtg.gamepedia.com/Template:List_of_Magic_sets)    <br /> By default downloads and compresses the images into a zip file, <br />  named `<setAcronym>`,  and places it in the same directory as scryfalldler|
+| `-set <setAcronym>` | Downloads all cards from a set, `<setAcronym>` can be found in [this table](https://mtg.gamepedia.com/Template:List_of_Magic_sets)    <br /> By default downloads and compresses the images into a zip file, <br />  named `<setAcronym>`,  and places it in the same directory as scryfalldler|
 | `-url <url location>` | Only for wizards official spoilers and recent releases.  <br /> `<url location>` should be of the form https://magic.wizards.com/en/products/dominaria/cards  <br /> By default downloads and compresses the images into a zip file, <br />  named  `WZR`, and places it in the same directory as scryfalldler|
 | `-gatherer <set name>` | __Broken.__ Downloads all cards from a given set, <set name> should be of the form `"Future Sight"`  <br /> By default downloads and compresses the images into a zip file, <br />  named  `???`, and places it in the same directory as scryfalldler |
  
@@ -51,8 +51,8 @@ You can add _at most 1_ argument from this table.
 |        Arguments, additional   | Notes |
 | ------------------------------| ----- |
 | `-size <sizeKeyword>` | Declare the size of image to download, default is `large`. <br />  The valid values for `<sizeKeyword>` are: `small` for 20% size, <br /> `medium` for 65% size, `large` for 90% size, `png` for 100% size, <br /> `art_crop` for 100% size art only, `border_crop` for 100% size no-art, <br /> and `gatherer` for 35% size |
-| `-force <zipName>` | Downloads the images into a zip file of name `<zipName>` |
-| `-folder <folder>` | Downloads the images into a zip file of name `1` <br /> in a folder named `<folder>` within the scryfalldler directory|
+| `-folder <folder>` | Downloads the images into a zip file of default name `1` <br /> and then places it in a folder named `<folder>` within the scryfalldler directory|
+| `-force <zipName>` | Forces the zip file name to be `<zipName>` |
 | `-ext <imageExtension>` | Force the image extension to `<imageExtionsion>` <br /> Default is `jpg` |
 | `-proxy <proxySite>` | Downloads the images through a proxy, <br /> `<proxySite>` should be of the form: http://proxy:port |
 | `-no-check` | Do not download the latest version of scryfalldler from GitHub on this execution |
@@ -71,7 +71,7 @@ These are stand-alone arguments
 
 `php scryfalldler`   
 `php scryfalldler -file myDeck.txt`   
-`php scryfalldler -file myDeck.txt -size png -force MyDeckArchive`   
+`php scryfalldler -file myDeck.txt -size png -folder decks/deck1/archive -force Deck1Archive`   
 `php scryfalldler -set C17`   
 `php scryfalldler -set C17 -size art_crop -force C17ArtCrop -ext png`   
 `php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards`   
