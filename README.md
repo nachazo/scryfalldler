@@ -38,20 +38,20 @@ The base command that all scryfaddler processes are run off of is
 From there you add arguments to that line.
 
 
-|        Arguments, declaring image source   | Notes |
+|        Arguments, declaring cards to download   | Notes |
 | ------------------------------| ----- |
-| `-file <fileName.txt>` | Uses a file of name `<filename.txt>` to generate the list of cards to download. <br /> The text file must fallow the form outlined below in __Text File Format__.   <br /> By default downloads and compresses the images into a zip file, <br />  named `FILE`,  and places it in the same directory as scryfalldler|
+| `-file <fileName.txt>` | Uses a file of name `<filename.txt>` as the list of cards to download. <br /> The text file must fallow the form outlined below in __Text File Format__.   <br /> By default downloads and compresses the images into a zip file, <br />  named `FILE`,  and places it in the same directory as scryfalldler|
 | `-set <setAcronym>` | Downloads all files from the given set, `<setAcronym>` correspond to [this table](https://mtg.gamepedia.com/Template:List_of_Magic_sets)    <br /> By default downloads and compresses the images into a zip file, <br />  named `<setAcronym>`,  and places it in the same directory as scryfalldler|
 | `-url <url location>` | Only for wizards official spoilers and recent releases.  <br /> `<url location>` should be of the form https://magic.wizards.com/en/products/dominaria/cards  <br /> By default downloads and compresses the images into a zip file, <br />  named  `WZR`, and places it in the same directory as scryfalldler|
 | `-gatherer <set name>` | __Broken.__ Downloads all cards from a given set, <set name> should be of the form `"Future Sight"`  <br /> By default downloads and compresses the images into a zip file, <br />  named  `???`, and places it in the same directory as scryfalldler |
 
 |        Arguments, additional   | Notes |
 | ------------------------------| ----- |
-| `-size <sizeKeyword>` | Declare the size of image to download, default is `large`. <br />  The valid values for `<sizeKeyword>` are: `small` for 20% size, <br /> `medium` for 65% size, `large` for 90% size, `png` for 100% size, <br /> `art_crop` for 100% size art only, `border_crop` for 100% size no-art, and `gatherer` for 35% size |
+| `-size <sizeKeyword>` | Declare the size of image to download, default is `large`. <br />  The valid values for `<sizeKeyword>` are: `small` for 20% size, <br /> `medium` for 65% size, `large` for 90% size, `png` for 100% size, <br /> `art_crop` for 100% size art only, `border_crop` for 100% size no-art, <br /> and `gatherer` for 35% size |
 | `-force <zipName>` | Downloads the images into a zip file of name `<zipName>` |
-| `-folder <folder>` | Downloads the images into a zip file of name `1` <br /> in a folder named <folder> within the scryfalldler directory|
+| `-folder <folder>` | Downloads the images into a zip file of name `1` <br /> in a folder named `<folder>` within the scryfalldler directory|
 | `-ext <imageExtension>` | Force the image extension to `<imageExtionsion>` <br /> Default is `jpg` |
-| `-proxy <proxySite>` | Downloads the images through a proxy, <br /> <proxySite> should be of the form: http://proxy:port |
+| `-proxy <proxySite>` | Downloads the images through a proxy, <br /> `<proxySite>` should be of the form: http://proxy:port |
 | `-no-check` | Do not download the latest version of scryfalldler from GitHub on this execution |
 
 |        Arguments, other | Notes |
@@ -62,6 +62,24 @@ From there you add arguments to that line.
 | `-list`| From Scryfall, lists all available sets for download, their acronyms, and card count |
 | `-version`| Displays the version of scryfalldler you are running |
 
+### Text File Format
+Text files used to declare the cards to download should have each line in the form...   
+* `<amount> <card name>`   
+   For Example   
+   `1 Rhystic Study`  
+   `2 Faithless Looting`   
+   `1 Gitaxian Probe` 
+ 
+There are optional parameters to add after the name, declaring which set to get the image from, and for cards with multiple images (like lands) which collector number to use.
+* `<amount> <card name>|<setAcronym>#<collectorNumber>`   
+   For Example   
+   `1 Island|GK2#132` 
+
+Scryfalldler will ignore any entries of an already declared `<card name>`.  
+* For Example     
+    `1 Island|GK2#132`    
+    `1 Island|GK2#131`   
+    Scryfalldler will ignore the second entry for Island.   
   
 ## Changelog
 
