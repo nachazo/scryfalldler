@@ -9,6 +9,8 @@ A simple fast tool to download Magic: The Gathering card images.
   * 6 options from the [Scryfall site](http://scryfall.com) including art crop and border crop
   * 1 option from [Wizard's Gatherer](https://gatherer.wizards.com/Pages/Default.aspx) or [product page](https://magic.wizards.com/en/products/warofthespark/cards)
   
+  --------------------
+  
 ## Requirements
 1. __PhP version 5.3 or higher, with curl extensions enabled__    
  * _Installing on Windows_   
@@ -30,6 +32,8 @@ A simple fast tool to download Magic: The Gathering card images.
     * Press the green `Clone or Download` button in the upper right, fallowed by `Download Zip`   
     * Extract the archive to your desired location
     * In a command prompt, change the directory to the scryfalldler folder and type `php scryfalldler` to ensure it is working.  You should see a list of commands and brief descriptions.
+    
+    -------------------
   
 ## Usage
 To run Scryfaddler, you must have a command prompt opened to the directory scryfaddler is in.
@@ -68,9 +72,11 @@ The fallowing table lists the stand-alone arguments
 | `-version`| Displays the version of scryfalldler you are running |
 | `-list`| From Scryfall, lists all available sets for download, their acronyms, and card count.  <br />  The output is fallowed by the option to enter a set acronym to download the entire set at the default `large` image size. <br /> Entering nothing and then pressing `ENTER` ends the process without downloading anything |
 
+---------------
+
 ### Examples
 
-These are example commands typed into a command prompt within the scryfalldler directory.
+The fallowing are example commands typed into a command prompt within the scryfalldler directory.
  
  ---------------
  
