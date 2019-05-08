@@ -50,10 +50,10 @@ You can add _at most 1_ argument from this table.
 
 |        Arguments, additional   | Notes |
 | ------------------------------| ----- |
-| `-size <sizeKeyword>` | Declare the size of image to download, default is `large`. <br />  The valid values for `<sizeKeyword>` are: `small` for 20% size, <br /> `medium` for 65% size, `large` for 90% size, `png` for 100% size, <br /> `art_crop` for 100% size art only, `border_crop` for 100% size no-art, <br /> and `gatherer` for 35% size |
+| `-size <sizeKeyword>` | Declare the size of image to download from a `-set` or `-file` call.  Default is `large`. <br />  The valid values for `<sizeKeyword>` are: `small` for 20% size, <br /> `medium` for 65% size, `large` for 90% size, `png` for 100% size, <br /> `art_crop` for 100% size art only, `border_crop` for 100% size no-art, <br /> and `gatherer` for 35% size |
 | `-folder <folder>` | Downloads the images into a zip file of default name `1` <br /> and then places it in a folder named `<folder>` within the scryfalldler directory|
 | `-force <zipName>` | Forces the zip file name to be `<zipName>` |
-| `-ext <imageExtension>` | Force the image extension to `<imageExtionsion>` <br /> Default is `jpg` |
+| `-ext <imageExtension>` | Force the extension of each image downloaded to be `<imageExtionsion>` <br /> Default image extension is `jpg` |
 | `-proxy <proxySite>` | Downloads the images through a proxy, <br /> `<proxySite>` should be of the form: http://proxy:port |
 | `-no-check` | Do not download the latest version of scryfalldler from GitHub on this execution |
 
