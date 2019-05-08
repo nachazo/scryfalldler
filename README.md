@@ -6,8 +6,8 @@ A simple fast tool to download Magic: The Gathering card images.
   * all cards in a set
   * all cards on an [official Wizards product page](https://magic.wizards.com/en/products/warofthespark/cards)
 * Of Size... 
-  * 6 options from the [Scryfall site](http://scryfall.com) (20%, 65%, 90%, or 100% resolution, 100% Art-Crop, 100% Border-Crop)
-  * 1 option from [Wizard's Gatherer](https://gatherer.wizards.com/Pages/Default.aspx) or [product page](https://magic.wizards.com/en/products/warofthespark/cards) (35% resolution)
+  * 6 options from the [Scryfall site](http://scryfall.com) including art crop and border crop
+  * 1 option from [Wizard's Gatherer](https://gatherer.wizards.com/Pages/Default.aspx) or [product page](https://magic.wizards.com/en/products/warofthespark/cards)
   
 ## Requirements
 1. __PhP version 5.3 or higher, with curl extensions enabled__    
@@ -44,7 +44,7 @@ You can add _at most 1_ argument from the fallowing table to declare the cards y
 | `-file <fileName>.txt` | Uses a file of name `<filename>.txt` as the list of cards to download. <br /> The text file must fallow the form outlined below in __Text File Format__.   <br /> By default downloads and compresses the images into a zip file, <br />  named `FILE`,  and places it in the same directory as scryfalldler|
 | `-set <setAcronym>` | Downloads all cards from a set, `<setAcronym>` can be found in [this table](https://mtg.gamepedia.com/Template:List_of_Magic_sets)    <br /> By default downloads and compresses the images into a zip file, <br />  named `<setAcronym>`,  and places it in the same directory as scryfalldler|
 | `-url <url location>` | Only for wizards official spoilers and recent releases.  <br /> `<url location>` should be of the form https://magic.wizards.com/en/products/dominaria/cards  <br /> By default downloads and compresses the images into a zip file, <br />  named  `WZR`, and places it in the same directory as scryfalldler|
-| `-gatherer <set name>` | __Broken.__ Downloads all cards from a given set, <set name> should be of the form `"Future Sight"`  <br /> By default downloads and compresses the images into a zip file, <br />  named  `???`, and places it in the same directory as scryfalldler |
+| `-gatherer <set name>` | __Broken.__ Downloads all cards from a given set, `<set name>` should be of the form `"Future Sight"`  <br /> By default downloads and compresses the images into a zip file, <br />  named  `???`, and places it in the same directory as scryfalldler |
  
  You can add _any number_ of arguments from the fallowing table.
 
