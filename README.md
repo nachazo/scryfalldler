@@ -1,11 +1,11 @@
 # Scryfalldler
 
-A tool for quickly downloading Magic: The Gathering card images.   
-* Download...   
-  * cards listed in a text file
-  * entire sets of cards
+A tool to quickly download Magic: The Gathering card images.   
+* Download by...   
+  * a list in a text file
+  * set
   * spoilers from a URL
-* Of Size...   
+* Of Size... 
   * 6 options from the [Scryfall site](http://scryfall.com) (20%, 65%, 90%, or 100% size, 100% size Art-Crop, 100% size Border-Crop)
   * 1 option from [Wizard's Gatherer](https://gatherer.wizards.com/Pages/Default.aspx) (35% size)
 
@@ -24,14 +24,31 @@ A tool for quickly downloading Magic: The Gathering card images.
    * Select `New` and type `C:\PHP7`
    * In a command prompt type `php -v` to ensure it is working
  
-2. __The Scryfalldler client__   
-  _Windows Users_   
+2. __The Scryfalldler client__
+  _Windows Users_
     Download the Client from GitHub
     * Press the green `Clone or Download` button in the upper right, fallowed by `Download Zip`   
     * Extract the archive to your desired location
   
 ## Usage
- You first must always open a command line in the folder
+To run Scryfaddler, you must have a command prompt opened to the directory scryfaddler is in.
+
+The base command that all scryfaddler processes are run off of is    
+   `php scryfaddler`    
+From there you add arguments to that line.
+
+|        Arguments                | Notes |
+| ------------------------------| ----- |
+| ` `| No argument returns a list of all the possible arguments and a brief description |
+| `-1`| Confirms Scryfaddler is working and updates it to the latest version on GitHub |
+| `-file <fileName.txt>` | Declares where the images are to come from.  <br /> The text file must fallow the form outlined below|
+| `-set <setAcronym>` | Declares where the images are to come from. <br /> Downloads all files from the given set, acronyms correspond to [this table](https://mtg.gamepedia.com/Template:List_of_Magic_sets) |
+
+
+* Basis for all commands: `C:\<directory> php scryfaddler`
+  `directory` is the directory that the scryfaddler file is in
+  running this command is the same as adding the argument `-h` or `-help`
+
 ### Downloading cards from a set
     php scryfalldler -set <setAbreviation> -size <cardImageSize> -folder /home/user/xmage/myImages -proxy http://myproxy:8888
   
