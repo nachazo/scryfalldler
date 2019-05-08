@@ -1,5 +1,70 @@
-# scryfalldler
-Simple (fast and probably *bad* coded) php client automated script for download and zip card images using the open [scryfall.com](http://scryfall.com) API site ready for XMage.
+# Scryfalldler
+
+A tool for quickly downloading Magic: The Gathering card images.   
+* Download...   
+  * cards listed in a text file
+  * entire sets of cards
+  * spoilers from a URL
+* Of Size...   
+  * 6 options from the [Scryfall site](http://scryfall.com) (20%, 65%, 90%, or 100% size, 100% size Art-Crop, 100% size Border-Crop)
+  * 1 option from [Wizard's Gatherer](https://gatherer.wizards.com/Pages/Default.aspx) (35% size)
+
+## Requirements
+1. __PhP version 5.3 or higher, with curl extensions enabled__     
+   _Windows Users_   
+   Download the latest PhP version from the [windows PhP website](https://windows.php.net/).    
+   * Copy the file php.ini-development in C:\PHP7\ and rename it to php.ini   
+   * Open C:\PHP7\php.ini in a text editor and make the fallowing changes   
+   *   uncomment `; extension_dir = "ext"` to `extension_dir = "ext"`
+   *   uncomment `;extension=curl` to `extension=curl`   
+   
+   Now we must add PhP to the Windows 10 system path enviornmental variables
+   * Control Panel->System and Security->System->Advanced system settings->Enviornmental Variables
+   * Under `System Variables` double click on `Path`
+   * Select `New` and type `C:\PHP7`
+   * In a command prompt type `php -v` to ensure it is working
+ 
+2. __The Scryfalldler client__   
+  _Windows Users_   
+    Download the Client from GitHub
+    * Press the green `Clone or Download` button in the upper right, fallowed by `Download Zip`   
+    * Extract the archive to your desired location
+  
+## Usage
+ You first must always open a command line in the folder
+### Downloading cards from a set
+    php scryfalldler -set <setAbreviation> -size <cardImageSize> -folder /home/user/xmage/myImages -proxy http://myproxy:8888
+  
+### Downloading cards from a text file
+    php scryfalldler -file <fileName.txt> -size <cardImageSize> -folder /home/user/xmage/myImages -proxy http://myproxy:8888
+  
+Required    
+ either    
+  * `-set` or `-s`  fallowed by `<setAbreviation>`    
+    * the set abreviation corresponds to the official abreviations [found here](https://mtg.gamepedia.com/Template:List_of_Magic_sets).   
+      This will download the entire specified set    
+  * `-file` or `-f` fallowed by `<fileName.txt>` 
+     * the command prompt is in the same directory as the file
+     * the file is in the form 
+       <amount> <cardName>   
+       <amount> <cardName>   
+        ....   
+     will download an image for each unique name.
+  
+     
+     `-set` or `-s` means the source of the images will be all from a set   
+     `<setAbreviation>` is the magic set abreviation        
+     `-size` or `z`.  Optional.  Default is `small`.  It declares the resolution to download the card images as.
+     `<cardImageSize>` The valid values are: `small`, `medium`, `large`, `png`, `art_crop`, `border_crop`.
+  
+     
+  
+ * Downloading cards from a text file
+   * Open a command line in the `scryfalldler-master` folder
+   * the command is `php scryfalldler -file "fileName.txt" -r archiveName`
+     `-file` means the Scryfaddler will be generating cards f
+
+* A simple (fast and probably *bad* coded) php client automated script for download and zip card images using the open [scryfall.com](http://scryfall.com) API site ready for XMage.
 
 This script is a simply php cli coded. I wanted to practice a bit with php cli scripts and this is what I made. With php we can take advantage of expanded php multi-platform, client executed (not web server, to avoid requests and filesize limitations), easy curl (http download) and zip tools.
 
@@ -51,7 +116,21 @@ If you don't have php path configured in file system, you could invoke pointing 
 > C:\myPhpFolder\php scryfalldler -l
 ```
 
-## Example commands
+## Commands
+-g or -gatherer gets the card from https://gatherer.wizards.com at 72 pixels/inch
+-h or -help
+-v or -version
+-s or -set
+-z or -size
+-u or -url
+-f or folder
+-r or -force
+-d or -debug
+-t or -test
+-p or -proxy
+-n or -no-check
+-x or -ext
+-i or -file
 Of course you can combine parameters, also using short or large reserved words, all listed in "Help" section (or type `php scryfalldler`).
 * This will download "Commander 2017" set cards (in large size) and zip to "C17.zip" in base folder:
   * `php scryfalldler -s c17`
