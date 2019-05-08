@@ -29,7 +29,7 @@ A simple fast tool to download Magic: The Gathering card images.
     Download the Client from GitHub   
     * Press the green `Clone or Download` button in the upper right, fallowed by `Download Zip`   
     * Extract the archive to your desired location
-    * In a command prompt, change the directory to the scryfalldler folder and type `php scryfalldler` to ensure it is working.  You should see a list of all the possible commands and brief descriptions.
+    * In a command prompt, change the directory to the scryfalldler folder and type `php scryfalldler` to ensure it is working.  You should see a list of commands and brief descriptions.
   
 ## Usage
 To run Scryfaddler, you must have a command prompt opened to the directory scryfaddler is in.
