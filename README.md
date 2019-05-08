@@ -36,13 +36,14 @@ A simple fast tool to download Magic: The Gathering card images.
     -------------------
   
 ## Usage
+
+Jump To: [Examples](#examples)  [further information](#further-information)
+
 To run Scryfaddler, you must have a command prompt opened to the directory scryfaddler is in.
 
 The base command that all scryfaddler processes are run off of is    
    `php scryfaddler`   
 From there you can add arguments, declaring what card images to download and how to download them.
-
-First will be an explanation of the [arguments](#source-arguments), then specific [examples](#examples), and finally some [further information](#further-information).
 
 ### Source Arguments
 
