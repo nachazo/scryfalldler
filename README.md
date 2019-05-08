@@ -85,7 +85,7 @@ These are example commands typed into a command prompt within the scryfalldler d
     * On this run, by default, scryfalldler will not download through a proxy
 
 `php scryfalldler -file myDeck.txt -size png -folder decks/deck1/archive -force Deck1Archive -ext png -no-check` 
- * Creates a zip file of card images, the amounts and names of each card to download are listed in the text file, `myDeck.txt`
+ * as above except...
     * The card images are of size `png`   
     * The zip file is placed in the folder `.../scryfalldlerDirectory/decks/deck1/archive/`   
     * The zip file's name is changed to `Deck1Archive`
@@ -102,7 +102,7 @@ These are example commands typed into a command prompt within the scryfalldler d
     * On this run, by default, scryfalldler will not download through a proxy
     
 `php scryfalldler -set C17 -size art_crop -force C17ArtCrop -ext png`   
- * Creates a zip file of cards images, this will contain 1 of each card from the set `C17`    
+ * As above except...
     * The zip file's name is changed to `C17ArtCrop`       
     * the card image size is changed to `art_crop`   
     * the extension on each image in the zip file is changed to `.png`
@@ -117,7 +117,7 @@ These are example commands typed into a command prompt within the scryfalldler d
     * On this run, by default, scryfalldler will not download through a proxy
     
 `php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards -folder cards/dominaria`  
-* Creates a zip file of cards from Wizard's web page featuring `dominaria` cards    
+* As above except... 
      * The zip file is placed in the folder `.../scryfalldlerDirectory/decks/deck1/archive/`  
      
  `php scryfalldler -list`   
