@@ -45,7 +45,7 @@ The base command that all scryfaddler processes are run off of is
    `php scryfaddler`   
 From there you can add arguments, declaring what card images to download and how to download them.
 
-### Source Arguments
+#### Source Arguments
 
 You can add _at most 1_ argument from the fallowing table to declare the cards you want downloaded.
 
@@ -56,7 +56,7 @@ You can add _at most 1_ argument from the fallowing table to declare the cards y
 | `-url <url location>` | Only for wizards official spoilers and recent releases.  <br /> `<url location>` should be of the form https://magic.wizards.com/en/products/dominaria/cards  <br /> By default downloads and compresses the images into a zip file, <br />  named  `WZR`, and places it in the same directory as scryfalldler|
 | `-gatherer <set name>` | __Broken.__ Downloads all cards from a given set, `<set name>` should be of the form `"Future Sight"`  <br /> By default downloads and compresses the images into a zip file, <br />  named  `???`, and places it in the same directory as scryfalldler |
  
- ### Additional Arguments
+ #### Additional Arguments
  
  You can add _any number_ of arguments from the fallowing table.
 
@@ -70,7 +70,7 @@ You can add _at most 1_ argument from the fallowing table to declare the cards y
 | `-proxy <proxySite>` | Downloads the images through a proxy, <br /> `<proxySite>` should be of the form: http://proxy:port |
 | `-no-check` | Do not download the latest version of scryfalldler from GitHub on this execution |
 
-### Stand-Alone Arguments
+#### Stand-Alone Arguments
 
 The fallowing table lists the stand-alone arguments
 
