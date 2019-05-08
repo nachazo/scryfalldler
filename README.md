@@ -37,7 +37,7 @@ A simple fast tool to download Magic: The Gathering card images.
   
 ## Usage
 
-Jump To: [Examples](#examples),  [Further Information](#further-information), [Text File Format](#text-file-format), [Size Keyword Details](#size-keyword-details)
+Jump To: [Examples](#examples) | [Further Information](#further-information) | [Text File Format](#text-file-format) | [Size Keyword Details](#size-keyword-details)
 
 To run Scryfaddler, you must have a command prompt opened to the directory scryfaddler is in.
 
@@ -56,8 +56,6 @@ You can add _at most 1_ argument from the fallowing table to declare the cards y
 | `-url <url location>` | Only for wizards official spoilers and recent releases.  <br /> `<url location>` should be of the form <br /> https://magic.wizards.com/en/products/dominaria/cards  <br /> By default downloads and compresses the images into a zip file, <br />  named  `WZR`, and places it in the same directory as scryfalldler|
 | `-gatherer <set name>` | __Broken.__ Downloads all cards from a given set, `<set name>` should be of <br /> the form `"Future Sight"`  <br /> By default downloads and compresses the images into a zip file, <br />  named  `???`, and places it in the same directory as scryfalldler |
  
- #### Additional Arguments
- 
  You can add _any number_ of arguments from the fallowing table.
 
 
@@ -69,8 +67,6 @@ You can add _at most 1_ argument from the fallowing table to declare the cards y
 | `-ext <imageExtension>` | Force the extension of each image downloaded to be `<imageExtionsion>` <br /> Default image extension is `jpg` |
 | `-proxy <proxySite>` | Downloads the images through a proxy, <br /> `<proxySite>` should be of the form: http://proxy:port |
 | `-no-check` | Do not download the latest version of scryfalldler from GitHub on this execution |
-
-#### Stand-Alone Arguments
 
 The fallowing table lists the stand-alone arguments
 
@@ -202,7 +198,7 @@ Site:
 
 ### Size Keyword Details
 
-Return to: [additonal arguments](#additional-arguments)
+Return to: [Usage](#usage)
 
 Further explaining the keywords of the argument `-size <sizeKeyword>`
 
@@ -241,7 +237,7 @@ Only downloadable through URL
 
 ### Text File Format
 
-Return to: [source arguments](#source-arguments)
+Return to: [Usage](#usage)
 
 Further explaining of the file format required by the argument `-file <fileName>.txt`
 
