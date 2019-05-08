@@ -37,140 +37,30 @@ The base command that all scryfaddler processes are run off of is
    `php scryfaddler`    
 From there you add arguments to that line.
 
-|        Arguments                | Notes |
+
+|        Arguments, declaring image source   | Notes |
+| ------------------------------| ----- |
+| `-file <fileName.txt>` | The text file must fallow the form outlined below.   <br /> By default downloads and compresses the images into a zip file, <br />  named `FILE`,  and places it in the same directory as scryfalldler|
+| `-set <setAcronym>` | Downloads all files from the given set, acronyms correspond to [this table](https://mtg.gamepedia.com/Template:List_of_Magic_sets)    <br /> By default downloads and compresses the images into a zip file, <br />  named `<setAcronym>`,  and places it in the same directory as scryfalldler|
+| `-url <url location>` | Only for wizards official spoilers and recent releases.  URL should be of the form <br /> https://magic.wizards.com/en/products/dominaria/cards  <br /> By default downloads and compresses the images into a zip file, <br />  named  `WZR`, and places it in the same directory as scryfalldler|
+| `-gatherer <set name>` | __Broken.__ Downloads all cards from a given set, <set name> should be of the form `"Future Sight"`  <br /> By default downloads and compresses the images into a zip file, <br />  named  `???`, and places it in the same directory as scryfalldler |
+
+|        Arguments, additional   | Notes |
+| ------------------------------| ----- |
+| `-size <sizeKeyword>` | Declare the size of image to download, default is `large`. <br />  The valid values are: `small` for 20% size, `medium` for 65% size, <br /> `large` for 90% size, `png` for 100% size, `art_crop` for 100% size art only, <br /> `border_crop` for 100% size no-art, and `gatherer` for 35% size |
+| `-force <zipName>` | Downloads the images into a zip file of name `<zipName>` |
+| `-folder <folder>` | Downloads the images into a zip file of name `1` <br /> in a folder named <folder> within the scryfalldler directory|
+| `-ext <imageExtension>` | Force the image extension to `<imageExtionsion>` <br /> Default is `jpg` |
+| `-proxy <proxySite>` | Downloads the images through a proxy, <br /> <proxySite> should be of the form: http://proxy:port |
+| `-no-check` | Do not download the latest version of scryfalldler from GitHub on this execution |
+
+|        Arguments, other | Notes |
 | ------------------------------| ----- |
 | ` `| No argument returns a list of all the possible arguments and a brief description |
-| `-1`| Confirms Scryfaddler is working and updates it to the latest version on GitHub |
-| `-file <fileName.txt>` | Declares where the images are to come from.  <br /> The text file must fallow the form outlined below|
-| `-set <setAcronym>` | Declares where the images are to come from. <br /> Downloads all files from the given set, acronyms correspond to [this table](https://mtg.gamepedia.com/Template:List_of_Magic_sets) |
-
-
-* Basis for all commands: `C:\<directory> php scryfaddler`
-  `directory` is the directory that the scryfaddler file is in
-  running this command is the same as adding the argument `-h` or `-help`
-
-### Downloading cards from a set
-    php scryfalldler -set <setAbreviation> -size <cardImageSize> -folder /home/user/xmage/myImages -proxy http://myproxy:8888
-  
-### Downloading cards from a text file
-    php scryfalldler -file <fileName.txt> -size <cardImageSize> -folder /home/user/xmage/myImages -proxy http://myproxy:8888
-  
-Required    
- either    
-  * `-set` or `-s`  fallowed by `<setAbreviation>`    
-    * the set abreviation corresponds to the official abreviations [found here](https://mtg.gamepedia.com/Template:List_of_Magic_sets).   
-      This will download the entire specified set    
-  * `-file` or `-f` fallowed by `<fileName.txt>` 
-     * the command prompt is in the same directory as the file
-     * the file is in the form 
-       <amount> <cardName>   
-       <amount> <cardName>   
-        ....   
-     will download an image for each unique name.
-  
-     
-     `-set` or `-s` means the source of the images will be all from a set   
-     `<setAbreviation>` is the magic set abreviation        
-     `-size` or `z`.  Optional.  Default is `small`.  It declares the resolution to download the card images as.
-     `<cardImageSize>` The valid values are: `small`, `medium`, `large`, `png`, `art_crop`, `border_crop`.
-  
-     
-  
- * Downloading cards from a text file
-   * Open a command line in the `scryfalldler-master` folder
-   * the command is `php scryfalldler -file "fileName.txt" -r archiveName`
-     `-file` means the Scryfaddler will be generating cards f
-
-* A simple (fast and probably *bad* coded) php client automated script for download and zip card images using the open [scryfall.com](http://scryfall.com) API site ready for XMage.
-
-This script is a simply php cli coded. I wanted to practice a bit with php cli scripts and this is what I made. With php we can take advantage of expanded php multi-platform, client executed (not web server, to avoid requests and filesize limitations), easy curl (http download) and zip tools.
-
-Use [Issues](https://github.com/nachazo/scryfalldler/issues) for feature request or bugs.
-
-Don't forget to support [scryfall.com](http://scryfall.com).
-
-## How to run
-You only need **php** 5.3+ (instaled in your system or uncompressed, for example from [php downloads page](http://php.net/downloads.php) or LAMP folder - note: **no** web server required, noly php) with **curl extension enabled**. Normally comes installed and enabled in most lamps or similar. If not, for Debian based GNU/Unix like Ubuntu, you simply can do it with `sudo apt install php-curl`. For Windows, search over there (could be done just editing two lines in php.ini file) :P
-
-So, just execute command and place resultant zip in your XMage images folder. For tokens you can drag&drop to TOK.zip file.
-
-Btw, script doesn't need php-zip extension, I'm using built-in phar to compress in zip (one requirement less) and in my tests result size is the same (phar bundles with php 5.3+).
-
-Don't forget to test set results on XMage "Viewer". There you can see bad or errored named cards. With common Zip filemanagers (like 7Zip or WinRAR) you could edit the name with it for fix.
-
-### GNU/Unix based
-Download the script where you want, for example using:
-```cmd
-> wget https://raw.githubusercontent.com/nachazo/scryfalldler/master/scryfalldler
-```
-And then simply run it with the desired options (this is a test command):
-```cmd
-> php scryfalldler -l
-```
-This example will show a list with the avaiable sets. Bellow you have some example commands.
-
-If you don't have php path configured in file system, you could invoke pointing php binary file, for example using:
-```cmd
-> /etc/bin/php scryfalldler -l
-```
-Also, if you want, you can give execute permissions with `chmod +x scryfalldler` to use without "php" word in the commands, just `scryfalldler` (or depending your system `./scryfalldler`). Depending how you saved the file, maybe you need to convert line endings with `sed -i s/\\r//g scryfalldler`.
-
-### Windows based
-Download the script where you want, save the path to a file or, for example, using Windows PowerShell (<kbd>Win</kbd> + <kbd>r</kbd>, then `powershell`):
-```cmd
-> wget https://raw.githubusercontent.com/nachazo/scryfalldler/master/scryfalldler -OutFile scryfalldler
-```
-And then simply run the command with the desired options (this is a test command):
-```cmd
-> php scryfalldler -l
-```
-This example will show a list with the avaiable sets.
-
-> *Note*: If you see weird symbols instead colors in the console, it's because [a problem with Windows ANSI encoding and php version](https://github.com/symfony/symfony/issues/19520). With lastest versions you will avoid it. Anyways, the image download works aswell :)
-
-If you don't have php path configured in file system, you could invoke pointing binary php.exe file, for example using:
-```cmd
-> C:\myPhpFolder\php scryfalldler -l
-```
-
-## Commands
--g or -gatherer gets the card from https://gatherer.wizards.com at 72 pixels/inch
--h or -help
--v or -version
--s or -set
--z or -size
--u or -url
--f or folder
--r or -force
--d or -debug
--t or -test
--p or -proxy
--n or -no-check
--x or -ext
--i or -file
-Of course you can combine parameters, also using short or large reserved words, all listed in "Help" section (or type `php scryfalldler`).
-* This will download "Commander 2017" set cards (in large size) and zip to "C17.zip" in base folder:
-  * `php scryfalldler -s c17`
-* This will download "Commander 2017" set cards and zip to "C17.zip" in specified folder:
-  * `php scryfalldler -set c17 -f /home/user/xmage/myImages`
-* This will download "Commander 2017" cards art crop image set:
-  * `php scryfalldler -set c17 -size art_crop`
-* This will download "Commander 2017" set cards behind proxy:
-  * `php scryfalldler -s c17 -p http://myproxy:8888`
-* This will download "Commander 2017" card images from Wizards Gatherer:
-  * `php scryfalldler -s c17 -z gatherer`
-* This will download "Commander 2017" tokens and zip into a subfolder named "C17", you could drag&drop to TOK.zip:
-  * `php scryfalldler -set tc17 -r C17`
-* This will read each line of "My deck file.text" and search in Scryfall for cards, then save that in the script format, in a zip "MYDECKRESULT.zip". Useful for common deck files, for example:
-  * `php scryfalldler -file "My deck file.txt" -r MYDECKRESULT`
-* This will download "Future Sight" set from Gatherer and generate correctly with "FTS.zip" name:
-  * `php scryfalldler -g "Future Sight" -r FTS`
-* This will download "Exodus" set from Gatherer:
-  * `php scryfalldler -g exodus`
-* This will download card images from official Wizards product set images, this case for Dominaria. Missing images would be taken from Gatherer:
-  * `php scryfalldler -u https://magic.wizards.com/en/products/dominaria/cards -r DOM`
-* This will download token images from official Wizards product images, this case for Dominaria. As it have not names, could be unnamed (you may rename):
-  * `php scryfalldler -u https://magic.wizards.com/en/articles/archive/card-preview/tokens-dominaria-2018-04-12 -r TOK`
+| `-help`| Returns a list of all the possible arguments and a brief description |
+| `-test`| Returns whether scryfalldler can successfully connect to Scyfall |
+| `-list`| From Scryfall, lists all available sets for download, their acronyms, and card count |
+| `-version`| Displays the version of scryfalldler you are running |
 
   
 ## Changelog
