@@ -3,8 +3,8 @@
 A simple fast tool to download Magic: The Gathering card images.   
 * Download by...   
   * a list in a text file
-  * all cards in a set
-  * all cards on an [official Wizards product page](https://magic.wizards.com/en/products/warofthespark/cards)
+  * 1 of each card in a set
+  * 1 of each card on an [official Wizards product page](https://magic.wizards.com/en/products/warofthespark/cards)
 * Of Size... 
   * 6 options from the [Scryfall site](http://scryfall.com) including art crop and border crop
   * 1 option from [Wizard's Gatherer](https://gatherer.wizards.com/Pages/Default.aspx) or [product page](https://magic.wizards.com/en/products/warofthespark/cards)
@@ -44,7 +44,7 @@ From there you can add arguments, declaring what card images to download and how
 
 First will be an explanation of the [arguments](#arguments), then specific [examples](#examples)
 
-### arguments
+### Arguments
 
 You can add _at most 1_ argument from the fallowing table to declare the cards you want downloaded.
 
@@ -144,67 +144,6 @@ The fallowing are example commands typed into a command prompt within the scryfa
     * no additional arguments can be added
     * the result is the same as a `php scryfalldler -set <setName>` call  
     * entering no text then pressing `ENTER` ends the process without downloading
-     
----------------
-
-### Image Size Details
-
-Further explaining the size keywords of the argument `-size <sizeKeyword>`
-
-Each keyword will download cards at a particular size and resolution, that size does not match actual card size, so below that information is the resolution of the image if image editing software is used to set the card image size to the size of actual cards.
-
-Note: `"` donotes inches
-
-For Referance   
-* Real Magic: The Gathering cards   
-   2.45" wide by 3.42" long, printed at 1200 pixels/inch   
-   
-Download-able sizes   
-* `small`   
- 2" by 2.83" at 72 pixels/inch   
-  * 60 pixels/inch if resized to real card size   
-* `normal`   
-  6.9" by 9.6" at 72 pixels/inch.
-  * 200 pixels/inch if resized to real card size   
-* `large`   
-  9.45" by 13" at 72 pixels/inch   
-  * 275 pixels/inch if resized to real card size   
-* `png`   
-  10.3" by 14.4" at 72 pixels/inch   
-  * 300 pixels/inch if resized to real card size   
-* `art_crop`   
-  The `png` sized card image's art. A varying sized imprecise cutout of the art at 72 pixels/inch.   
-* `border_crop`   
-  A 105% scaled `normal` card image with the black border partially cropped out removing the rounded edges.   
-  
-Only downloadable through URL
-* `gatherer`   
-  2.76" by 3.85" at 96 pixels/inch
-  * 108 pixels/inch if resized to real card size 
-
--------------------
-
-### Text File Format
-
-Further explaining of the file format required by `-file <fileName>.txt`
-
-Text files used to declare the cards to download should have each line in the form...   
-* `<amount> <card name>`   
-   For Example   
-   `1 Rhystic Study`  
-   `2 Faithless Looting`   
-   `1 Gitaxian Probe` 
- 
-There are optional parameters to add after the name, declaring which set to get the image from, and for cards with multiple images in a set (like lands) which collector number to use.
-* `<amount> <card name>|<setAcronym>#<collectorNumber>`   
-   For Example   
-   `1 Island|GK2#132` 
-
-Scryfalldler will ignore any entries of an already declared `<card name>`.  
-* For Example     
-    `1 Island|GK2#132`    
-    `1 Island|GK2#131`   
-    Scryfalldler will ignore the second entry for Island.   
     
 ## Further Information
 
@@ -249,7 +188,68 @@ Site:
 
 <p align="center"><img src="https://i.imgur.com/I7QEYF6.gif" data-canonical-src="https://i.imgur.com/I7QEYF6.gif" width="500" /></p>
 
+---------------
 
+### Image Size Details
+
+Further explaining the size keywords of the [argument](#arguments) `-size <sizeKeyword>`
+
+Each keyword will download cards at a particular size and resolution, that size does not match actual card size, so below that information is the resolution of the image if image editing software is used to set the card image size to the size of actual cards.
+
+Note: `"` donotes inches
+
+For Referance   
+* Real Magic: The Gathering cards   
+   2.45" wide by 3.42" long, printed at 1200 pixels/inch   
+   
+Download-able sizes   
+* `small`   
+ 2" by 2.83" at 72 pixels/inch   
+  * 60 pixels/inch if resized to real card size   
+* `normal`   
+  6.9" by 9.6" at 72 pixels/inch.
+  * 200 pixels/inch if resized to real card size   
+* `large`   
+  9.45" by 13" at 72 pixels/inch   
+  * 275 pixels/inch if resized to real card size   
+* `png`   
+  10.3" by 14.4" at 72 pixels/inch   
+  * 300 pixels/inch if resized to real card size   
+* `art_crop`   
+  The `png` sized card image's art. A varying sized imprecise cutout of the art at 72 pixels/inch.   
+* `border_crop`   
+  A 105% scaled `normal` card image with the black border partially cropped out removing the rounded edges.   
+  
+Only downloadable through URL
+* `gatherer`   
+  2.76" by 3.85" at 96 pixels/inch
+  * 108 pixels/inch if resized to real card size 
+
+-------------------
+
+### Text File Format
+
+Further explaining of the file format required by the [arguments](#arguments) `-file <fileName>.txt`
+
+Text files used to declare the cards to download should have each line in the form...   
+* `<amount> <card name>`   
+   For Example   
+   `1 Rhystic Study`  
+   `2 Faithless Looting`   
+   `1 Gitaxian Probe` 
+ 
+There are optional parameters to add after the name, declaring which set to get the image from, and for cards with multiple images in a set (like lands) which collector number to use.
+* `<amount> <card name>|<setAcronym>#<collectorNumber>`   
+   For Example   
+   `1 Island|GK2#132` 
+
+Scryfalldler will ignore any entries of an already declared `<card name>`.  
+* For Example     
+    `1 Island|GK2#132`    
+    `1 Island|GK2#131`   
+    Scryfalldler will ignore the second entry for Island.   
+
+---------
   
 ## Changelog
 
