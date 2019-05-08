@@ -22,13 +22,14 @@ A simple fast tool to download Magic: The Gathering card images.
    * Control Panel->System and Security->System->Advanced system settings->Enviornmental Variables
    * Under `System Variables` double click on `Path`
    * Select `New` and type `C:\PHP7`
-   * In a command prompt type `php -v` to ensure it is working
+   * In a command prompt type `php -v` to ensure it is working.  You should see version and copyright information.
  
 2. __The Scryfalldler client__   
  * _Installing on Windows_   
     Download the Client from GitHub   
     * Press the green `Clone or Download` button in the upper right, fallowed by `Download Zip`   
     * Extract the archive to your desired location
+    * In a command prompt, change the directory to the scryfalldler folder and type `php scryfalldler` to ensure it is working.  You should see a list of all the possible commands and brief descriptions.
   
 ## Usage
 To run Scryfaddler, you must have a command prompt opened to the directory scryfaddler is in.
@@ -67,17 +68,12 @@ The fallowing table lists the stand-alone arguments
 | `-version`| Displays the version of scryfalldler you are running |
 | `-list`| From Scryfall, lists all available sets for download, their acronyms, and card count.  <br />  The output is fallowed by the option to enter a set acronym to download the entire set at the default `large` image size. <br /> Entering nothing and then pressing `ENTER` ends the process without downloading anything |
 
-#### Examples
+### Examples
 
-`php scryfalldler`   
+These are example commands typed into a command prompt within the scryfalldler directory.
+
+`php scryfalldler`      
  * returns help information, all the possible arguments and a brief description 
- 
- `php scryfalldler -list`   
- * in the command window, lists all of the card sets on Scryfall and the number of cards in each of those sets.
- * then it asks for a set to name to download all the cards of
-    * no additional arguments can be added
-    * the result is the same as a `php scryfalldler -set <setName>` call  
-    * entering no text then pressing `ENTER` ends the process without downloading
  
 `php scryfalldler -file myDeck.txt`     
  * Creates a zip file of card images, the amounts and names of each card to download are listed in the text file, `myDeck.txt`
@@ -123,6 +119,13 @@ The fallowing table lists the stand-alone arguments
 `php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards -folder cards/dominaria`  
 * Creates a zip file of cards from Wizard's web page featuring `dominaria` cards    
      * The zip file is placed in the folder `.../scryfalldlerDirectory/decks/deck1/archive/`  
+     
+ `php scryfalldler -list`   
+ * in the command window, lists all of the card sets on Scryfall and the number of cards in each of those sets.
+ * then it asks for a set to name to download all the cards of
+    * no additional arguments can be added
+    * the result is the same as a `php scryfalldler -set <setName>` call  
+    * entering no text then pressing `ENTER` ends the process without downloading
      
 ---------------
 
