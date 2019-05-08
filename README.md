@@ -35,20 +35,20 @@ To run Scryfaddler, you must have a command prompt opened to the directory scryf
 
 The base command that all scryfaddler processes are run off of is    
    `php scryfaddler`   
-From there you can add arguments, declaring what cards and how to download them.
+From there you can add arguments, declaring what card images to download and how to download them.
    
-You can add _at most 1_ argument from this table.
+You can add _at most 1_ argument from the fallowing table to declare the cards you want downloaded.
 
-| Arguments, cards to download   | Notes |
+| Arguments, declaring cards to download  | Notes |
 | ------------------------------| ----- |
 | `-file <fileName.txt>` | Uses a file of name `<filename.txt>` as the list of cards to download. <br /> The text file must fallow the form outlined below in __Text File Format__.   <br /> By default downloads and compresses the images into a zip file, <br />  named `FILE`,  and places it in the same directory as scryfalldler|
 | `-set <setAcronym>` | Downloads all cards from a set, `<setAcronym>` can be found in [this table](https://mtg.gamepedia.com/Template:List_of_Magic_sets)    <br /> By default downloads and compresses the images into a zip file, <br />  named `<setAcronym>`,  and places it in the same directory as scryfalldler|
 | `-url <url location>` | Only for wizards official spoilers and recent releases.  <br /> `<url location>` should be of the form https://magic.wizards.com/en/products/dominaria/cards  <br /> By default downloads and compresses the images into a zip file, <br />  named  `WZR`, and places it in the same directory as scryfalldler|
 | `-gatherer <set name>` | __Broken.__ Downloads all cards from a given set, <set name> should be of the form `"Future Sight"`  <br /> By default downloads and compresses the images into a zip file, <br />  named  `???`, and places it in the same directory as scryfalldler |
  
- You can add _any number_ of arguments from this table.
+ You can add _any number_ of arguments from the fallowing table.
 
-|        Arguments, additional   | Notes |
+|   Arguments, Additional   | Notes |
 | ------------------------------| ----- |
 | `-size <sizeKeyword>` | Declare the size of image to download from a `-set` or `-file` call.  Default is `large`. <br />  The valid values for `<sizeKeyword>` are: `small` for 20% size, <br /> `medium` for 65% size, `large` for 90% size, `png` for 100% size, <br /> `art_crop` for 100% size art only, `border_crop` for 100% size no-art, <br /> and `gatherer` for 35% size |
 | `-folder <folder>` | Downloads the images into a zip file of default name `1` <br /> and then places it in a folder named `<folder>` within the scryfalldler directory|
@@ -57,7 +57,7 @@ You can add _at most 1_ argument from this table.
 | `-proxy <proxySite>` | Downloads the images through a proxy, <br /> `<proxySite>` should be of the form: http://proxy:port |
 | `-no-check` | Do not download the latest version of scryfalldler from GitHub on this execution |
 
-These are stand-alone arguments
+The fallowing table lists the stand-alone arguments
 
 |        Arguments, other | Notes |
 | ------------------------------| ----- |
