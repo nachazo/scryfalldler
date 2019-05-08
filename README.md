@@ -4,7 +4,7 @@ A tool to quickly download Magic: The Gathering card images.
 * Download by...   
   * a list in a text file
   * all cards in a set
-  * spoilers from a URL
+  * spoilers on the [official Wizards url](https://magic.wizards.com/en/products/warofthespark/cards)
 * Of Size... 
   * 6 options from the [Scryfall site](http://scryfall.com) (20%, 65%, 90%, or 100% size, 100% size Art-Crop, 100% size Border-Crop)
   * 1 option from [Wizard's Gatherer](https://gatherer.wizards.com/Pages/Default.aspx) (35% size)
@@ -34,16 +34,19 @@ A tool to quickly download Magic: The Gathering card images.
 To run Scryfaddler, you must have a command prompt opened to the directory scryfaddler is in.
 
 The base command that all scryfaddler processes are run off of is    
-   `php scryfaddler`    
-From there you add arguments to that line.
+   `php scryfaddler`   
+From there you can add arguments, declaring what cards and how to download them.
+   
+You can add _at most 1_ argument from this table.
 
-
-|        Arguments, declaring cards to download   | Notes |
+| Arguments, cards to download   | Notes |
 | ------------------------------| ----- |
 | `-file <fileName.txt>` | Uses a file of name `<filename.txt>` as the list of cards to download. <br /> The text file must fallow the form outlined below in __Text File Format__.   <br /> By default downloads and compresses the images into a zip file, <br />  named `FILE`,  and places it in the same directory as scryfalldler|
 | `-set <setAcronym>` | Downloads all files from the given set, `<setAcronym>` correspond to [this table](https://mtg.gamepedia.com/Template:List_of_Magic_sets)    <br /> By default downloads and compresses the images into a zip file, <br />  named `<setAcronym>`,  and places it in the same directory as scryfalldler|
 | `-url <url location>` | Only for wizards official spoilers and recent releases.  <br /> `<url location>` should be of the form https://magic.wizards.com/en/products/dominaria/cards  <br /> By default downloads and compresses the images into a zip file, <br />  named  `WZR`, and places it in the same directory as scryfalldler|
 | `-gatherer <set name>` | __Broken.__ Downloads all cards from a given set, <set name> should be of the form `"Future Sight"`  <br /> By default downloads and compresses the images into a zip file, <br />  named  `???`, and places it in the same directory as scryfalldler |
+ 
+ You can add _any number_ of arguments from this table.
 
 |        Arguments, additional   | Notes |
 | ------------------------------| ----- |
@@ -54,13 +57,26 @@ From there you add arguments to that line.
 | `-proxy <proxySite>` | Downloads the images through a proxy, <br /> `<proxySite>` should be of the form: http://proxy:port |
 | `-no-check` | Do not download the latest version of scryfalldler from GitHub on this execution |
 
+These are stand-alone arguments
+
 |        Arguments, other | Notes |
 | ------------------------------| ----- |
 | ` `| No argument returns a list of all the possible arguments and a brief description |
 | `-help`| Returns a list of all the possible arguments and a brief description |
 | `-test`| Returns whether scryfalldler can successfully connect to Scyfall |
-| `-list`| From Scryfall, lists all available sets for download, their acronyms, and card count |
 | `-version`| Displays the version of scryfalldler you are running |
+| `-list`| From Scryfall, lists all available sets for download, their acronyms, and card count.  <br />  The output is fallowed by the option to enter a set acronym to download the entire set at the default `large` image size. |
+
+#### Examples
+
+`php scryfalldler`   
+`php scryfalldler -file myDeck.txt`   
+`php scryfalldler -file myDeck.txt -size png -force MyDeckArchive`   
+`php scryfalldler -set C17`   
+`php scryfalldler -set C17 -size art_crop -force C17ArtCrop -ext png`   
+`php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards`   
+`php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards -folder cards/dominaria`   
+
 
 ### Text File Format
 Text files used to declare the cards to download should have each line in the form...   
@@ -70,7 +86,7 @@ Text files used to declare the cards to download should have each line in the fo
    `2 Faithless Looting`   
    `1 Gitaxian Probe` 
  
-There are optional parameters to add after the name, declaring which set to get the image from, and for cards with multiple images (like lands) which collector number to use.
+There are optional parameters to add after the name, declaring which set to get the image from, and for cards with multiple images in a set (like lands) which collector number to use.
 * `<amount> <card name>|<setAcronym>#<collectorNumber>`   
    For Example   
    `1 Island|GK2#132` 
