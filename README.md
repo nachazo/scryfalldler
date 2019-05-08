@@ -50,7 +50,7 @@ You can add _at most 1_ argument from the fallowing table to declare the cards y
 
 |   Arguments, Additional   | Notes |
 | ------------------------------| ----- |
-| `-size <sizeKeyword>` | Declare the size of image to download from a `-set` or `-file` call.  Default is `large`. <br />  See __Image Size Details__ section for more info on keywords. <br /> Valid values for `<sizeKeyword>` are: `small`, `medium`, `large`, <br /> `png`, `art_crop`, `border_crop`, and `gatherer` |
+| `-size <sizeKeyword>` | Declare the size of image to download from a `-set` or `-file` call. <br /> Default is `large`. <br />  Valid values for `<sizeKeyword>` are: `small`, `medium`, `large`, <br /> `png`, `art_crop`, `border_crop`, and `gatherer` <br />  See __Image Size Details__ section for more info on keywords. |
 | `-folder <folder>` | Downloads the images into a zip file of default name `1` <br /> and then places it in a folder named `<folder>` within the scryfalldler directory|
 | `-force <zipName>` | Forces the zip file name to be `<zipName>` |
 | `-ext <imageExtension>` | Force the extension of each image downloaded to be `<imageExtionsion>` <br /> Default image extension is `jpg` |
@@ -61,8 +61,8 @@ The fallowing table lists the stand-alone arguments
 
 |        Arguments, other | Notes |
 | ------------------------------| ----- |
-| ` `| No argument returns a list of all the possible arguments and a brief description |
-| `-help`| Returns a list of all the possible arguments and a brief description |
+| ` `| No argument returns help information, all the possible arguments and a brief description |
+| `-help`| Returns help information, all the possible arguments and a brief description |
 | `-test`| Returns whether scryfalldler can successfully connect to Scyfall |
 | `-version`| Displays the version of scryfalldler you are running |
 | `-list`| From Scryfall, lists all available sets for download, their acronyms, and card count.  <br />  The output is fallowed by the option to enter a set acronym to download the entire set at the default `large` image size. |
@@ -70,12 +70,59 @@ The fallowing table lists the stand-alone arguments
 #### Examples
 
 `php scryfalldler`   
-`php scryfalldler -file myDeck.txt`   
-`php scryfalldler -file myDeck.txt -size png -folder decks/deck1/archive -force Deck1Archive`   
+ * returns help information, all the possible arguments and a brief description 
+ 
+ `php scryfalldler -list`   
+ * in the command window, lists all of the card sets on Scryfall and the number of cards in each of those sets.
+ * then it asks for a set to name to download all the cards of
+    * will download the first set where that begins with the entered string
+   `a` as a response will return the first set that starts with the letter `a`
+    * result is the same as a `php scryfalldler -set a` call  
+ 
+`php scryfalldler -file myDeck.txt`     
+ * Create a zip file of card images, the amounts and names of each card to download are listed in the text file, `myDeck.txt`
+    * The card images are of default size, `large`  
+    * The zip file is placed in the default location, the scryfalldler directory   
+    * The zip file's name is defaulted to `FILE`   
+    * The extension on each image in the zip file is defaulted to `jpg`
+    * On this run, by default, scryfalldler checks for and downloads any GitHub updates
+    * On this run, by default, scryfalldler will not download through a proxy
+
+`php scryfalldler -file myDeck.txt -size png -folder decks/deck1/archive -force Deck1Archive -ext png -no-check` 
+ * Create a zip file of card images, the amounts and names of each card to download are listed in the text file, `myDeck.txt`
+    * The card images are of size `png`   
+    * The zip file is placed in the folder `.../scryfalldlerDirectory/decks/deck1/archive/`   
+    * The zip file's name is changed to `Deck1Archive`
+    * The extension on each image in the zip file is changed to `png`
+    * On this run, scryfalldler will not check for github updates
+    
 `php scryfalldler -set C17`   
+ * Creates a zip file of cards images, this will contain 1 of each card from the set `C17`  
+    * The card images are of default size, `large`  
+    * The zip file is placed in the default location, the scryfalldler directory   
+    * The zip file's name is defaulted to `C17`   
+    * The extension on each image in the zip file is defaulted to `jpg`
+    * On this run, by default, scryfalldler checks for and downloads any GitHub updates
+    * On this run, by default, scryfalldler will not download through a proxy
+    
 `php scryfalldler -set C17 -size art_crop -force C17ArtCrop -ext png`   
-`php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards`   
+ * Creates a zip file of cards images, this will contain 1 of each card from the set `C17`    
+    * The zip file's name is changed to `C17ArtCrop`       
+    * the card image size is changed to `art_crop`   
+    * the extension on each image in the zip file is changed to `.png`
+    
+`php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards` 
+* creates a zip file of card images from Wizard's web page of `dominaria` cards   
+    * The card images are of default size, `gatherer`  
+    * The zip file is placed in the default location, the scryfalldler directory   
+    * The zip file's name is defaulted to `WZR`   
+    * The extension on each image in the zip file is defaulted to `jpg`
+    * On this run, by default, scryfalldler checks for and downloads any GitHub updates
+    * On this run, by default, scryfalldler will not download through a proxy
+    
 `php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards -folder cards/dominaria`  
+* creates a zip file of cards from Wizard's web page featuring `dominaria` cards    
+     * The zip file is placed in the folder `.../scryfalldlerDirectory/decks/deck1/archive/`  
 
 ### Image Size Details
 For each image size there is (1) the size and resolution it is downloaded at (2) the resolution of the image if image editing software is used to set the card image to the size of actual cards
@@ -124,34 +171,11 @@ Scryfalldler will ignore any entries of an already declared `<card name>`.
     `1 Island|GK2#132`    
     `1 Island|GK2#131`   
     Scryfalldler will ignore the second entry for Island.   
-  
-## Changelog
+    
+## Further Information
 
-* **1.4.1** (15/06/18):
-  * Small fix for cards with foil versions causing bad exporting.
-* **1.4** (27/04/18):
-  * Added "-g" option for download from Wizards Gatherer without taking any info from Scryfall. Doing it searching by set name.
-  * Added "-u" option for download from Wizards official set site card page. Empty cards comes from Gatherer. Also tokens, but "unnamed". Not works as good as Scryfall, needs some post-renaming, but usefull in early launched sets.
-* **1.3.3** (02/04/18):
-  * Configured error reporting for avoid showing in output high number of warnings and so on. Now only important errors will be shown.
-* **1.3.2** (13/03/18):
-  * Improved the new file list option. Now you could specify the set you want for the card edition with "card|set" (i.e: Opt|INV) (useful for lands also you can use collector number with #, i.e. Forest|bfz#273). Also, can read the XMage .dck format.
-* **1.3.1** (12/03/18):
-  * Fixed error saving cards with " in the name. Until now, these cards doesn't download.
-  * Corrected version naming.
-* **1.3** (12/03/18):
-  * Added optional feature for download card images from a file list (deck file, for example).
-* **1.2** (12/03/18):
-  * Fixed error saving split cards (the cards with "//"). Until now, these cards doesn't download.
-  * Fixed error saving cards with ":" and " * " in name. Replaced by blank, like XMage does. As strange chars in some systems, until now it caused that images with that doesn't download.
-  * Added option (-x, -ext) for force the image extension for the cards.
-* **1.1** (09/02/18):
-  * Fixed a relevant bug with basic land naming.
-* **1.0** (10/01/18):
-  * Initial release.
+Each command has a shortened, 1 letter, abreviation and short functional description.  These are built into Scryfalldler and can be found through a `php scryfallder` or `php scryfallder -help` command, or found below.
 
-## Help
-Command `php scryfalldler -h` shows:
 ```yaml
 Usage:
   php scryfalldler [arguments] 
@@ -190,3 +214,30 @@ Site:
 ```
 
 <p align="center"><img src="https://i.imgur.com/I7QEYF6.gif" data-canonical-src="https://i.imgur.com/I7QEYF6.gif" width="500" /></p>
+
+
+  
+## Changelog
+
+* **1.4.1** (15/06/18):
+  * Small fix for cards with foil versions causing bad exporting.
+* **1.4** (27/04/18):
+  * Added "-g" option for download from Wizards Gatherer without taking any info from Scryfall. Doing it searching by set name.
+  * Added "-u" option for download from Wizards official set site card page. Empty cards comes from Gatherer. Also tokens, but "unnamed". Not works as good as Scryfall, needs some post-renaming, but usefull in early launched sets.
+* **1.3.3** (02/04/18):
+  * Configured error reporting for avoid showing in output high number of warnings and so on. Now only important errors will be shown.
+* **1.3.2** (13/03/18):
+  * Improved the new file list option. Now you could specify the set you want for the card edition with "card|set" (i.e: Opt|INV) (useful for lands also you can use collector number with #, i.e. Forest|bfz#273). Also, can read the XMage .dck format.
+* **1.3.1** (12/03/18):
+  * Fixed error saving cards with " in the name. Until now, these cards doesn't download.
+  * Corrected version naming.
+* **1.3** (12/03/18):
+  * Added optional feature for download card images from a file list (deck file, for example).
+* **1.2** (12/03/18):
+  * Fixed error saving split cards (the cards with "//"). Until now, these cards doesn't download.
+  * Fixed error saving cards with ":" and " * " in name. Replaced by blank, like XMage does. As strange chars in some systems, until now it caused that images with that doesn't download.
+  * Added option (-x, -ext) for force the image extension for the cards.
+* **1.1** (09/02/18):
+  * Fixed a relevant bug with basic land naming.
+* **1.0** (10/01/18):
+  * Initial release.
