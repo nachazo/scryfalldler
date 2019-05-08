@@ -3,8 +3,8 @@
 A simple fast tool to download Magic: The Gathering card images.   
 * Download by...   
   * a list in a text file
-  * 1 of each card in a set
-  * 1 of each card on an [official Wizards product page](https://magic.wizards.com/en/products/warofthespark/cards)
+  * all cards in a set
+  * cards on an [official Wizards product page](https://magic.wizards.com/en/products/warofthespark/cards)
 * Of Size... 
   * 6 options from the [Scryfall site](http://scryfall.com) including art crop and border crop
   * 1 option from [Wizard's Gatherer](https://gatherer.wizards.com/Pages/Default.aspx) or [product page](https://magic.wizards.com/en/products/warofthespark/cards)
