@@ -37,7 +37,7 @@ A simple fast tool to download Magic: The Gathering card images.
   
 ## Usage
 
-Jump To: [Examples](#examples)  [further information](#further-information)
+Jump To: [Examples](#examples),  [Further Information](#further-information)
 
 To run Scryfaddler, you must have a command prompt opened to the directory scryfaddler is in.
 
