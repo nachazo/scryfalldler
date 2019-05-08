@@ -50,7 +50,7 @@ You can add _at most 1_ argument from the fallowing table to declare the cards y
 
 |   Arguments, Additional   | Notes |
 | ------------------------------| ----- |
-| `-size <sizeKeyword>` | Declare the size of image to download from a `-set` or `-file` call. <br /> Default is `large`. <br />  Valid values for `<sizeKeyword>` are: `small`, `medium`, `large`, <br /> `png`, `art_crop`, `border_crop`, and `gatherer` <br />  See __Image Size Details__ section for more info on keywords. |
+| `-size <sizeKeyword>` | Declare the size of image to download from a `-set` or `-file` call. <br /> Default is `large` for `-set` or `-file` calls, and is <br /> forced to be `gatherer` for `-url` calls. <br />  Valid values for `<sizeKeyword>` are: `small`, `medium`, `large`, <br /> `png`, `art_crop`, and `border_crop` <br />  See __Image Size Details__ section for more info on keywords. |
 | `-folder <folder>` | Downloads the images into a zip file of default name `1` <br /> and then places it in a folder named `<folder>` within the scryfalldler directory|
 | `-force <zipName>` | Forces the zip file name to be `<zipName>` |
 | `-ext <imageExtension>` | Force the extension of each image downloaded to be `<imageExtionsion>` <br /> Default image extension is `jpg` |
@@ -75,12 +75,11 @@ The fallowing table lists the stand-alone arguments
  `php scryfalldler -list`   
  * in the command window, lists all of the card sets on Scryfall and the number of cards in each of those sets.
  * then it asks for a set to name to download all the cards of
-    * will download the first set where that begins with the entered string
-   `a` as a response will return the first set that starts with the letter `a`
-    * result is the same as a `php scryfalldler -set a` call  
+    * no additional arguments can be added
+    * the result is the same as a `php scryfalldler -set <setName>` call  
  
 `php scryfalldler -file myDeck.txt`     
- * Create a zip file of card images, the amounts and names of each card to download are listed in the text file, `myDeck.txt`
+ * Creates a zip file of card images, the amounts and names of each card to download are listed in the text file, `myDeck.txt`
     * The card images are of default size, `large`  
     * The zip file is placed in the default location, the scryfalldler directory   
     * The zip file's name is defaulted to `FILE`   
@@ -89,7 +88,7 @@ The fallowing table lists the stand-alone arguments
     * On this run, by default, scryfalldler will not download through a proxy
 
 `php scryfalldler -file myDeck.txt -size png -folder decks/deck1/archive -force Deck1Archive -ext png -no-check` 
- * Create a zip file of card images, the amounts and names of each card to download are listed in the text file, `myDeck.txt`
+ * Creates a zip file of card images, the amounts and names of each card to download are listed in the text file, `myDeck.txt`
     * The card images are of size `png`   
     * The zip file is placed in the folder `.../scryfalldlerDirectory/decks/deck1/archive/`   
     * The zip file's name is changed to `Deck1Archive`
@@ -97,7 +96,7 @@ The fallowing table lists the stand-alone arguments
     * On this run, scryfalldler will not check for github updates
     
 `php scryfalldler -set C17`   
- * Creates a zip file of cards images, this will contain 1 of each card from the set `C17`  
+ * Createss a zip file of cards images, this will contain 1 of each card from the set `C17`  
     * The card images are of default size, `large`  
     * The zip file is placed in the default location, the scryfalldler directory   
     * The zip file's name is defaulted to `C17`   
@@ -112,7 +111,7 @@ The fallowing table lists the stand-alone arguments
     * the extension on each image in the zip file is changed to `.png`
     
 `php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards` 
-* creates a zip file of card images from Wizard's web page of `dominaria` cards   
+* Creates a zip file of card images from Wizard's web page of `dominaria` cards   
     * The card images are of default size, `gatherer`  
     * The zip file is placed in the default location, the scryfalldler directory   
     * The zip file's name is defaulted to `WZR`   
@@ -121,28 +120,33 @@ The fallowing table lists the stand-alone arguments
     * On this run, by default, scryfalldler will not download through a proxy
     
 `php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards -folder cards/dominaria`  
-* creates a zip file of cards from Wizard's web page featuring `dominaria` cards    
+* Creates a zip file of cards from Wizard's web page featuring `dominaria` cards    
      * The zip file is placed in the folder `.../scryfalldlerDirectory/decks/deck1/archive/`  
+     
+---------------
 
 ### Image Size Details
-For each image size there is (1) the size and resolution it is downloaded at (2) the resolution of the image if image editing software is used to set the card image to the size of actual cards
+
+Further explaining the size keywords of the argument `-size <sizeKeyword>`
+
+Each keyword will download cards at a particular size and resolution, that size does not match actual card size, so below that information is the resolution of the image if image editing software is used to set the card image size to the size of actual cards.
 
 Note: `"` donotes inches
 
 For Referance   
 * Real Magic: The Gathering cards   
-   2.45" wide, 3.42" long printed at 1200 pixels/inch   
+   2.45" wide by 3.42" long, printed at 1200 pixels/inch   
    
 Download-able sizes   
 * `small`   
  2" by 2.83" at 72 pixels/inch   
   * 60 pixels/inch if resized to real card size   
 * `normal`   
-  3.7" by 5.1" at 72 pixels/inch.
-  * 108 pixels/inch if resized to real card size   
-* `large`   
-  6.77" by 9.44" at 72 pixels/inch   
+  6.9" by 9.6" at 72 pixels/inch.
   * 200 pixels/inch if resized to real card size   
+* `large`   
+  9.45" by 13" at 72 pixels/inch   
+  * 275 pixels/inch if resized to real card size   
 * `png`   
   10.3" by 14.4" at 72 pixels/inch   
   * 300 pixels/inch if resized to real card size   
@@ -150,8 +154,13 @@ Download-able sizes
   The `png` sized card image's art. A varying sized imprecise cutout of the art at 72 pixels/inch.   
 * `border_crop`   
   A 105% scaled `normal` card image with the black border partially cropped out removing the rounded edges.   
+  
+Only downloadable through URL
 * `gatherer`   
-  Doesn't seem to work.   
+  2.76" by 3.85" at 96 pixels/inch
+  * 108 pixels/inch if resized to real card size 
+
+-------------------
 
 ### Text File Format
 Text files used to declare the cards to download should have each line in the form...   
