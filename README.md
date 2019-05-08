@@ -10,8 +10,8 @@ A tool to quickly download Magic: The Gathering card images.
   * 1 option from [Wizard's Gatherer](https://gatherer.wizards.com/Pages/Default.aspx) (35% size)
 
 ## Requirements
-1. __PhP version 5.3 or higher, with curl extensions enabled__     
-   _Windows Users_   
+1. __PhP version 5.3 or higher, with curl extensions enabled__    
+ * _Installing on Windows_   
    Download the latest PhP version from the [windows PhP website](https://windows.php.net/).    
    * Copy the file php.ini-development in C:\PHP7\ and rename it to php.ini   
    * Open C:\PHP7\php.ini in a text editor and make the fallowing changes   
@@ -24,9 +24,9 @@ A tool to quickly download Magic: The Gathering card images.
    * Select `New` and type `C:\PHP7`
    * In a command prompt type `php -v` to ensure it is working
  
-2. __The Scryfalldler client__
-  _Windows Users_
-    Download the Client from GitHub
+2. __The Scryfalldler client__   
+ * _Installing on Windows_   
+    Download the Client from GitHub   
     * Press the green `Clone or Download` button in the upper right, fallowed by `Download Zip`   
     * Extract the archive to your desired location
   
