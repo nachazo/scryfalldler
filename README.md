@@ -65,7 +65,7 @@ The fallowing table lists the stand-alone arguments
 | `-help`| Returns help information, all the possible arguments and a brief description |
 | `-test`| Returns whether scryfalldler can successfully connect to Scyfall |
 | `-version`| Displays the version of scryfalldler you are running |
-| `-list`| From Scryfall, lists all available sets for download, their acronyms, and card count.  <br />  The output is fallowed by the option to enter a set acronym to download the entire set at the default `large` image size. |
+| `-list`| From Scryfall, lists all available sets for download, their acronyms, and card count.  <br />  The output is fallowed by the option to enter a set acronym to download the entire set at the default `large` image size. <br /> Entering nothing and then pressing `ENTER` ends the process without downloading anything |
 
 #### Examples
 
