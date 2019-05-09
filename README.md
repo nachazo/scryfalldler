@@ -200,36 +200,24 @@ Return to: [Usage](#usage)
 
 Further explaining the keywords of the argument `-size <sizeKeyword>`
 
-Each keyword will download cards at a particular size and resolution, that size does not match actual card size, so below that information is the resolution of the image if image editing software is used to set the card image size to the size of actual cards.
+Each keyword will download cards at a particular size and resolution.   
+That size does not match actual card size. The image size downloaded is typically the size of a whole 8.5 by 11 sheet of paper, or larger.
+So next to the image size information is the `pixels/inch if edited to real card size` column which shows the resolution of the card image if image editing software is used to adjust the pixels/inch so the card image so that it is the size of an actual card.  For example, with Paint.Net, if you open the card with Paint.Net and then go to Image->Canvas Size and change the Resolution the appropriate `pixels/inch if edited to real card size` value, it will be the size of an actual magic card.
 
-Note: `"` donotes inches
+| Card | Size in inches | pixels/inch | pixels/inch if edited to real card size  |
+| ---- | -------------- | ----------- | ----------------------------------------- |
+| Real physical Magic card | 2.45 by 3.42 | 1200 | 1200 |
+| `small` | 2 by 2.83 | 72 | 60 |
+| `normal` | 6.9 by 9.6 | 72 | 195 |
+| `large` | 9.5 by 13 | 72 | 275 |
+| `png` | 10.3 by 14.4 | 72 | 300 |
+| `border_crop`<sup>1</sup> | 6.8 by 9.6 | 72 | 210~ |
+| `art_crop`<sup>2</sup> | ---- | 72 | 300 |
+| `gatherer`<sup>3</sup> | 2.76 by 3.85 | 96 | 108 |
 
-For Referance   
-* Real Magic: The Gathering cards   
-   2.45" wide by 3.42" long, printed at 1200 pixels/inch   
-   
-Download-able sizes   
-* `small`   
- 2" by 2.83" at 72 pixels/inch   
-  * 60 pixels/inch if resized to real card size   
-* `normal`   
-  6.9" by 9.6" at 72 pixels/inch.
-  * 200 pixels/inch if resized to real card size   
-* `large`   
-  9.45" by 13" at 72 pixels/inch   
-  * 275 pixels/inch if resized to real card size   
-* `png`   
-  10.3" by 14.4" at 72 pixels/inch   
-  * 300 pixels/inch if resized to real card size   
-* `art_crop`   
-  The `png` sized card image's art. A varying sized imprecise cutout of the art at 72 pixels/inch.   
-* `border_crop`   
-  A 105% scaled `normal` card image with the black border partially cropped out removing the rounded edges.   
-  
-Only downloadable through URL
-* `gatherer`   
-  2.76" by 3.85" at 96 pixels/inch
-  * 108 pixels/inch if resized to real card size 
+<sub>1 - `border_crop` is a 105% scaled `normal` card image cropped back down to roughly `normal` size, removing a large portion of the black border.</sub>   
+<sub>2 - `art crop` is only the art of a `png` sized card image. It is imprecise and the size varies from card to card.</sub>    
+<sub>3 - `gatherer` is the image size downloaded through the [official wizards product page](https://magic.wizards.com/en/products/warofthespark/cards)</sub>   
 
 -------------------
 
