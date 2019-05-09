@@ -55,7 +55,7 @@ The arguments in the table below declare what the card names will be.
 
 A command can have _at most 1_ argument from the fallowing table.
 
-| Arguments, use at most 1 to declare the cards to download  | Notes |
+| Arguments <br /> declare the cards to download  | Notes |
 | ------------------------------| ----- |
 | `-file <fileName>.txt` | Uses a file of name `<filename>.txt` as the list of cards to download. <br /> The text file must fallow the form outlined below in [Text File Format](#text-file-format).   <br /> By default downloads and compresses the images into a zip file, <br />  named `FILE`,  and places it in the same directory as scryfalldler|
 | `-set <setAcronym>` | Downloads all cards from a set, `<setAcronym>` can be found in [this table](https://mtg.gamepedia.com/Template:List_of_Magic_sets)    <br /> By default downloads and compresses the images into a zip file, <br />  named `<setAcronym>`,  and places it in the same directory as scryfalldler|
@@ -68,7 +68,7 @@ A command can have _at most 1_ argument from the fallowing table.
  
  A command can have _any number_ of arguments from the table below.
 
-|   Argument   | Notes |
+|   Arguments <br /> modify the defaults of a download   | Notes |
 | ------------------------------| ----- |
 | `-size <sizeKeyword>` | Declare the size of image to download from a `-set` or `-file` call. <br /> Default is `large` for `-set` or `-file` calls, and is <br /> forced to be `gatherer` for `-url` calls. <br />  Valid values for `<sizeKeyword>` are: `small`, `medium`, `large`, <br /> `png`, `art_crop`, and `border_crop` <br />  See [Size Keyword Details](#size-keyword-details) for more information. |
 | `-folder <folder>` | Downloads the images into a zip file of default name `1` <br /> and then places it in a folder named `<folder>` within the scryfalldler directory|
@@ -83,7 +83,7 @@ The arguments in the table below are solitary arguements.
 
 A command can only include 1 and must include no other arguments
 
-|        Argument | Notes |
+|        Arguments <br /> use alone | Notes |
 | ------------------------------| ----- |
 | ` `| No argument returns help information, all the possible arguments and a brief description |
 | `-help`| Returns help information, all the possible arguments and a brief description |
