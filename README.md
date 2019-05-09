@@ -8,6 +8,8 @@ A simple fast tool to download Magic: The Gathering card images.
 * Of Size... 
   * 6 options from the [Scryfall site](http://scryfall.com) including art crop and border crop
   * 1 option from [Wizard's Gatherer](https://gatherer.wizards.com/Pages/Default.aspx) or [product page](https://magic.wizards.com/en/products/warofthespark/cards)
+  
+You can also choose which sets' art to use and even the collector number for cards with multiple different images within a set, such as basic lands.
 
 ------------------
   
@@ -41,21 +43,30 @@ Jump To: [Examples](#examples) | [Text File Format](#text-file-format) | [Size K
 
 To run Scryfaddler, you must have a command prompt opened to the directory scryfaddler is in.
 
-The base command that all scryfaddler processes are run off of is    
+The base for all scryfaddler functions is    
    `php scryfaddler`   
-From there you can add arguments, declaring what card images to download and how to download them.
+From there you will be adding arguments that declaring what card names will be downloaded, in what size, and much more.
 
-From the fallowing table, you can add _at most 1_ argument declaring the cards you want downloaded.
+### Argument Definitions
 
-| Argument  | Notes |
+   ---------------------
+
+The arguments in the table below declare what the card names will be.  
+
+A command can have _at most 1_ argument from the fallowing table.
+
+| Arguments, use at most 1 to declare the cards to download  | Notes |
 | ------------------------------| ----- |
 | `-file <fileName>.txt` | Uses a file of name `<filename>.txt` as the list of cards to download. <br /> The text file must fallow the form outlined below in [Text File Format](#text-file-format).   <br /> By default downloads and compresses the images into a zip file, <br />  named `FILE`,  and places it in the same directory as scryfalldler|
 | `-set <setAcronym>` | Downloads all cards from a set, `<setAcronym>` can be found in [this table](https://mtg.gamepedia.com/Template:List_of_Magic_sets)    <br /> By default downloads and compresses the images into a zip file, <br />  named `<setAcronym>`,  and places it in the same directory as scryfalldler|
 | `-url <url location>` | Only for wizards official spoilers and recent releases.  <br /> `<url location>` should be of the form <br /> https://magic.wizards.com/en/products/dominaria/cards  <br /> By default downloads and compresses the images into a zip file, <br />  named  `WZR`, and places it in the same directory as scryfalldler|
 | `-gatherer <set name>` | __Broken.__ Downloads all cards from a given set, `<set name>` should be of <br /> the form `"Future Sight"`  <br /> By default downloads and compresses the images into a zip file, <br />  named  `???`, and places it in the same directory as scryfalldler |
- 
- From the fallowing table you can add _any number_ of arguments.
 
+   ---------------------
+ 
+ The arguments below edit the default properties of the image download.
+ 
+ A command can have _any number_ of arguments from the table below.
 
 |   Argument   | Notes |
 | ------------------------------| ----- |
@@ -66,7 +77,11 @@ From the fallowing table, you can add _at most 1_ argument declaring the cards y
 | `-proxy <proxySite>` | Downloads the images through a proxy, <br /> `<proxySite>` should be of the form: http://proxy:port |
 | `-no-check` | Do not download the latest version of scryfalldler from GitHub on this execution |
 
-The fallowing table's arguments have to be used alone.
+   ---------------------
+
+The arguments in the table below are solitary arguements.  
+
+A command can only include 1 and must include no other arguments
 
 |        Argument | Notes |
 | ------------------------------| ----- |
