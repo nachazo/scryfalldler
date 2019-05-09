@@ -6,7 +6,6 @@
 
 <h1 align="center">Scryfalldler</h1>
 
-
 <p align="center"> A simple fast tool to download Magic: The Gathering card images. </p>
 
 Scryfalldler is a php based client automated script for downlaoding and zipping
@@ -22,13 +21,11 @@ For feature requests and bugs use:
 
 Don't forget to support [scryfall.com](http://scryfall.com)!
 
-
-
 ## Features
 
 Download cards in bulk  
 
-- through a text file or Xmage .dck file
+- through a text file or <a href="http://xmage.de/">Xmage</a> .dck file
 - by set, get 1 of every card in a set
 - through an [official Wizards product
   page](https://magic.wizards.com/en/products/warofthespark/cards)
@@ -36,14 +33,12 @@ Download cards in bulk
 Extras  
 
 - 6 options for  image size, including Art Crop and Border Crop
-
 - Multiple choices in image types (jpg, png).
-
 - Able to declare which set's art to use for each individual card in text or
   Xmage .dck files.  For cards with multiple images within a set, such as basic
   lands, you can add a collectors number to identify specifically which one.
 
----
+-------------------------------------------------------------------------------
 
 ## Requirements
 
@@ -56,7 +51,6 @@ Extras
 
         - Copy the file php.ini-development in C:\PHP7\ and rename it to php.ini
         - Open C:\PHP7\php.ini in a text editor and make the fallowing 
-
           changes
         - uncomment `; extension_dir = "ext"` to `extension_dir = "ext"`
         - uncomment `;extension=curl` to `extension=curl`
@@ -77,26 +71,20 @@ Extras
    - _Installing on Windows_   
      1. Download the Client from GitHub
         - Press the green `Clone or Download` button in the upper right, 
-
           fallowed by `Download Zip`
         - Extract the archive to your desired location
         - In a command prompt, change the directory to the scryfalldler 
-
           folder and type `php scryfalldler` to ensure it is working.   
 
-          You should see a list of commands and brief descriptions.
+          If working, a list of commands should show up.
 
----
+-------------------------------------------------------------------------------
 
 ## Usage
 
 Jump To: [Examples](#examples)
 
-
-
    `php scryfalldler`  
-
-
 
 All scryfalldler functionality begins with (1) a command prompt opened to the
 directory scryfalldler is in and (2) the above phrase typed into that command
@@ -107,7 +95,7 @@ in what size, and more.
 
 #### Argument Definitions
 
----
+-------------------------------------------------------------------------------
 
 A command can have _at most 1_ argument that declares the card images to be
 downloaded.
@@ -121,11 +109,13 @@ downloaded.
         <th>Notes</th>
     </tr>
     <tr>
-        <td> <code>-file [fileName].txt</code> </td>
+        <td> <code>-file [file]</code> </td>
         <td>
-            Uses a file of name <code>[filename].txt</code> as the list of 
-            cards to download. <br /> The text file must fallow the form 
-            outlined below in <a href="#text-file-format">Text File Format</a>.
+            <code>[file]</code> is a .txt or 
+            <a href="http://xmage.de/">Xmage</a> .dck file 
+              listing the cards to be downloaded. 
+            <br /> Text files must fallow the form outlined below in 
+            <a href="#text-file-format">Text File Format</a>.
         </td>
     </tr>
     <tr>
@@ -159,9 +149,7 @@ downloaded.
     </tr>
 </table>
 
----
-
-
+-------------------------------------------------------------------------------
 
 A command to download card images can have _any number_ of arguments modifying
 the default values.
@@ -231,9 +219,7 @@ the default values.
     </tr>
 </table>
 
----
-
-
+-------------------------------------------------------------------------------
 
 Special commands
 
@@ -285,11 +271,7 @@ These are solitary commands, they must be used alone after `php scryfalldler`.
     </tr>
 </table>
 
-
-
-----
-
-
+-------------------------------------------------------------------------------
 
 ### Examples
 
@@ -298,7 +280,7 @@ Return to: [Usage](#usage)
 The fallowing are example commands typed into a command prompt pointed at the
 scryfalldler directory.
 
----
+-------------------------------------------------------------------------------
 
 `php scryfalldler -file myDeck.txt`     
 
@@ -307,12 +289,10 @@ scryfalldler directory.
    download are listed in the text file, `myDeck.txt`
   - The card images are of default size, `large`  
   - The zip file is placed in the default location, the scryfalldler 
-
     directory   
   - The zip file's name is defaulted to `FILE`   
   - The extension on each image in the zip file is defaulted to `jpg`
   - On this run, by default, scryfalldler checks for and downloads any 
-
     GitHub updates
   - On this run, by default, scryfalldler will not download through a proxy
 
@@ -322,13 +302,12 @@ Deck1Archive -ext png -no-check`
 - as above except...
   - The card images are of size `png`   
   - The zip file is placed in the folder 
-
     `.../scryfalldlerDirectory/decks/deck1/archive/`   
   - The zip file's name is changed to `Deck1Archive`
   - The extension on each image in the zip file is changed to `png`
   - On this run, scryfalldler will not check for github updates
 
----
+-------------------------------------------------------------------------------
 
 `php scryfalldler -set C17`   
 
@@ -337,12 +316,10 @@ Deck1Archive -ext png -no-check`
   the set `C17`  
   - The card images are of default size, `large`  
   - The zip file is placed in the default location, the scryfalldler 
-
     directory   
   - The zip file's name is defaulted to `C17`   
   - The extension on each image in the zip file is defaulted to `jpg`
   - On this run, by default, scryfalldler checks for and downloads any 
-
     GitHub updates
   - On this run, by default, scryfalldler will not download through a proxy
 
@@ -353,7 +330,7 @@ Deck1Archive -ext png -no-check`
   - the card image size is changed to `art_crop`   
   - the extension on each image in the zip file is changed to `.png`
 
----
+-------------------------------------------------------------------------------
 
 `php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards` 
 
@@ -362,12 +339,10 @@ Deck1Archive -ext png -no-check`
   cards   
   - The card images are of default size, `gatherer`  
   - The zip file is placed in the default location, the scryfalldler 
-
     directory   
   - The zip file's name is defaulted to `WZR`   
   - The extension on each image in the zip file is defaulted to `jpg`
   - On this run, by default, scryfalldler checks for and downloads any 
-
     GitHub updates
   - On this run, by default, scryfalldler will not download through a proxy
 
@@ -379,7 +354,7 @@ Deck1Archive -ext png -no-check`
 
     `.../scryfalldlerDirectory/decks/deck1/archive/`  
 
----
+-------------------------------------------------------------------------------
 
  `php scryfalldler`      
 
@@ -393,10 +368,9 @@ Deck1Archive -ext png -no-check`
   - no additional arguments can be added
   - the result is the same as a `php scryfalldler -set <setName>` call  
   - entering no text then pressing `ENTER` ends the process without 
-
     downloading
 
----
+-------------------------------------------------------------------------------
 
 ### Size Keyword Details
 
@@ -473,14 +447,14 @@ of an actual magic card.
     </tr>
 </table>
 
-<sub>1 - `border_crop` is a 105% scaled `normal` card image cropped back down to
-roughly `normal` size, removing a large portion of the black border.</sub>   
-<sub>2 - `art crop` is only the art of a `png` sized card image. It is imprecise
-and the size varies from card to card.</sub>    
+<sub>1 - `border_crop` is a 105% scaled `normal` card image cropped back down 
+to roughly `normal` size, removing a large portion of the black border.</sub>   
+<sub>2 - `art crop` is only the art of a `png` sized card image. It is 
+imprecise and the size varies from card to card.</sub>    
 <sub>3 - `gatherer` is the image size downloaded through the `-url` argument
 </sub>
 
----
+-------------------------------------------------------------------------------
 
 ### Text File Format
 
@@ -492,37 +466,33 @@ Return to: [Usage](#usage)
 Text files used to declare the cards to download should have each line in the
 form...   
 
-- `[amount] [card name]`   
+- `[amount] [card name]`  
 
-   For Example    
+   For Example  
 
-   `1 Rhystic Study`   
-
-   `2 Faithless Looting`    
-
-   `1 Gitaxian Probe`   
+   `1 Rhystic Study`  
+   `2 Faithless Looting`  
+   `1 Gitaxian Probe`  
 
 There are optional parameters to add after the name, declaring which set to get
 the image from, and for cards with multiple images in a set (like lands) which
 collector number to use.
 
-- `[amount] [card name]|[setAcronym]#[collectorNumber]`   
+- `[amount] [card name]|[setAcronym]#[collectorNumber]` 
 
-   For Example   
+   For Example  
 
-   `1 Island|GK2#132`   
+   `1 Island|GK2#132`  
 
 Scryfalldler will ignore any entries of an already declared `<card name>`.  
+- For Example  
 
-- For Example     
-
-    `1 Island|GK2#132`    
-
-    `1 Island|GK2#131`     
+    `1 Island|GK2#132`  
+    `1 Island|GK2#131`  
 
     Scryfalldler will ignore the second entry for Island.   
 
----
+-------------------------------------------------------------------------------
 
 ## Further Information
 
@@ -572,77 +542,55 @@ Site:
 <p align="center"><img src="https://i.imgur.com/I7QEYF6.gif" 
 data-canonical-src="https://i.imgur.com/I7QEYF6.gif" width="500" /></code>
 
----
+-------------------------------------------------------------------------------
 
 ## Changelog
 
 - **1.4.1** (15/06/18):
-  
   - Small fix for cards with foil versions causing bad exporting.
 
 - **1.4** (27/04/18):
-  
   - Added "-g" option for download from Wizards Gatherer without taking 
-    
     any info from Scryfall. Doing it searching by set name.
   - Added "-u" option for download from Wizards official set site card 
-    
     page. Empty cards comes from Gatherer. Also tokens, but "unnamed". 
-    
     Not works as good as Scryfall, needs some post-renaming, but usefull 
-    
     in early launched sets.
 
 - **1.3.3** (02/04/18):
-  
   - Configured error reporting for avoid showing in output high number of 
-    
     warnings and so on. Now only important errors will be shown.
 
 - **1.3.2** (13/03/18):
-  
   - Improved the new file list option. Now you could specify the set you 
-    
     want for the card edition with "card|set" (i.e: Opt|INV) (useful for 
-    
     lands also you can use collector number with #, i.e. Forest|bfz#273). 
-    
     Also, can read the XMage .dck format.
 
 - **1.3.1** (12/03/18):
-  
   - Fixed error saving cards with " in the name. Until now, these cards 
-    
     doesn't download.
   - Corrected version naming.
 
 - **1.3** (12/03/18):
-  
   - Added optional feature for download card images from a file list 
-    
     (deck file, for example).
-Rewrap: Toggle Auto-Wrap
+
 - **1.2** (12/03/18):
-  
   - Fixed error saving split cards (the cards with "//"). Until now, these 
-    
     cards doesn't download.
   - Fixed error saving cards with ":" and " * " in name. Replaced by blank, 
-    
     like XMage does. As strange chars in some systems, until now it caused 
-    
     that images with that doesn't download.
   - Added option (-x, -ext) for force the image extension for the cards.
 
 - **1.1** (09/02/18):
-  
   - Fixed a relevant bug with basic land naming.
 
 - **1.0** (10/01/18):
-  
   - Initial release.
 
----
+-------------------------------------------------------------------------------
 
 documentation is fallowing [Carwin's Style
 Guide](https://github.com/carwin/markdown-styleguide)
