@@ -364,4 +364,4 @@ data-canonical-src="https://i.imgur.com/I7QEYF6.gif" width="500" /></p>
 	
 --------------------------------------------------------------------------------
 
-Documentation is done fallowing [carwin's style guide](https://github.com/carwin/markdown-styleguide)
+documentation is fallowing [Carwin's Style Guide](https://github.com/carwin/markdown-styleguide)
