@@ -37,7 +37,7 @@ A simple fast tool to download Magic: The Gathering card images.
   
 ## Usage
 
-Jump To: [Examples](#examples) | [Further Information](#further-information) | [Text File Format](#text-file-format) | [Size Keyword Details](#size-keyword-details)
+Jump To: [Examples](#examples) | [Text File Format](#text-file-format) | [Size Keyword Details](#size-keyword-details) | [Further Information](#further-information)
 
 To run Scryfaddler, you must have a command prompt opened to the directory scryfaddler is in.
 
@@ -146,7 +146,62 @@ The fallowing are example commands typed into a command prompt within the scryfa
     * no additional arguments can be added
     * the result is the same as a `php scryfalldler -set <setName>` call  
     * entering no text then pressing `ENTER` ends the process without downloading
-    
+
+---------------
+
+### Size Keyword Details
+
+Return to: [Usage](#usage)
+
+Further explaining the keywords of the argument `-size <sizeKeyword>`
+
+Each keyword will download cards at a particular size and resolution.   
+That size does not match actual card size. The image size downloaded is typically the size of a whole 8.5 by 11 sheet of paper, or larger.   
+So next to the image size information is the `pixels/inch if edited to real card size` column which shows the resolution of the card image if image editing software is used to adjust the resolution so the card image is the size of an actual card.  For example, with Paint.Net, if you open the card with Paint.Net and then go to `Image->Canvas Size` and change the `Resolution` to the appropriate `pixels/inch if edited to real card size` value, it will be the size of an actual magic card.
+
+| Card | Size in inches | pixels/inch | pixels/inch if edited to real card size  |
+| ---- | -------------- | ----------- | ----------------------------------------- |
+| Real physical Magic card | 2.45 by 3.42 | --- | --- |
+| `small` | 2 by 2.83 | 72 | 60 |
+| `normal` | 6.9 by 9.6 | 72 | 195 |
+| `large` | 9.5 by 13 | 72 | 275 |
+| `png` | 10.3 by 14.4 | 72 | 300 |
+| `border_crop`<sup>1</sup> | 6.8 by 9.6 | 72 | 210~ |
+| `art_crop`<sup>2</sup> | ---- | 72 | 300 |
+| `gatherer`<sup>3</sup> | 2.76 by 3.85 | 96 | 108 |
+
+<sub>1 - `border_crop` is a 105% scaled `normal` card image cropped back down to roughly `normal` size, removing a large portion of the black border.</sub>   
+<sub>2 - `art crop` is only the art of a `png` sized card image. It is imprecise and the size varies from card to card.</sub>    
+<sub>3 - `gatherer` is the image size downloaded through the [official wizards product page](https://magic.wizards.com/en/products/warofthespark/cards)</sub>   
+
+-------------------
+
+### Text File Format
+
+Return to: [Usage](#usage)
+
+Further explaining of the file format required by the argument `-file <fileName>.txt`
+
+Text files used to declare the cards to download should have each line in the form...   
+* `<amount> <card name>`   
+   For Example   
+   `1 Rhystic Study`  
+   `2 Faithless Looting`   
+   `1 Gitaxian Probe` 
+ 
+There are optional parameters to add after the name, declaring which set to get the image from, and for cards with multiple images in a set (like lands) which collector number to use.
+* `<amount> <card name>|<setAcronym>#<collectorNumber>`   
+   For Example   
+   `1 Island|GK2#132` 
+
+Scryfalldler will ignore any entries of an already declared `<card name>`.  
+* For Example     
+    `1 Island|GK2#132`    
+    `1 Island|GK2#131`   
+    Scryfalldler will ignore the second entry for Island.   
+
+---------
+
 ## Further Information
 
 Return to: [Usage](#usage)
@@ -192,60 +247,7 @@ Site:
 
 <p align="center"><img src="https://i.imgur.com/I7QEYF6.gif" data-canonical-src="https://i.imgur.com/I7QEYF6.gif" width="500" /></p>
 
----------------
-
-### Size Keyword Details
-
-Return to: [Usage](#usage)
-
-Further explaining the keywords of the argument `-size <sizeKeyword>`
-
-Each keyword will download cards at a particular size and resolution.   
-That size does not match actual card size. The image size downloaded is typically the size of a whole 8.5 by 11 sheet of paper, or larger.
-So next to the image size information is the `pixels/inch if edited to real card size` column which shows the resolution of the card image if image editing software is used to adjust the pixels/inch so the card image so that it is the size of an actual card.  For example, with Paint.Net, if you open the card with Paint.Net and then go to Image->Canvas Size and change the Resolution the appropriate `pixels/inch if edited to real card size` value, it will be the size of an actual magic card.
-
-| Card | Size in inches | pixels/inch | pixels/inch if edited to real card size  |
-| ---- | -------------- | ----------- | ----------------------------------------- |
-| Real physical Magic card | 2.45 by 3.42 | 1200 | 1200 |
-| `small` | 2 by 2.83 | 72 | 60 |
-| `normal` | 6.9 by 9.6 | 72 | 195 |
-| `large` | 9.5 by 13 | 72 | 275 |
-| `png` | 10.3 by 14.4 | 72 | 300 |
-| `border_crop`<sup>1</sup> | 6.8 by 9.6 | 72 | 210~ |
-| `art_crop`<sup>2</sup> | ---- | 72 | 300 |
-| `gatherer`<sup>3</sup> | 2.76 by 3.85 | 96 | 108 |
-
-<sub>1 - `border_crop` is a 105% scaled `normal` card image cropped back down to roughly `normal` size, removing a large portion of the black border.</sub>   
-<sub>2 - `art crop` is only the art of a `png` sized card image. It is imprecise and the size varies from card to card.</sub>    
-<sub>3 - `gatherer` is the image size downloaded through the [official wizards product page](https://magic.wizards.com/en/products/warofthespark/cards)</sub>   
-
--------------------
-
-### Text File Format
-
-Return to: [Usage](#usage)
-
-Further explaining of the file format required by the argument `-file <fileName>.txt`
-
-Text files used to declare the cards to download should have each line in the form...   
-* `<amount> <card name>`   
-   For Example   
-   `1 Rhystic Study`  
-   `2 Faithless Looting`   
-   `1 Gitaxian Probe` 
- 
-There are optional parameters to add after the name, declaring which set to get the image from, and for cards with multiple images in a set (like lands) which collector number to use.
-* `<amount> <card name>|<setAcronym>#<collectorNumber>`   
-   For Example   
-   `1 Island|GK2#132` 
-
-Scryfalldler will ignore any entries of an already declared `<card name>`.  
-* For Example     
-    `1 Island|GK2#132`    
-    `1 Island|GK2#131`   
-    Scryfalldler will ignore the second entry for Island.   
-
----------
+-----------------------
   
 ## Changelog
 
