@@ -216,16 +216,62 @@ with Paint.Net and then go to `Image->Canvas Size` and change the `Resolution`
 to the appropriate `pixels/inch if edited to real card size` value, it will be 
 the size of an actual magic card.
 
-| Size 					   	| Size in inches | pixels/inch | pixels/inch if edited to real card size 
-| -------------------------	| -------------- | ----------- | --------------------------------------- 
-| Real physical Magic card 	| 2.45 by 3.42 	| --- 		   | ---
-| `small` 				   	| 2 by 2.83 	| 72 		   | 60 
-| `normal` 				   	| 6.9 by 9.6 	| 72 		   | 195 
-| `large` 				   	| 9.5 by 13 	| 72 		   | 275 
-| `png` 				   	| 10.3 by 14.4 	| 72 		   | 300 
-| `border_crop`<sup>1</sup> | 6.8 by 9.6 	| 72 		   | 210~ 
-| `art_crop`<sup>2</sup> 	| ---- 			| 72 		   | 300 
-| `gatherer`<sup>3</sup> 	| 2.76 by 3.85 	| 96 		   | 108 
+<table>
+	<tr>
+		<th>Image Size</th>
+		<th>Size in Inches</th>
+		<th>Pixels/Inch</th>
+		<th>Pixels/Inch if edited to real card size</th>
+	</tr>
+	<tr>
+		<td>Real Magic Card</td>
+		<td>2.45 by 3.42</td>
+		<td> --- </td>
+		<td> --- </td>
+	</tr>
+	<tr>
+		<td> <p>small</p> </td>
+		<td>2 by 2.83</td>
+		<td> 72 </td>
+		<td> 60 </td>
+	</tr>
+	<tr>
+		<td> <p>normal</p> </td>
+		<td>6.9 by 9.6</td>
+		<td> 72 </td>
+		<td> 195 </td>
+	</tr>
+	<tr>
+		<td> <p>large</p> </td>
+		<td>9.5 by 13</td>
+		<td> 72 </td>
+		<td> 275 </td>
+	</tr>
+	<tr>
+		<td> <p>png</p> </td>
+		<td> 10.3 by 14.4 </td>
+		<td> 72 </td>
+		<td> 300 </td>
+	</tr>
+	<tr>
+		<td> <p>border_crop</p><sup>1</sup> </td>
+		<td>6.8 by 9.6</td>
+		<td> 72 </td>
+		<td> 210~ </td>
+	</tr>
+	<tr>
+		<td> <p>art_crop</p><sup>2</sup> </td>
+		<td> --- </td>
+		<td> 72 </td>
+		<td> 300 </td>
+	</tr>
+	<tr>
+		<td> <p>gatherer</p><sup>3</sup> </td>
+		<td> 2.76 by 3.85 </td>
+		<td> 96 </td>
+		<td> 108 </td>
+	</tr>
+</table>
 
 <sub>1 - `border_crop` is a 105% scaled `normal` card image cropped back down 
 to roughly `normal` size, removing a large portion of the black border.</sub>   
@@ -364,4 +410,4 @@ data-canonical-src="https://i.imgur.com/I7QEYF6.gif" width="500" /></p>
 	
 --------------------------------------------------------------------------------
 
-Documentation is fallowing [Carwin's Style Guide](https://github.com/carwin/markdown-styleguide)
+documentation is fallowing [Carwin's Style Guide](https://github.com/carwin/markdown-styleguide)
