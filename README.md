@@ -119,7 +119,7 @@ scryfalldler directory.
 --------------------------------------------------------------------------------
  
 `php scryfalldler -file myDeck.txt`     
- - Creates a zip file of card images, the amounts and names of each card to 
+- Creates a zip file of card images, the amounts and names of each card to 
    download are listed in the text file, `myDeck.txt`
     - The card images are of default size, `large`  
     - The zip file is placed in the default location, the scryfalldler 
@@ -130,7 +130,8 @@ scryfalldler directory.
 	  GitHub updates
     - On this run, by default, scryfalldler will not download through a proxy
 
-`php scryfalldler -file myDeck.txt -size png -folder decks/deck1/archive -force Deck1Archive -ext png -no-check` 
+`php scryfalldler -file myDeck.txt -size png -folder decks/deck1/archive 
+-force Deck1Archive -ext png -no-check` 
  - as above except...
     - The card images are of size `png`   
     - The zip file is placed in the folder 
@@ -173,10 +174,11 @@ scryfalldler directory.
 	  GitHub updates
     - On this run, by default, scryfalldler will not download through a proxy
     
-`php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards -folder cards/dominaria`  
+`php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards 
+-folder cards/dominaria`  
 - As above except... 
-     - The zip file is placed in the folder 
-	   `.../scryfalldlerDirectory/decks/deck1/archive/`  
+    - The zip file is placed in the folder 
+	  `.../scryfalldlerDirectory/decks/deck1/archive/`  
      
 --------------------------------------------------------------------------------
      
@@ -212,8 +214,8 @@ with Paint.Net and then go to `Image->Canvas Size` and change the `Resolution`
 to the appropriate `pixels/inch if edited to real card size` value, it will be 
 the size of an actual magic card.
 
-| Size | Size in inches | pixels/inch | pixels/inch if edited to real card size  |
-| ---- | -------------- | ----------- | ---------------------------------------- |
+| Size | Size in inches | pixels/inch | pixels/inch if edited to real card size |
+| ---- | -------------- | ----------- | --------------------------------------- |
 | Real physical Magic card | 2.45 by 3.42 | --- | --- |
 | `small` | 2 by 2.83 | 72 | 60 |
 | `normal` | 6.9 by 9.6 | 72 | 195 |
@@ -241,7 +243,7 @@ Return to: [Usage](#usage)
 
 Text files used to declare the cards to download should have each line in the 
 form...   
-* `<amount> <card name>`   
+- `<amount> <card name>`   
    For Example   
    `1 Rhystic Study`  
    `2 Faithless Looting`   
@@ -250,12 +252,12 @@ form...
 There are optional parameters to add after the name, declaring which set to 
 get the image from, and for cards with multiple images in a set (like lands) 
 which collector number to use.
-* `<amount> <card name>|<setAcronym>#<collectorNumber>`   
+- `<amount> <card name>|<setAcronym>#<collectorNumber>`   
    For Example   
    `1 Island|GK2#132` 
 
 Scryfalldler will ignore any entries of an already declared `<card name>`.  
-* For Example     
+- For Example     
     `1 Island|GK2#132`    
     `1 Island|GK2#131`   
     Scryfalldler will ignore the second entry for Island.   
@@ -307,31 +309,45 @@ Site:
   https://github.com/nachazo/scryfalldler 
 ```
 
-<p align="center"><img src="https://i.imgur.com/I7QEYF6.gif" data-canonical-src="https://i.imgur.com/I7QEYF6.gif" width="500" /></p>
+<p align="center"><img src="https://i.imgur.com/I7QEYF6.gif" 
+data-canonical-src="https://i.imgur.com/I7QEYF6.gif" width="500" /></p>
 
 --------------------------------------------------------------------------------
   
 ## Changelog
 
-* **1.4.1** (15/06/18):
-  * Small fix for cards with foil versions causing bad exporting.
-* **1.4** (27/04/18):
-  * Added "-g" option for download from Wizards Gatherer without taking any info from Scryfall. Doing it searching by set name.
-  * Added "-u" option for download from Wizards official set site card page. Empty cards comes from Gatherer. Also tokens, but "unnamed". Not works as good as Scryfall, needs some post-renaming, but usefull in early launched sets.
-* **1.3.3** (02/04/18):
-  * Configured error reporting for avoid showing in output high number of warnings and so on. Now only important errors will be shown.
-* **1.3.2** (13/03/18):
-  * Improved the new file list option. Now you could specify the set you want for the card edition with "card|set" (i.e: Opt|INV) (useful for lands also you can use collector number with #, i.e. Forest|bfz#273). Also, can read the XMage .dck format.
-* **1.3.1** (12/03/18):
-  * Fixed error saving cards with " in the name. Until now, these cards doesn't download.
-  * Corrected version naming.
-* **1.3** (12/03/18):
-  * Added optional feature for download card images from a file list (deck file, for example).
-* **1.2** (12/03/18):
-  * Fixed error saving split cards (the cards with "//"). Until now, these cards doesn't download.
-  * Fixed error saving cards with ":" and " * " in name. Replaced by blank, like XMage does. As strange chars in some systems, until now it caused that images with that doesn't download.
-  * Added option (-x, -ext) for force the image extension for the cards.
-* **1.1** (09/02/18):
-  * Fixed a relevant bug with basic land naming.
-* **1.0** (10/01/18):
-  * Initial release.
+- **1.4.1** (15/06/18):
+    - Small fix for cards with foil versions causing bad exporting.
+- **1.4** (27/04/18):
+    - Added "-g" option for download from Wizards Gatherer without taking 
+	  any info from Scryfall. Doing it searching by set name.
+    - Added "-u" option for download from Wizards official set site card 
+	  page. Empty cards comes from Gatherer. Also tokens, but "unnamed". 
+	  Not works as good as Scryfall, needs some post-renaming, but usefull 
+	  in early launched sets.
+- **1.3.3** (02/04/18):
+    - Configured error reporting for avoid showing in output high number of 
+	warnings and so on. Now only important errors will be shown.
+- **1.3.2** (13/03/18):
+    - Improved the new file list option. Now you could specify the set you 
+	  want for the card edition with "card|set" (i.e: Opt|INV) (useful for 
+	  lands also you can use collector number with #, i.e. Forest|bfz#273). 
+	  Also, can read the XMage .dck format.
+- **1.3.1** (12/03/18):
+    - Fixed error saving cards with " in the name. Until now, these cards 
+	  doesn't download.
+    - Corrected version naming.
+- **1.3** (12/03/18):
+    - Added optional feature for download card images from a file list 
+	  (deck file, for example).
+- **1.2** (12/03/18):
+    - Fixed error saving split cards (the cards with "//"). Until now, these 
+	  cards doesn't download.
+    - Fixed error saving cards with ":" and " * " in name. Replaced by blank, 
+	  like XMage does. As strange chars in some systems, until now it caused 
+	  that images with that doesn't download.
+    - Added option (-x, -ext) for force the image extension for the cards.
+- **1.1** (09/02/18):
+    - Fixed a relevant bug with basic land naming.
+- **1.0** (10/01/18):
+    - Initial release.
