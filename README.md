@@ -78,7 +78,8 @@ A command can have _at most 1_ argument from the fallowing table.
 		<th colspan="3">Declare the card images to download</th>
 	</tr>
 	<tr>
-		<th>Arguments</th>
+		<th>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			Arguments &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</th>
 		<th>Notes</th>
 	</tr>
 	<tr>
@@ -91,7 +92,8 @@ A command can have _at most 1_ argument from the fallowing table.
 	</tr>
 	<tr>
 		<td> <code>-set [setAcronym]</code> </td>
-		<td>Downloads all cards from a set, <code>[setAcronym]</code> can be 
+		<td>Downloads all cards from a set corresponding to 
+		<code>[setAcronym]</code> <br/> set names and acronyms can be 
 		found in 
 		<a href="https://mtg.gamepedia.com/Template:List_of_Magic_sets">
 		This Table</a>.</td>
@@ -99,15 +101,18 @@ A command can have _at most 1_ argument from the fallowing table.
 	<tr>
 		<td> <code>-url [url location]</code> </td>
 		<td>Only for wizards official spoilers and recent releases. <br/> 
-		<code>[url location]</code> should be of the form <br /> 
-		https://magic.wizards.com/en/products/dominaria/cards </td>
+		Only downloads images at <code>gatherer</code> image size <br/>
+		<code>[url location]</code> should be of the form <br/> 
+		https://magic.wizards.com/en/products/[set]/cards <br/>
+		for example <br/> 
+		https://magic.wizards.com/en/products/warofthespark/cards </td>
 	</tr>
 	<tr>
 		<td> <code>-gatherer [set name]</code> </td>
-		<td>Broken. Downloads all cards from a given set, 
-		<code>[set name]</code> should be of <br /> the form 
-		<code>"Future Sight"</code>.  Downloads images at only 
-		<code>gatherer</code> image size</td>
+		<td>Broken. <br/> Downloads all cards from a given set. <br/>
+		Downloads images at only <code>gatherer</code> image size.<br/> 
+		<code>[set name]</code> should be of the form 
+		<code>"Future Sight"</code>. </td>
 	</tr>
 </table>
 
@@ -120,7 +125,8 @@ A command can have _at most 1_ argument from the fallowing table.
 		<th colspan="3">Modify the default values</th>
 	</tr>
 	<tr>
-		<th>Arguments</th>
+		<th>&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+			Arguments &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;</th>
 		<th>Default</th>
 		<th>Notes</th>
 	</tr>
