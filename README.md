@@ -57,11 +57,11 @@ for cards with multiple different images within a set, such as basic lands.
 
 Jump To: [Examples](#examples)
 
-To run Scryfaddler, you must have a command prompt opened to the directory 
-scryfaddler is in.
+To run Scryfalldler, you must have a command prompt opened to the directory 
+scryfalldler is in.
 
-The base for all scryfaddler functions is    
-   `php scryfaddler`   
+The base for all scryfalldler functions is  
+   `php scryfalldler`  
 From there you will be adding arguments that declaring what card names will 
 be downloaded, in what size, and much more.
 
@@ -85,14 +85,16 @@ A command can have _at most 1_ argument from the fallowing table.
 		<td> <code>-file [fileName].txt</code> </td>
 		<td>Uses a file of name <code>[filename].txt</code> as the list of 
 		cards to download. <br /> The text file must fallow the form outlined 
-		below in <a href="https://github.com/tenbom/scryfalldler#text-file-form
-		at">Text File Format</a>.</td>
+		below in 
+		<a href="https://github.com/tenbom/scryfalldler#text-file-format">
+		Text File Format</a>.</td>
 	</tr>
 	<tr>
 		<td> <code>-set [setAcronym]</code> </td>
 		<td>Downloads all cards from a set, <code>[setAcronym]</code> can be 
-		found in <a href="(https://mtg.gamepedia.com/Template:List_of_Magic_set
-		s">This Table.</a>.</td>
+		found in 
+		<a href="https://mtg.gamepedia.com/Template:List_of_Magic_sets">
+		This Table</a>.</td>
 	</tr>
 	<tr>
 		<td> <code>-url [url location]</code> </td>
@@ -148,10 +150,10 @@ A command can have _at most 1_ argument from the fallowing table.
 		<td>Forces the zip file name to be <code>[zipName]</code></td>
 	</tr>
 	<tr>
-		<td> <code>-ext [imageExtension]</code> </td>
+		<td> <code>-ext [imgExtension]</code> </td>
 		<td> <code>jpg</code> </td>
 		<td>Force the extension of each image downloaded to be 
-		<code>[imageExtionsion]</code> <br /> Valid Values: 
+		<code>[imgExtension]</code> <br /> Valid Values: 
 		<code>jpg</code> and <code>png</code></td>
 	</tr>
 	<tr>
@@ -247,7 +249,7 @@ scryfalldler directory.
 --------------------------------------------------------------------------------
     
 `php scryfalldler -set C17`   
- - Createss a zip file of cards images, this will contain 1 of each card from 
+ - Creates a zip file of cards images, this will contain 1 of each card from 
    the set `C17`  
     - The card images are of default size, `large`  
     - The zip file is placed in the default location, the scryfalldler 
