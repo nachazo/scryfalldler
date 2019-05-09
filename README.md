@@ -9,6 +9,14 @@
 
 Scryfalldler is a PhP based client automated script for downlaoding and zipping card images based off of the Scryfall API site.
 
+This script is a simply php cli coded. I wanted to practice a bit with php cli scripts and this is what I made. With php we can take advantage of expanded php multi-platform, client executed (not web server, to avoid requests and filesize limitations), easy curl (http download) and zip tools.
+
+For features and bugs use: [Issues](https://github.com/nachazo/scryfalldler/issues)
+
+Don't forget to support [scryfall.com](http://scryfall.com)!
+
+## Features
+
 Fetch cards in bulk  
 
 -   through a list in a text file or Xmage .dck file
@@ -91,28 +99,20 @@ A command can have _at most 1_ argument that declares the card images to be down
     </tr>
     <tr>
         <td> <code>-file [fileName].txt</code> </td>
-        <td>Uses a file of name <code>[filename].txt</code> as the list of 
-        cards to download. <br /> The text file must fallow the form outlined 
-        below in 
-        <a href="https://github.com/tenbom/scryfalldler#text-file-format">
-        Text File Format</a>.</td>
+        <td>Uses a file of name <code>[filename].txt</code> as the list of cards to download. <br /> The text file must fallow the form outlined below in <a href="https://github.com/tenbom/scryfalldler#text-file-format"> Text File Format</a>.</td>
     </tr>
     <tr>
         <td> <code>-set [setAcronym]</code> </td>
         <td>Downloads all cards from a set corresponding to 
-        <code>[setAcronym]</code> <br/> set names and acronyms can be 
-        found in 
-        <a href="https://mtg.gamepedia.com/Template:List_of_Magic_sets">
-        This Table</a>.</td>
+        <code>[setAcronym]</code>. <br/> Set names and acronyms can be found in <a href="https://mtg.gamepedia.com/Template:List_of_Magic_sets"> This Table</a>.</td>
     </tr>
     <tr>
         <td> <code>-url [url location]</code> </td>
-        <td>Only for wizards official spoilers and recent releases. <br/> 
-        Only downloads images at <code>gatherer</code> image size <br/>
-        <code>[url location]</code> should be of the form <br/> 
-        https://magic.wizards.com/en/products/[set]/cards <br/>
-        for example <br/> 
-        https://magic.wizards.com/en/products/warofthespark/cards </td>
+        <td>Only for wizards official spoilers and recent releases. <br/> <code>-url</code> only downloads images at <code>gatherer</code> image size <br/>
+ <code>[url location]</code> should be of the form <br/> 
+https://magic.wizards.com/en/products/[set]/cards <br/>
+for example <br/> https://magic.wizards.com/en/products/warofthespark/cards 
+        </td>
     </tr>
     <tr>
         <td> <code>-gatherer [set name]</code> </td>
