@@ -111,7 +111,7 @@ downloaded.
     <tr>
         <td> <code>-file [file]</code> </td>
         <td>
-            <code>[file]</code> is a .txt or 
+            <code>[file]</code> is a .txt file or 
             <a href="http://xmage.de/">Xmage</a> .dck file 
               listing the cards to be downloaded. 
             <br /> Text files must fallow the form outlined below in 
@@ -165,7 +165,7 @@ the default values.
     </tr>
     <tr>
         <td> <code>-size [sizeKeyword]</code> </td>
-        <td> <code>large</code> </td>
+        <td> large </td>
         <td>
             Declare the size of image to download in a <code>set</code> or 
             <code>-file</code> command. <br/> <code>-url</code> commands always 
@@ -188,12 +188,12 @@ the default values.
     </tr>
     <tr>
         <td> <code>-force [zipName]</code> </td>
-        <td> <code>FILE</code> </td>
+        <td> FILE </td>
         <td>Forces the zip file name to be <code>[zipName]</code></td>
     </tr>
     <tr>
         <td> <code>-ext [imgExtension]</code> </td>
-        <td> <code>jpg</code> </td>
+        <td> jpg </td>
         <td>
             Force the extension of each image downloaded to be 
             <code>[imgExtension]</code> <br /> Valid Values: 
@@ -202,7 +202,7 @@ the default values.
     </tr>
     <tr>
         <td> <code>-proxy [proxySite]</code> </td>
-        <td> <code>None</code> </td>
+        <td> No proxy </td>
         <td>
             Downloads the images through a proxy. <br /> 
             <code>[proxySite]</code> should be of the form: 
