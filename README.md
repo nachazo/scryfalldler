@@ -291,8 +291,7 @@ scryfalldler directory.
 `php scryfalldler -file myDeck.txt`     
 
 - Creates a zip file of card images, the amounts and names of each card to 
-
-   download are listed in the text file, `myDeck.txt`
+  download are listed in the text file, `myDeck.txt`
   - The card images are of default size, `large`  
   - The zip file is placed in the default location, the scryfalldler 
     directory   
@@ -318,7 +317,6 @@ Deck1Archive -ext png -no-check`
 `php scryfalldler -set C17`   
 
 - Creates a zip file of cards images, this will contain 1 of each card from 
-
   the set `C17`  
   - The card images are of default size, `large`  
   - The zip file is placed in the default location, the scryfalldler 
@@ -341,7 +339,6 @@ Deck1Archive -ext png -no-check`
 `php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards` 
 
 - Creates a zip file of card images from Wizard's web page of `dominaria` 
-
   cards   
   - The card images are of default size, `gatherer`  
   - The zip file is placed in the default location, the scryfalldler 
@@ -352,24 +349,18 @@ Deck1Archive -ext png -no-check`
     GitHub updates
   - On this run, by default, scryfalldler will not download through a proxy
 
-`php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards
--folder cards/dominaria`  
+`php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards -folder cards/dominaria`
 
 - As above except... 
-  - The zip file is placed in the folder 
-
-    `.../scryfalldlerDirectory/decks/deck1/archive/`  
+  - The zip file is placed in the folder `.../scryfalldlerDirectory/cards/dominaria/`  
 
 -------------------------------------------------------------------------------
 
  `php scryfalldler`      
+- returns help information, all the possible arguments and a brief description 
 
-- returns help information, all the possible arguments and a brief description
-
-  `php scryfalldler -list`   
-- in the command window, lists all of the card sets on Scryfall and the number 
-
-  of cards in each of those sets.
+`php scryfalldler -list`   
+- in the command window, lists all of the card sets on Scryfall and the number of cards in each of those sets.
 - then it asks for a set to name to download all the cards of
   - no additional arguments can be added
   - the result is the same as a `php scryfalldler -set <setName>` call  
@@ -393,7 +384,7 @@ size` column which shows the resolution of the card image if image editing
 software is used to adjust the resolution so the card image is the size of an
 actual card.  For example, with Paint.Net, if you open the card with Paint.Net
 and then go to `Image->Canvas Size` and change the `Resolution` to the
-appropriate `pixels/inch if edited to real card size` value, it will be close to the size
+appropriate `Pixels/Inch to be Real Card Size` value, it will be close to the size
 of an actual magic card.
 
 <table>
