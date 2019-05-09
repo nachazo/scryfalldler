@@ -86,8 +86,7 @@ A command can have _at most 1_ argument that declares the card images to be down
         <th colspan="3">Declare the card images to download</th>
     </tr>
     <tr>
-        <th>           
-            Arguments            </th>
+        <th>Arguments<img width=100/></th>
         <th>Notes</th>
     </tr>
     <tr>
@@ -133,9 +132,7 @@ A command to download card images can have _any number_ of arguments modifying t
         <th colspan="3">Modify the default values</th>
     </tr>
     <tr>
-        <th>           
-            Arguments            
-        </th>
+        <th>Arguments <img width=100/> </th>
         <th>Default</th>
         <th>Notes</th>
     </tr>
@@ -176,7 +173,7 @@ A command to download card images can have _any number_ of arguments modifying t
     </tr>
     <tr>
         <td> <code>-no-check</code> </td>
-        <td> <code>Update <br/> Scryfalldler</code> </td>
+        <td> Update <br/> Scryfalldler </td>
         <td> If this argument is added, do not download the latest <br/> 
             version of scryfalldler from GitHub on this execution 
         </td>
