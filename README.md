@@ -6,6 +6,7 @@ A simple fast tool to download Magic: The Gathering card images.
   - all cards in a set
   - cards on an [official Wizards product page](
     https://magic.wizards.com/en/products/warofthespark/cards)
+	
 - Of Size... 
   - 6 options from the [Scryfall site](http://scryfall.com) including art 
     crop and border crop
@@ -72,41 +73,41 @@ The arguments in the table below declare what the card names will be.
 
 A command can have _at most 1_ argument from the fallowing table.
 
-| Arguments <br /> declare the cards to download  | Notes |
-| ------------------------------| ----- |
-| `-file <fileName>.txt` | Uses a file of name `<filename>.txt` as the list of cards to download. <br /> The text file must fallow the form outlined below in [Text File Format](#text-file-format).   <br /> By default downloads and compresses the images into a zip file, <br />  named `FILE`,  and places it in the same directory as scryfalldler|
-| `-set <setAcronym>` | Downloads all cards from a set, `<setAcronym>` can be found in [this table](https://mtg.gamepedia.com/Template:List_of_Magic_sets)    <br /> By default downloads and compresses the images into a zip file, <br />  named `<setAcronym>`,  and places it in the same directory as scryfalldler|
-| `-url <url location>` | Only for wizards official spoilers and recent releases.  <br /> `<url location>` should be of the form <br /> https://magic.wizards.com/en/products/dominaria/cards  <br /> By default downloads and compresses the images into a zip file, <br />  named  `WZR`, and places it in the same directory as scryfalldler|
-| `-gatherer <set name>` | **Broken.** Downloads all cards from a given set, `<set name>` should be of <br /> the form `"Future Sight"`  <br /> By default downloads and compresses the images into a zip file, <br />  named  `???`, and places it in the same directory as scryfalldler |
+Arguments <br /> declare the cards to download  | Notes
+------------------------------- | -----
+`-file <fileName>.txt`			| Uses a file of name `<filename>.txt` as the list of cards to download. <br /> The text file must fallow the form outlined below in [Text File Format](#text-file-format).   <br /> By default downloads and compresses the images into a zip file, <br />  named `FILE`,  and places it in the same directory as scryfalldler
+`-set <setAcronym>` 			| Downloads all cards from a set, `<setAcronym>` can be found in [this table](https://mtg.gamepedia.com/Template:List_of_Magic_sets)    <br /> By default downloads and compresses the images into a zip file, <br />  named `<setAcronym>`,  and places it in the same directory as scryfalldler
+`-url <url location>` 			| Only for wizards official spoilers and recent releases.  <br /> `<url location>` should be of the form <br /> https://magic.wizards.com/en/products/dominaria/cards  <br /> By default downloads and compresses the images into a zip file, <br />  named  `WZR`, and places it in the same directory as scryfalldler
+`-gatherer <set name>` 			| **Broken.** Downloads all cards from a given set, `<set name>` should be of <br /> the form `"Future Sight"`  <br /> By default downloads and compresses the images into a zip file, <br />  named  `???`, and places it in the same directory as scryfalldler 
 
-   --------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
  
  The arguments below edit the default properties of the image download.
  
  A command can have _any number_ of arguments from the table below.
 
-|   Arguments <br /> modify the defaults of a download   | Notes |
-| ------------------------------| ----- |
-| `-size <sizeKeyword>` | Declare the size of image to download from a `-set` or `-file` call. <br /> Default is `large` for `-set` or `-file` calls, and is <br /> forced to be `gatherer` for `-url` calls. <br />  Valid values for `<sizeKeyword>` are: `small`, `medium`, `large`, <br /> `png`, `art_crop`, and `border_crop` <br />  See [Size Keyword Details](#size-keyword-details) for more information. |
-| `-folder <folder>` | Downloads the images into a zip file of default name `1` <br /> and then places it in a folder named `<folder>` within the scryfalldler directory|
-| `-force <zipName>` | Forces the zip file name to be `<zipName>` |
-| `-ext <imageExtension>` | Force the extension of each image downloaded to be `<imageExtionsion>` <br /> Default image extension is `jpg` |
-| `-proxy <proxySite>` | Downloads the images through a proxy, <br /> `<proxySite>` should be of the form: http://proxy:port |
-| `-no-check` | Do not download the latest version of scryfalldler from GitHub on this execution |
+|   Arguments <br /> modify the defaults of a download   | Notes 
+| ----------------------------- | ------------------------------
+| `-size <sizeKeyword>` 		| Declare the size of image to download from a `-set` or `-file` call. <br /> Default is `large` for `-set` or `-file` calls, and is <br /> forced to be `gatherer` for `-url` calls. <br />  Valid values for `<sizeKeyword>` are: `small`, `medium`, `large`, <br /> `png`, `art_crop`, and `border_crop` <br />  See [Size Keyword Details](#size-keyword-details) for more information. 
+| `-folder <folder>` 			| Downloads the images into a zip file of default name `1` <br /> and then places it in a folder named `<folder>` within the scryfalldler directory
+| `-force <zipName>` 			| Forces the zip file name to be `<zipName>`
+| `-ext <imageExtension>` 		| Force the extension of each image downloaded to be `<imageExtionsion>` <br /> Default image extension is `jpg` 
+| `-proxy <proxySite>` 			| Downloads the images through a proxy, <br /> `<proxySite>` should be of the form: http://proxy:port 
+| `-no-check` 					| Do not download the latest version of scryfalldler from GitHub on this execution 
 
-   --------------------------------------------------------------------------------
+--------------------------------------------------------------------------------
 
 The arguments in the table below are solitary arguements.  
 
 A command can only include 1 and must include no other arguments
 
-|        Arguments <br /> use alone | Notes |
-| ------------------------------| ----- |
-| ` `| No argument returns help information, all the possible arguments and a brief description |
-| `-help`| Returns help information, all the possible arguments and a brief description |
-| `-test`| Returns whether scryfalldler can successfully connect to Scyfall |
-| `-version`| Displays the version of scryfalldler you are running |
-| `-list`| From Scryfall, lists all available sets for download, their acronyms, and card count.  <br />  The output is fallowed by the option to enter a set acronym to download the entire set at the default `large` image size. <br /> Entering nothing and then pressing `ENTER` ends the process without downloading anything |
+|        Arguments <br /> use alone | Notes 
+| ------------------------------ | ----- 
+| ` `			| No argument returns help information, all the possible arguments and a brief description 
+| `-help`		| Returns help information, all the possible arguments and a brief description 
+| `-test`		| Returns whether scryfalldler can successfully connect to Scyfall 
+| `-version`	| Displays the version of scryfalldler you are running 
+| `-list`		| From Scryfall, lists all available sets for download, their acronyms, and card count.  <br />  The output is fallowed by the option to enter a set acronym to download the entire set at the default `large` image size. <br /> Entering nothing and then pressing `ENTER` ends the process without downloading anything 
 
 --------------------------------------------------------------------------------
 
@@ -215,16 +216,16 @@ with Paint.Net and then go to `Image->Canvas Size` and change the `Resolution`
 to the appropriate `pixels/inch if edited to real card size` value, it will be 
 the size of an actual magic card.
 
-| Size | Size in inches | pixels/inch | pixels/inch if edited to real card size |
-| ---- | -------------- | ----------- | --------------------------------------- |
-| Real physical Magic card | 2.45 by 3.42 | --- | --- |
-| `small` | 2 by 2.83 | 72 | 60 |
-| `normal` | 6.9 by 9.6 | 72 | 195 |
-| `large` | 9.5 by 13 | 72 | 275 |
-| `png` | 10.3 by 14.4 | 72 | 300 |
-| `border_crop`<sup>1</sup> | 6.8 by 9.6 | 72 | 210~ |
-| `art_crop`<sup>2</sup> | ---- | 72 | 300 |
-| `gatherer`<sup>3</sup> | 2.76 by 3.85 | 96 | 108 |
+| Size 					   	| Size in inches | pixels/inch | pixels/inch if edited to real card size 
+| -------------------------	| -------------- | ----------- | --------------------------------------- 
+| Real physical Magic card 	| 2.45 by 3.42 	| --- 		   | ---
+| `small` 				   	| 2 by 2.83 	| 72 		   | 60 
+| `normal` 				   	| 6.9 by 9.6 	| 72 		   | 195 
+| `large` 				   	| 9.5 by 13 	| 72 		   | 275 
+| `png` 				   	| 10.3 by 14.4 	| 72 		   | 300 
+| `border_crop`<sup>1</sup> | 6.8 by 9.6 	| 72 		   | 210~ 
+| `art_crop`<sup>2</sup> 	| ---- 			| 72 		   | 300 
+| `gatherer`<sup>3</sup> 	| 2.76 by 3.85 	| 96 		   | 108 
 
 <sub>1 - `border_crop` is a 105% scaled `normal` card image cropped back down 
 to roughly `normal` size, removing a large portion of the black border.</sub>   
@@ -361,3 +362,6 @@ data-canonical-src="https://i.imgur.com/I7QEYF6.gif" width="500" /></p>
 - **1.0** (10/01/18):
     - Initial release.
 	
+--------------------------------------------------------------------------------
+
+Documentation is done fallowing [carwin's style guide](https://github.com/carwin/markdown-styleguide)
