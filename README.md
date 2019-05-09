@@ -39,7 +39,7 @@ You can also choose which sets' art to use and even the collector number for car
   
 ## Usage
 
-Jump To: [Examples](#examples) | [Text File Format](#text-file-format) | [Size Keyword Details](#size-keyword-details) | [Further Information](#further-information)
+Jump To: [Examples](#examples)
 
 To run Scryfaddler, you must have a command prompt opened to the directory scryfaddler is in.
 
