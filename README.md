@@ -105,35 +105,34 @@ downloaded.
         <th colspan="3">Declare the card images to download</th>
     </tr>
     <tr>
-        <th>Arguments<img width=100/></th>
+        <th>Arguments</th>
+        <th>Description</th>
         <th>Notes</th>
     </tr>
     <tr>
         <td> <code>-file [file]</code> </td>
+        <td> Download cards named in a file </td>
         <td>
-            <code>[file]</code> is a .txt file or 
-            <a href="http://xmage.de/">Xmage</a> .dck file 
-              listing the cards to be downloaded. 
-            <br /> Text files must fallow the form outlined below in 
-            <a href="#text-file-format">Text File Format</a>.
+            Valid types: .txt file fallowing <a href="#text-file-format">
+            Text File Format</a>, or  <a href="http://xmage.de/">Xmage</a> 
+            .dck file 
         </td>
     </tr>
     <tr>
         <td> <code>-set [setAcronym]</code> </td>
+        <td> Download every card of a set </td>
         <td>
-            Downloads all cards from a set corresponding to 
-            <code>[setAcronym]</code>. <br/> Set names and acronyms can be 
-            found in 
+            <code>[setAcronym]</code>s can be found in
             <a href="https://mtg.gamepedia.com/Template:List_of_Magic_sets"> 
             This Table</a>.
         </td>
     </tr>
     <tr>
-        <td> <code>-url [url location]</code> </td>
+        <td> <code>-url [url]</code> </td>
+        <td> Download cards on a wizard's product page </td>
         <td>
-            Only for wizards official spoilers and recent releases. <br/> 
-            <code>-url</code> only downloads images at <code>gatherer</code> 
-            image size <br/> <code>[url location]</code> should be of the form 
+            Card image size will be <code>gatherer</code> <br/>
+            <code>[url]</code> should be of the form 
             <br/> https://magic.wizards.com/en/products/[set]/cards <br/> for 
             example <br/> 
             https://magic.wizards.com/en/products/warofthespark/cards 
@@ -141,9 +140,13 @@ downloaded.
     </tr> 
     <tr> 
         <td> 
-            <code>-gatherer [set name]</code> </td> <td>Broken. <br/> 
+            <code>-gatherer [set]</code> 
+        </td> 
+        <td> Download every card of a set </td>
+        <td>
+            Broken. <br/> 
             Downloads all cards from a given set. <br/> Downloads images at 
-            only <code>gatherer</code> image size.<br/> <code>[set name]</code>
+            only <code>gatherer</code> image size.<br/> <code>[set]</code>
             should be of the form <code>"Future Sight"</code>. 
         </td> 
     </tr>
@@ -156,65 +159,68 @@ the default values.
 
 <table>
     <tr>
-        <th colspan="3">Modify the default values</th>
+        <th colspan="4">Modify the default values</th>
     </tr>
     <tr>
         <th>Arguments <img width=100/> </th>
+        <th>Description</th>
         <th>Default</th>
         <th>Notes</th>
     </tr>
     <tr>
-        <td> <code>-size [sizeKeyword]</code> </td>
+        <td> <code>-size [size]</code> </td>
+        <td> The card image size </td>
         <td> large </td>
         <td>
-            Declare the size of image to download in a <code>set</code> or 
-            <code>-file</code> command. <br/> <code>-url</code> commands always 
-            use <code>gatherer</code> size. <br/>Valid values: 
+            <code>-url</code> commands always download
+            at <code>gatherer</code> size. <br/>Valid values: 
             <code>small</code>, <code>medium</code>, <code>large</code>, 
-            <br/> <code>png</code>, <code>art_crop</code>, and 
+            <code>png</code>, <code>art_crop</code>, and 
             <code>border_crop</code> <br/>  See <a 
-            href="#size-keyword-details">Size Keyword Details</a>for more 
+            href="#size-argument-details">Size Argument Details</a> for more 
             information. 
         </td>
     </tr>
     <tr>
         <td> <code>-folder [folder]</code> </td>
+        <td> Folder to place the card zip file in </td>
         <td> Scryfalldler<br/>Directory </td>
         <td>
-            Downloads the images into a zip file of default name 
-            <code>1</code> <br/> and then places it in a folder named 
-            <code>[folder]</code> within <br/> the scryfalldler directory
+            The folder will be within the scryfallder directory <br/>
+            If there is no folder by that name, one will be created. <br/>
+            Creating a folder outside of the scryfallder directory is untested
         </td>
     </tr>
     <tr>
         <td> <code>-force [zipName]</code> </td>
+        <td> The name of the card zip file </td>
         <td> FILE </td>
-        <td>Forces the zip file name to be <code>[zipName]</code></td>
+        <td> </td>
     </tr>
     <tr>
-        <td> <code>-ext [imgExtension]</code> </td>
+        <td> <code>-ext [imgExt]</code> </td>
+        <td> The image type to download </td>
         <td> jpg </td>
         <td>
-            Force the extension of each image downloaded to be 
-            <code>[imgExtension]</code> <br /> Valid Values: 
-            <code>jpg</code> and <code>png</code>
+           Valid Values: <code>jpg</code> and <code>png</code>
         </td>
     </tr>
     <tr>
-        <td> <code>-proxy [proxySite]</code> </td>
+        <td> <code>-proxy [proxy]</code> </td>
+        <td> Download through a proxy </td>
         <td> No proxy </td>
         <td>
-            Downloads the images through a proxy. <br /> 
-            <code>[proxySite]</code> should be of the form: 
+            The site to proxy through <br /> 
+            <code>[proxy]</code> should be of the form: 
             http://proxy:port
         </td>
     </tr>
     <tr>
         <td> <code>-no-check</code> </td>
+        <td> Don't check for updates </td>
         <td> Update <br/> Scryfalldler </td>
         <td> 
-            If this argument is added, do not download the latest <br/> 
-            version of scryfalldler from GitHub on this execution 
+            On this execution do not check GitHub for updates 
         </td>
     </tr>
 </table>
@@ -372,7 +378,7 @@ Deck1Archive -ext png -no-check`
 
 -------------------------------------------------------------------------------
 
-### Size Keyword Details
+### Size Argument Details
 
 Return to: [Usage](#usage)
 
