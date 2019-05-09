@@ -73,43 +73,145 @@ The arguments in the table below declare what the card names will be.
 
 A command can have _at most 1_ argument from the fallowing table.
 
-Arguments <br /> declare the cards to download  | Notes
-------------------------------- | -----
-`-file <fileName>.txt`			| Uses a file of name `<filename>.txt` as the list of cards to download. <br /> The text file must fallow the form outlined below in [Text File Format](#text-file-format).   <br /> By default downloads and compresses the images into a zip file, <br />  named `FILE`,  and places it in the same directory as scryfalldler
-`-set <setAcronym>` 			| Downloads all cards from a set, `<setAcronym>` can be found in [this table](https://mtg.gamepedia.com/Template:List_of_Magic_sets)    <br /> By default downloads and compresses the images into a zip file, <br />  named `<setAcronym>`,  and places it in the same directory as scryfalldler
-`-url <url location>` 			| Only for wizards official spoilers and recent releases.  <br /> `<url location>` should be of the form <br /> https://magic.wizards.com/en/products/dominaria/cards  <br /> By default downloads and compresses the images into a zip file, <br />  named  `WZR`, and places it in the same directory as scryfalldler
-`-gatherer <set name>` 			| **Broken.** Downloads all cards from a given set, `<set name>` should be of <br /> the form `"Future Sight"`  <br /> By default downloads and compresses the images into a zip file, <br />  named  `???`, and places it in the same directory as scryfalldler 
+<table>
+	<tr>
+		<th colspan="3">Declare the card images to download</th>
+	</tr>
+	<tr>
+		<th>Arguments</th>
+		<th>Notes</th>
+	</tr>
+	<tr>
+		<td> <code>-file [fileName].txt</code> </td>
+		<td>Uses a file of name <code>[filename].txt</code> as the list of 
+		cards to download. <br /> The text file must fallow the form outlined 
+		below in <a href="https://github.com/tenbom/scryfalldler#text-file-form
+		at">Text File Format</a>.</td>
+	</tr>
+	<tr>
+		<td> <code>-set [setAcronym]</code> </td>
+		<td>Downloads all cards from a set, <code>[setAcronym]</code> can be 
+		found in <a href="(https://mtg.gamepedia.com/Template:List_of_Magic_set
+		s">This Table.</a>.</td>
+	</tr>
+	<tr>
+		<td> <code>-url [url location]</code> </td>
+		<td>Only for wizards official spoilers and recent releases. <br/> 
+		<code>[url location]</code> should be of the form <br /> 
+		https://magic.wizards.com/en/products/dominaria/cards </td>
+	</tr>
+	<tr>
+		<td> <code>-gatherer [set name]</code> </td>
+		<td>Broken. Downloads all cards from a given set, 
+		<code>[set name]</code> should be of <br /> the form 
+		<code>"Future Sight"</code>.  Downloads images at only 
+		<code>gatherer</code> image size</td>
+	</tr>
+</table>
 
---------------------------------------------------------------------------------
- 
  The arguments below edit the default properties of the image download.
  
  A command can have _any number_ of arguments from the table below.
 
-|   Arguments <br /> modify the defaults of a download   | Notes 
-| ----------------------------- | ------------------------------
-| `-size <sizeKeyword>` 		| Declare the size of image to download from a `-set` or `-file` call. <br /> Default is `large` for `-set` or `-file` calls, and is <br /> forced to be `gatherer` for `-url` calls. <br />  Valid values for `<sizeKeyword>` are: `small`, `medium`, `large`, <br /> `png`, `art_crop`, and `border_crop` <br />  See [Size Keyword Details](#size-keyword-details) for more information. 
-| `-folder <folder>` 			| Downloads the images into a zip file of default name `1` <br /> and then places it in a folder named `<folder>` within the scryfalldler directory
-| `-force <zipName>` 			| Forces the zip file name to be `<zipName>`
-| `-ext <imageExtension>` 		| Force the extension of each image downloaded to be `<imageExtionsion>` <br /> Default image extension is `jpg` 
-| `-proxy <proxySite>` 			| Downloads the images through a proxy, <br /> `<proxySite>` should be of the form: http://proxy:port 
-| `-no-check` 					| Do not download the latest version of scryfalldler from GitHub on this execution 
+<table>
+	<tr>
+		<th colspan="3">Modify the default values</th>
+	</tr>
+	<tr>
+		<th>Arguments</th>
+		<th>Default</th>
+		<th>Notes</th>
+	</tr>
+	<tr>
+		<td> <code>-size [sizeKeyword]</code> </td>
+		<td> <code>large</code> </td>
+		<td>Declare the size of image to download in a <code>-set</code> or 
+			<br/> <code>-file</code> command. <br/> <code>-url</code> commands 
+			always use <code>gatherer</code> size. <br/>Valid values: 
+			<code>small</code>, <code>medium</code>, <code>large</code>, 
+			<br/> <code>png</code>, <code>art_crop</code>, and 
+			<code>border_crop</code> <br/>  See <a href="https://github.com/ten
+			bom/scryfalldler#size-keyword-details">Size Keyword Details</a> 
+			for more information. </td>
+	</tr>
+	<tr>
+		<td> <code>-folder [folder]</code> </td>
+		<td> Scryfalldler<br/>Directory </td>
+		<td>Downloads the images into a zip file of default name 
+		<code>1</code> <br/> and then places it in a folder named 
+		<code>[folder]</code> within <br/> the scryfalldler directory
+		</td>
+	</tr>
+	<tr>
+		<td> <code>-force [zipName]</code> </td>
+		<td> <code>FILE</code> </td>
+		<td>Forces the zip file name to be <code>[zipName]</code></td>
+	</tr>
+	<tr>
+		<td> <code>-ext [imageExtension]</code> </td>
+		<td> <code>jpg</code> </td>
+		<td>Force the extension of each image downloaded to be 
+		<code>[imageExtionsion]</code> <br /> Valid Values: 
+		<code>jpg</code> and <code>png</code></td>
+	</tr>
+	<tr>
+		<td> <code>-proxy [proxySite]</code> </td>
+		<td> <code>None</code> </td>
+		<td>Downloads the images through a proxy. <br /> 
+		<code>[proxySite]</code> should be of the form: http://proxy:port</td>
+	</tr>
+	<tr>
+		<td> <code>-no-check</code> </td>
+		<td> <code>Update <br/> Scryfalldler</code> </td>
+		<td> If this argument is added, do not download the latest <br/> 
+		version of scryfalldler from GitHub on this execution </td>
+	</tr>
+</table>
 
 --------------------------------------------------------------------------------
+
 
 The arguments in the table below are solitary arguements.  
 
 A command can only include 1 and must include no other arguments
 
-|        Arguments <br /> use alone | Notes 
-| ------------------------------ | ----- 
-| ` `			| No argument returns help information, all the possible arguments and a brief description 
-| `-help`		| Returns help information, all the possible arguments and a brief description 
-| `-test`		| Returns whether scryfalldler can successfully connect to Scyfall 
-| `-version`	| Displays the version of scryfalldler you are running 
-| `-list`		| From Scryfall, lists all available sets for download, their acronyms, and card count.  <br />  The output is fallowed by the option to enter a set acronym to download the entire set at the default `large` image size. <br /> Entering nothing and then pressing `ENTER` ends the process without downloading anything 
-
---------------------------------------------------------------------------------
+<table>
+	<tr>
+		<th colspan="3">Solitary Arguments</th>
+	</tr>
+	<tr>
+		<th>Arguments</th>
+		<th>Notes</th>
+	</tr>
+	<tr>
+		<td> <code> </code> </td>
+		<td>No argument returns help information, all the possible arguments 
+		    and a brief description </td>
+	</tr>
+	<tr>
+		<td> <code>-help</code> </td>
+		<td>Returns help information, all the possible arguments and a brief 
+		    description </td>
+	</tr>
+	<tr>
+		<td> <code>-test</code> </td>
+		<td>Returns whether scryfalldler can successfully connect to 
+		    Scyfall </td>
+	</tr>
+	<tr>
+		<td> <code>-version</code> </td>
+		<td> Displays the version of scryfalldler you are running  </td>
+	</tr>
+	<tr>
+		<td> <code>-list</code> </td>
+		<td>From Scryfall, lists all available sets for download, their 
+		    acronyms, and card count.  <br />  The output is fallowed by 
+			the option to enter a set acronym to download the entire set 
+			at the default `large` image size. <br /> Entering nothing and 
+			then pressing `ENTER` ends the process without downloading 
+			anything</td>
+	</tr>
+</table>
 
 ### Examples
 
@@ -203,7 +305,7 @@ scryfalldler directory.
 Return to: [Usage](#usage)
 
 **This section further explains the keywords of the argument 
-`-size <sizeKeyword>`**
+`-size [sizeKeyword]`**
 
 Each keyword will download cards at a particular size and resolution.  <br />
 That size does not match actual card size. The image size downloaded is 
@@ -230,43 +332,43 @@ the size of an actual magic card.
 		<td> --- </td>
 	</tr>
 	<tr>
-		<td> <p>small</p> </td>
+		<td> <code>small</code> </td>
 		<td>2 by 2.83</td>
 		<td> 72 </td>
 		<td> 60 </td>
 	</tr>
 	<tr>
-		<td> <p>normal</p> </td>
+		<td> <code>normal</code> </td>
 		<td>6.9 by 9.6</td>
 		<td> 72 </td>
 		<td> 195 </td>
 	</tr>
 	<tr>
-		<td> <p>large</p> </td>
+		<td> <code>large</code> </td>
 		<td>9.5 by 13</td>
 		<td> 72 </td>
 		<td> 275 </td>
 	</tr>
 	<tr>
-		<td> <p>png</p> </td>
+		<td> <code>png</code> </td>
 		<td> 10.3 by 14.4 </td>
 		<td> 72 </td>
 		<td> 300 </td>
 	</tr>
 	<tr>
-		<td> <p>border_crop</p><sup>1</sup> </td>
+		<td> <code>border_crop<sup>1</sup> </code> </td>
 		<td>6.8 by 9.6</td>
 		<td> 72 </td>
 		<td> 210~ </td>
 	</tr>
 	<tr>
-		<td> <p>art_crop</p><sup>2</sup> </td>
+		<td> <code>art_crop<sup>2</sup> </code> </td>
 		<td> --- </td>
 		<td> 72 </td>
 		<td> 300 </td>
 	</tr>
 	<tr>
-		<td> <p>gatherer</p><sup>3</sup> </td>
+		<td> <code>gatherer<sup>3</sup> </code> </td>
 		<td> 2.76 by 3.85 </td>
 		<td> 96 </td>
 		<td> 108 </td>
@@ -287,11 +389,11 @@ argument </sub>
 Return to: [Usage](#usage)
 
 **This section further explains the file format required by the argument 
-`-file <fileName>.txt`**
+`-file <[fileName].txt`**
 
 Text files used to declare the cards to download should have each line in the 
 form...   
-- `<amount> <card name>`   
+- `[amount] [card name]`   
    For Example   
    `1 Rhystic Study`  
    `2 Faithless Looting`   
@@ -300,7 +402,7 @@ form...
 There are optional parameters to add after the name, declaring which set to 
 get the image from, and for cards with multiple images in a set (like lands) 
 which collector number to use.
-- `<amount> <card name>|<setAcronym>#<collectorNumber>`   
+- `[amount] [card name]|[setAcronym]#[collectorNumber]`   
    For Example   
    `1 Island|GK2#132` 
 
@@ -358,7 +460,7 @@ Site:
 ```
 
 <p align="center"><img src="https://i.imgur.com/I7QEYF6.gif" 
-data-canonical-src="https://i.imgur.com/I7QEYF6.gif" width="500" /></p>
+data-canonical-src="https://i.imgur.com/I7QEYF6.gif" width="500" /></code>
 
 --------------------------------------------------------------------------------
   
