@@ -30,6 +30,7 @@ for cards with multiple different images within a set, such as basic lands.
 			  changes
             -   uncomment `; extension_dir = "ext"` to `extension_dir = "ext"`
             -   uncomment `;extension=curl` to `extension=curl`
+			
         2. Now we must add PhP to the Windows 10 system path enviornmental 
 		   variables
             - Control Panel->System and Security->System->
@@ -318,6 +319,7 @@ data-canonical-src="https://i.imgur.com/I7QEYF6.gif" width="500" /></p>
 
 - **1.4.1** (15/06/18):
     - Small fix for cards with foil versions causing bad exporting.
+	
 - **1.4** (27/04/18):
     - Added "-g" option for download from Wizards Gatherer without taking 
 	  any info from Scryfall. Doing it searching by set name.
@@ -325,21 +327,26 @@ data-canonical-src="https://i.imgur.com/I7QEYF6.gif" width="500" /></p>
 	  page. Empty cards comes from Gatherer. Also tokens, but "unnamed". 
 	  Not works as good as Scryfall, needs some post-renaming, but usefull 
 	  in early launched sets.
+	  
 - **1.3.3** (02/04/18):
     - Configured error reporting for avoid showing in output high number of 
 	warnings and so on. Now only important errors will be shown.
+	
 - **1.3.2** (13/03/18):
     - Improved the new file list option. Now you could specify the set you 
 	  want for the card edition with "card|set" (i.e: Opt|INV) (useful for 
 	  lands also you can use collector number with #, i.e. Forest|bfz#273). 
 	  Also, can read the XMage .dck format.
+	  
 - **1.3.1** (12/03/18):
     - Fixed error saving cards with " in the name. Until now, these cards 
 	  doesn't download.
     - Corrected version naming.
+	
 - **1.3** (12/03/18):
     - Added optional feature for download card images from a file list 
 	  (deck file, for example).
+	  
 - **1.2** (12/03/18):
     - Fixed error saving split cards (the cards with "//"). Until now, these 
 	  cards doesn't download.
@@ -347,7 +354,10 @@ data-canonical-src="https://i.imgur.com/I7QEYF6.gif" width="500" /></p>
 	  like XMage does. As strange chars in some systems, until now it caused 
 	  that images with that doesn't download.
     - Added option (-x, -ext) for force the image extension for the cards.
+	
 - **1.1** (09/02/18):
     - Fixed a relevant bug with basic land naming.
+	
 - **1.0** (10/01/18):
     - Initial release.
+	
