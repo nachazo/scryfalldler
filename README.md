@@ -168,13 +168,13 @@ The fallowing are example commands typed into a command prompt pointed at the sc
 
 Return to: [Usage](#usage)
 
-Further explaining the keywords of the argument `-size <sizeKeyword>`
+__This section further explains the keywords of the argument `-size <sizeKeyword>`__
 
 Each keyword will download cards at a particular size and resolution.   
 That size does not match actual card size. The image size downloaded is typically the size of a whole 8.5 by 11 sheet of paper, or larger.   
 So next to the image size information is the `pixels/inch if edited to real card size` column which shows the resolution of the card image if image editing software is used to adjust the resolution so the card image is the size of an actual card.  For example, with Paint.Net, if you open the card with Paint.Net and then go to `Image->Canvas Size` and change the `Resolution` to the appropriate `pixels/inch if edited to real card size` value, it will be the size of an actual magic card.
 
-| Card | Size in inches | pixels/inch | pixels/inch if edited to real card size  |
+| Size | Size in inches | pixels/inch | pixels/inch if edited to real card size  |
 | ---- | -------------- | ----------- | ----------------------------------------- |
 | Real physical Magic card | 2.45 by 3.42 | --- | --- |
 | `small` | 2 by 2.83 | 72 | 60 |
@@ -195,7 +195,7 @@ So next to the image size information is the `pixels/inch if edited to real card
 
 Return to: [Usage](#usage)
 
-Further explaining of the file format required by the argument `-file <fileName>.txt`
+__This section further explains the file format required by the argument `-file <fileName>.txt`__
 
 Text files used to declare the cards to download should have each line in the form...   
 * `<amount> <card name>`   
