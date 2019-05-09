@@ -1,3 +1,7 @@
+------------------------ THIS IS MOCKUP DOCUMENTATION -------------------------  
+--------------------- THE ACTUAL PROJECT CAN BE FOUND AT ----------------------  
+---------------------- https://github.com/nachazo/scryfalldler ------------------------  
+
 # Scryfalldler
 
 A simple fast tool to download Magic: The Gathering card images.   
