@@ -1,7 +1,8 @@
------------------------- THIS IS MOCKUP DOCUMENTATION -------------------------
-
---------------------- THE ACTUAL PROJECT CAN BE FOUND AT ----------------------
- ---------------------- https://github.com/nachazo/scryfalldler ------------------------
+```
+----------  THIS IS MOCK-UP DOCUMENTATION ----------------------
+--------- THE ACTUAL PROJECT CAN BE FOUND AT -------------------
+ ------ https://github.com/nachazo/scryfalldler ----------------
+```
 
 <h1 align="center">Scryfalldler</h1>
 
@@ -11,7 +12,7 @@ Scryfalldler is a PhP based client automated script for downlaoding and zipping 
 
 This script is a simply php cli coded. I wanted to practice a bit with php cli scripts and this is what I made. With php we can take advantage of expanded php multi-platform, client executed (not web server, to avoid requests and filesize limitations), easy curl (http download) and zip tools.
 
-For features and bugs use: [Issues](https://github.com/nachazo/scryfalldler/issues)
+For feature requests and bugs use: [Issues](https://github.com/nachazo/scryfalldler/issues)
 
 Don't forget to support [scryfall.com](http://scryfall.com)!
 
@@ -19,7 +20,7 @@ Don't forget to support [scryfall.com](http://scryfall.com)!
 
 Fetch cards in bulk  
 
--   through a list in a text file or Xmage .dck file
+-   through a text file or Xmage .dck file
 -   by set, get 1 of every card in a set
 -   through an [official Wizards product page](https://magic.wizards.com/en/products/warofthespark/cards)
 
@@ -27,9 +28,9 @@ Extras
 
 -   6 options for image size, including Art Crop and Border Crop
     
--   Multiple possible image types.
+-   Multiple choices in image types (jpg, png).
     
--   In a text or Xmage .dck files you can declare which set's art to use for each card. For cards with multiple images within a set, such as basic lands, you can add a collectors number to identify specifically which one.
+-   Able to declare which set's art to use for each individual card in text or Xmage .dck files. For cards with multiple images within a set, such as basic lands, you can add a collectors number to identify specifically which one.
     
 
 * * *
