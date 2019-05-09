@@ -97,7 +97,7 @@ A command can only include 1 and must include no other arguments
 
 Return to: [Usage](#usage)
 
-The fallowing are example commands typed into a command prompt within the scryfalldler directory.
+The fallowing are example commands typed into a command prompt pointed at the scryfalldler directory.
  
  ---------------
  
