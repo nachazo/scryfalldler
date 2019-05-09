@@ -187,7 +187,7 @@ So next to the image size information is the `pixels/inch if edited to real card
 
 <sub>1 - `border_crop` is a 105% scaled `normal` card image cropped back down to roughly `normal` size, removing a large portion of the black border.</sub>   
 <sub>2 - `art crop` is only the art of a `png` sized card image. It is imprecise and the size varies from card to card.</sub>    
-<sub>3 - `gatherer` is the image size downloaded through the [official wizards product page](https://magic.wizards.com/en/products/warofthespark/cards)</sub>   
+<sub>3 - `gatherer` is the image size downloaded through the `-url` argument </sub>
 
 -------------------
 
