@@ -1,137 +1,532 @@
-# scryfalldler
-Simple (fast and probably *bad* coded) php client automated script for download and zip card images using the open [scryfall.com](http://scryfall.com) API site ready for XMage.
-
-This script is a simply php cli coded. I wanted to practice a bit with php cli scripts and this is what I made. With php we can take advantage of expanded php multi-platform, client executed (not web server, to avoid requests and filesize limitations), easy curl (http download) and zip tools.
-
-Use [Issues](https://github.com/nachazo/scryfalldler/issues) for feature request or bugs.
-
-Don't forget to support [scryfall.com](http://scryfall.com).
-
-## How to run
-You only need **php** 5.3+ (instaled in your system or uncompressed, for example from [php downloads page](http://php.net/downloads.php) or LAMP folder - note: **no** web server required, noly php) with **curl extension enabled**. Normally comes installed and enabled in most lamps or similar. If not, for Debian based GNU/Unix like Ubuntu, you simply can do it with `sudo apt install php-curl`. For Windows, search over there (could be done just editing two lines in php.ini file) :P
-
-So, just execute command and place resultant zip in your XMage images folder. For tokens you can drag&drop to TOK.zip file.
-
-Btw, script doesn't need php-zip extension, I'm using built-in phar to compress in zip (one requirement less) and in my tests result size is the same (phar bundles with php 5.3+).
-
-Don't forget to test set results on XMage "Viewer". There you can see bad or errored named cards. With common Zip filemanagers (like 7Zip or WinRAR) you could edit the name with it for fix.
-
-### GNU/Unix based
-Download the script where you want, for example using:
-```cmd
-> wget https://raw.githubusercontent.com/nachazo/scryfalldler/master/scryfalldler
 ```
-And then simply run it with the desired options (this is a test command):
-```cmd
-> php scryfalldler -l
-```
-This example will show a list with the avaiable sets. Bellow you have some example commands.
-
-If you don't have php path configured in file system, you could invoke pointing php binary file, for example using:
-```cmd
-> /etc/bin/php scryfalldler -l
-```
-Also, if you want, you can give execute permissions with `chmod +x scryfalldler` to use without "php" word in the commands, just `scryfalldler` (or depending your system `./scryfalldler`). Depending how you saved the file, maybe you need to convert line endings with `sed -i s/\\r//g scryfalldler`.
-
-### Windows based
-Download the script where you want, save the path to a file or, for example, using Windows PowerShell (<kbd>Win</kbd> + <kbd>r</kbd>, then `powershell`):
-```cmd
-> wget https://raw.githubusercontent.com/nachazo/scryfalldler/master/scryfalldler -OutFile scryfalldler
-```
-And then simply run the command with the desired options (this is a test command):
-```cmd
-> php scryfalldler -l
-```
-This example will show a list with the avaiable sets.
-
-> *Note*: If you see weird symbols instead colors in the console, it's because [a problem with Windows ANSI encoding and php version](https://github.com/symfony/symfony/issues/19520). With lastest versions you will avoid it. Anyways, the image download works aswell :)
-
-If you don't have php path configured in file system, you could invoke pointing binary php.exe file, for example using:
-```cmd
-> C:\myPhpFolder\php scryfalldler -l
+----------  THIS IS MOCK-UP DOCUMENTATION ----------------------
+--------- THE ACTUAL PROJECT CAN BE FOUND AT -------------------
+ ------ https://github.com/nachazo/scryfalldler ----------------
 ```
 
-## Example commands
-Of course you can combine parameters, also using short or large reserved words, all listed in "Help" section (or type `php scryfalldler`).
-* This will download "Commander 2017" set cards (in large size) and zip to "C17.zip" in base folder:
-  * `php scryfalldler -s c17`
-* This will download "Commander 2017" set cards and zip to "C17.zip" in specified folder:
-  * `php scryfalldler -set c17 -f /home/user/xmage/myImages`
-* This will download "Commander 2017" cards art crop image set:
-  * `php scryfalldler -set c17 -size art_crop`
-* This will download "Commander 2017" set cards behind proxy:
-  * `php scryfalldler -s c17 -p http://myproxy:8888`
-* This will download "Commander 2017" card images from Wizards Gatherer:
-  * `php scryfalldler -s c17 -z gatherer`
-* This will download "Commander 2017" tokens and zip into a subfolder named "C17", you could drag&drop to TOK.zip:
-  * `php scryfalldler -set tc17 -r C17`
-* This will read each line of "My deck file.text" and search in Scryfall for cards, then save that in the script format, in a zip "MYDECKRESULT.zip". Useful for common deck files, for example:
-  * `php scryfalldler -file "My deck file.txt" -r MYDECKRESULT`
-* This will download "Future Sight" set from Gatherer and generate correctly with "FTS.zip" name:
-  * `php scryfalldler -g "Future Sight" -r FTS`
-* This will download "Exodus" set from Gatherer:
-  * `php scryfalldler -g exodus`
-* This will download card images from official Wizards product set images, this case for Dominaria. Missing images would be taken from Gatherer:
-  * `php scryfalldler -u https://magic.wizards.com/en/products/dominaria/cards -r DOM`
-* This will download token images from official Wizards product images, this case for Dominaria. As it have not names, could be unnamed (you may rename):
-  * `php scryfalldler -u https://magic.wizards.com/en/articles/archive/card-preview/tokens-dominaria-2018-04-12 -r TOK`
+<h1 align="center">Scryfalldler</h1>
 
-  
-## Changelog
+<p align="center"> A simple fast tool to download Magic: The Gathering card images. </p>
 
-* **1.4.1** (15/06/18):
-  * Small fix for cards with foil versions causing bad exporting.
-* **1.4** (27/04/18):
-  * Added "-g" option for download from Wizards Gatherer without taking any info from Scryfall. Doing it searching by set name.
-  * Added "-u" option for download from Wizards official set site card page. Empty cards comes from Gatherer. Also tokens, but "unnamed". Not works as good as Scryfall, needs some post-renaming, but usefull in early launched sets.
-* **1.3.3** (02/04/18):
-  * Configured error reporting for avoid showing in output high number of warnings and so on. Now only important errors will be shown.
-* **1.3.2** (13/03/18):
-  * Improved the new file list option. Now you could specify the set you want for the card edition with "card|set" (i.e: Opt|INV) (useful for lands also you can use collector number with #, i.e. Forest|bfz#273). Also, can read the XMage .dck format.
-* **1.3.1** (12/03/18):
-  * Fixed error saving cards with " in the name. Until now, these cards doesn't download.
-  * Corrected version naming.
-* **1.3** (12/03/18):
-  * Added optional feature for download card images from a file list (deck file, for example).
-* **1.2** (12/03/18):
-  * Fixed error saving split cards (the cards with "//"). Until now, these cards doesn't download.
-  * Fixed error saving cards with ":" and " * " in name. Replaced by blank, like XMage does. As strange chars in some systems, until now it caused that images with that doesn't download.
-  * Added option (-x, -ext) for force the image extension for the cards.
-* **1.1** (09/02/18):
-  * Fixed a relevant bug with basic land naming.
-* **1.0** (10/01/18):
-  * Initial release.
+Scryfalldler is a php based client automated script for downlaoding and zipping
+card images based off of the Scryfall API site.  
 
-## Help
-Command `php scryfalldler -h` shows:
+This script is a simple php, cli or command line, client. I wanted to practice a
+bit with php cli scripts and this is what I made. With php we can take advantage
+of expanded php multi-platform, client executed (not web server, to avoid
+requests and filesize limitations), easy curl (http download) and zip tools.
+
+For feature requests and bugs use:
+[Issues](https://github.com/nachazo/scryfalldler/issues) 
+
+Don't forget to support [scryfall.com](http://scryfall.com)!
+
+## Features
+
+Download cards in bulk  
+
+- through a text file or <a href="http://xmage.de/">Xmage</a> .dck file
+- by set, get 1 of every card in a set
+- through an [official Wizards product
+  page](https://magic.wizards.com/en/products/warofthespark/cards)
+
+Extras  
+
+- 6 options for  image size, including Art Crop and Border Crop
+- Multiple choices in image types (jpg, png).
+- Able to declare which set's art to use for each individual card in text or
+  Xmage .dck files.  For cards with multiple images within a set, such as basic
+  lands, you can add a collectors number to identify specifically which one.
+
+-------------------------------------------------------------------------------
+
+## Requirements
+
+1. **PhP version 5.3 or higher, with curl extensions enabled**    
+
+   - _Installing on Windows_   
+     1. Download the latest PhP version from the 
+
+        [windows PhP website](https://windows.php.net/).
+
+        - Copy the file php.ini-development in C:\PHP7\ and rename it to php.ini
+        - Open C:\PHP7\php.ini in a text editor and make the fallowing 
+          changes
+        - uncomment `; extension_dir = "ext"` to `extension_dir = "ext"`
+        - uncomment `;extension=curl` to `extension=curl`
+
+     2. Add PhP to the Windows 10 system path enviornmental variables
+
+        - Control Panel->System and Security->System->
+
+          Advanced system settings->Enviornmental Variables
+        - Under `System Variables` double click on `Path`
+        - Select `New` and type `C:\PHP7`
+        - In a command prompt type `php -v` to ensure it is working. 
+
+          If working, version and copyright information should show up.
+
+2. **The Scryfalldler client** 
+
+   - _Installing on Windows_   
+     1. Download the Client from GitHub
+        - Press the green `Clone or Download` button in the upper right, 
+          fallowed by `Download Zip`
+        - Extract the archive to your desired location
+        - In a command prompt, change the directory to the scryfalldler 
+          folder and type `php scryfalldler` to ensure it is working.   
+
+          If working, a list of commands should show up.
+
+-------------------------------------------------------------------------------
+
+## Usage
+
+Jump To: [Examples](#examples)
+
+   `php scryfalldler`  
+
+All scryfalldler functionality begins with (1) a command prompt opened to the
+directory scryfalldler is in and (2) the above phrase typed into that command
+prompt.
+
+Arguments can be added to the above phrase declaring the cards to be downloaded,
+in what size, and more.
+
+#### Argument Definitions
+
+-------------------------------------------------------------------------------
+
+A command can have _at most 1_ argument that declares the card images to be
+downloaded.
+
+<table>
+    <tr>
+        <th colspan="3">Declare the card images to download</th>
+    </tr>
+    <tr>
+        <th>Arguments</th>
+        <th>Description</th>
+        <th>Notes</th>
+    </tr>
+    <tr>
+        <td> <code>-file [file]</code> </td>
+        <td> Download cards named in a file </td>
+        <td>
+            Valid types: .txt file fallowing <a href="#text-file-format">
+            Text File Format</a>, or  <a href="http://xmage.de/">Xmage</a> 
+            .dck file 
+        </td>
+    </tr>
+    <tr>
+        <td> <code>-set [setAcronym]</code> </td>
+        <td> Download every card of a set </td>
+        <td>
+            <code>[setAcronym]</code>s can be found in
+            <a href="https://mtg.gamepedia.com/Template:List_of_Magic_sets"> 
+            This Table</a>.
+        </td>
+    </tr>
+    <tr>
+        <td> <code>-url [url]</code> </td>
+        <td> Download cards on a wizard's product page </td>
+        <td>
+            Card image size will be <code>gatherer</code> <br/>
+            <code>[url]</code> should be of the form 
+            <br/> https://magic.wizards.com/en/products/[set]/cards <br/> for 
+            example <br/> 
+            https://magic.wizards.com/en/products/warofthespark/cards 
+        </td> 
+    </tr> 
+    <tr> 
+        <td> 
+            <code>-gatherer [set]</code> 
+        </td> 
+        <td> Download every card of a set </td>
+        <td>
+            Broken. <br/> 
+            Downloads all cards from a given set. <br/> Downloads images at 
+            only <code>gatherer</code> image size.<br/> <code>[set]</code>
+            should be of the form <code>"Future Sight"</code>. 
+        </td> 
+    </tr>
+</table>
+
+-------------------------------------------------------------------------------
+
+A command to download card images can have _any number_ of arguments modifying
+the default values.
+
+<table>
+    <tr>
+        <th colspan="4">Modify the default values</th>
+    </tr>
+    <tr>
+        <th>Arguments <img width=100/> </th>
+        <th>Description</th>
+        <th>Default</th>
+        <th>Notes</th>
+    </tr>
+    <tr>
+        <td> <code>-size [size]</code> </td>
+        <td> The card image size </td>
+        <td> large </td>
+        <td>
+            <code>-url</code> commands always download
+            at <code>gatherer</code> size. <br/>Valid values: 
+            <code>small</code>, <code>medium</code>, <code>large</code>, 
+            <code>png</code>, <code>art_crop</code>, and 
+            <code>border_crop</code> <br/>  See <a 
+            href="#size-argument-details">Size Argument Details</a> for more 
+            information. 
+        </td>
+    </tr>
+    <tr>
+        <td> <code>-folder [folder]</code> </td>
+        <td> Folder to place the card zip file in </td>
+        <td> Scryfalldler<br/>Directory </td>
+        <td>
+            The folder will be within the scryfallder directory <br/>
+            If there is no folder by that name, one will be created. <br/>
+            Creating a folder outside of the scryfallder directory is untested
+        </td>
+    </tr>
+    <tr>
+        <td> <code>-force [zipName]</code> </td>
+        <td> The name of the card zip file </td>
+        <td> FILE </td>
+        <td> </td>
+    </tr>
+    <tr>
+        <td> <code>-ext [imgExt]</code> </td>
+        <td> The image type to download </td>
+        <td> jpg </td>
+        <td>
+           Valid Values: <code>jpg</code> and <code>png</code>
+        </td>
+    </tr>
+    <tr>
+        <td> <code>-proxy [proxy]</code> </td>
+        <td> Download through a proxy </td>
+        <td> No proxy </td>
+        <td>
+            The site to proxy through <br /> 
+            <code>[proxy]</code> should be of the form: 
+            http://proxy:port
+        </td>
+    </tr>
+    <tr>
+        <td> <code>-no-check</code> </td>
+        <td> Don't check for updates </td>
+        <td> Update <br/> Scryfalldler </td>
+        <td> 
+            On this execution do not check GitHub for updates 
+        </td>
+    </tr>
+</table>
+
+-------------------------------------------------------------------------------
+
+Special commands
+
+These are solitary commands, they must be used alone after `php scryfalldler`.
+
+<table>
+    <tr>
+        <th colspan="3">Solitary Arguments</th>
+    </tr>
+    <tr>
+        <th>Arguments</th>
+        <th>Notes</th>
+    </tr>
+    <tr>
+        <td> <code> </code> </td>
+        <td>
+            No argument returns help information, all the possible arguments 
+            and a brief description 
+        </td>
+    </tr>
+    <tr>
+        <td> <code>-help</code> </td>
+        <td>
+            Returns help information, all the possible arguments and a brief 
+            description 
+        </td>
+    </tr>
+    <tr>
+        <td> <code>-test</code> </td>
+        <td>
+            Returns whether scryfalldler can successfully connect to 
+            Scyfall 
+        </td>
+    </tr>
+    <tr>
+        <td> <code>-version</code> </td>
+        <td> Displays the version of scryfalldler you are running  </td>
+    </tr>
+    <tr>
+        <td> <code>-list</code> </td>
+        <td>
+            From Scryfall, lists all available sets for download, their 
+            acronyms, and card count.  <br />  The output is fallowed by 
+            the option to enter a set acronym to download the entire set 
+            at the default `large` image size. <br /> Entering nothing and 
+            then pressing `ENTER` ends the process without downloading 
+            anything
+        </td>
+    </tr>
+</table>
+
+-------------------------------------------------------------------------------
+
+### Examples
+
+Return to: [Usage](#usage)
+
+The fallowing are example commands typed into a command prompt pointed at the
+scryfalldler directory.
+
+-------------------------------------------------------------------------------
+
+`php scryfalldler -file myDeck.txt`     
+
+- Creates a zip file of card images, the amounts and names of each card to 
+  download are listed in the text file, `myDeck.txt`
+  - The card images are of default size, `large`  
+  - The zip file is placed in the default location, the scryfalldler 
+    directory   
+  - The zip file's name is defaulted to `FILE`   
+  - The extension on each image in the zip file is defaulted to `jpg`
+  - On this run, by default, scryfalldler checks for and downloads any 
+    GitHub updates
+  - On this run, by default, scryfalldler will not download through a proxy
+
+`php scryfalldler -file myDeck.txt -size png -folder decks/deck1/archive -force
+Deck1Archive -ext png -no-check` 
+
+- as above except...
+  - The card images are of size `png`   
+  - The zip file is placed in the folder 
+    `.../scryfalldlerDirectory/decks/deck1/archive/`   
+  - The zip file's name is changed to `Deck1Archive`
+  - The extension on each image in the zip file is changed to `png`
+  - On this run, scryfalldler will not check for github updates
+
+-------------------------------------------------------------------------------
+
+`php scryfalldler -set C17`   
+
+- Creates a zip file of cards images, this will contain 1 of each card from 
+  the set `C17`  
+  - The card images are of default size, `large`  
+  - The zip file is placed in the default location, the scryfalldler 
+    directory   
+  - The zip file's name is defaulted to `C17`   
+  - The extension on each image in the zip file is defaulted to `jpg`
+  - On this run, by default, scryfalldler checks for and downloads any 
+    GitHub updates
+  - On this run, by default, scryfalldler will not download through a proxy
+
+`php scryfalldler -set C17 -size art_crop -force C17ArtCrop -ext png`   
+
+- As above except...
+  - The zip file's name is changed to `C17ArtCrop`       
+  - the card image size is changed to `art_crop`   
+  - the extension on each image in the zip file is changed to `.png`
+
+-------------------------------------------------------------------------------
+
+`php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards` 
+
+- Creates a zip file of card images from Wizard's web page of `dominaria` 
+  cards   
+  - The card images are of default size, `gatherer`  
+  - The zip file is placed in the default location, the scryfalldler 
+    directory   
+  - The zip file's name is defaulted to `WZR`   
+  - The extension on each image in the zip file is defaulted to `jpg`
+  - On this run, by default, scryfalldler checks for and downloads any 
+    GitHub updates
+  - On this run, by default, scryfalldler will not download through a proxy
+
+`php scryfalldler -url https://magic.wizards.com/en/products/dominaria/cards -folder cards/dominaria`
+
+- As above except... 
+  - The zip file is placed in the folder `.../scryfalldlerDirectory/cards/dominaria/`  
+
+-------------------------------------------------------------------------------
+
+ `php scryfalldler`      
+- returns help information, all the possible arguments and a brief description 
+
+`php scryfalldler -list`   
+- in the command window, lists all of the card sets on Scryfall and the number of cards in each of those sets.
+- then it asks for a set to name to download all the cards of
+  - no additional arguments can be added
+  - the result is the same as a `php scryfalldler -set <setName>` call  
+  - entering no text then pressing `ENTER` ends the process without 
+    downloading
+
+-------------------------------------------------------------------------------
+
+### Size Argument Details
+
+Return to: [Usage](#usage)
+
+**This section further explains the keywords of the argument `-size
+[sizeKeyword]`**
+
+Each keyword will download cards at a particular size and resolution.  <br />
+That size does not match actual card size. The image size downloaded is
+typically the size of a whole 8.5 by 11 sheet of paper, or larger.  <br /> So
+next to the image size information is the `pixels/inch if edited to real card
+size` column which shows the resolution of the card image if image editing
+software is used to adjust the resolution so the card image is the size of an
+actual card.  For example, with Paint.Net, if you open the card with Paint.Net
+and then go to `Image->Canvas Size` and change the `Resolution` to the
+appropriate `Pixels/Inch to be Real Card Size` value, it will be close to the size
+of an actual magic card.
+
+<table>
+    <tr>
+        <th>Image Size</th>
+        <th>Size in Inches</th>
+        <th>Pixels/Inch</th>
+        <th>Pixels/Inch to be Real Card Size</th>
+    </tr>
+    <tr>
+        <td>Real Magic Card</td>
+        <td>2.45 by 3.42</td>
+        <td> --- </td>
+        <td> --- </td>
+    </tr>
+    <tr>
+        <td> <code>small</code> </td>
+        <td>2 by 2.83</td>
+        <td> 72 </td>
+        <td> 60 </td>
+    </tr>
+    <tr>
+        <td> <code>normal</code> </td>
+        <td>6.9 by 9.6</td>
+        <td> 72 </td>
+        <td> 195 </td>
+    </tr>
+    <tr>
+        <td> <code>large</code> </td>
+        <td>9.5 by 13</td>
+        <td> 72 </td>
+        <td> 275 </td>
+    </tr>
+    <tr>
+        <td> <code>png</code> </td>
+        <td> 10.3 by 14.4 </td>
+        <td> 72 </td>
+        <td> 300 </td>
+    </tr>
+    <tr>
+        <td> <code>border_crop<sup>1</sup> </code> </td>
+        <td>6.8 by 9.6</td>
+        <td> 72 </td>
+        <td> 210~ </td>
+    </tr>
+    <tr>
+        <td> <code>art_crop<sup>2</sup> </code> </td>
+        <td> --- </td>
+        <td> 72 </td>
+        <td> 300 </td>
+    </tr>
+    <tr>
+        <td> <code>gatherer<sup>3</sup> </code> </td>
+        <td> 2.76 by 3.85 </td>
+        <td> 96 </td>
+        <td> 108 </td>
+    </tr>
+</table>
+
+<sub>1 - `border_crop` is a 105% scaled `normal` card image cropped back down 
+to roughly `normal` size, removing a large portion of the black border.</sub>   
+<sub>2 - `art crop` is only the art of a `png` sized card image. It is 
+imprecise and the size varies from card to card.</sub>    
+<sub>3 - `gatherer` is the image size downloaded through the `-url` argument
+</sub>
+
+-------------------------------------------------------------------------------
+
+### Text File Format
+
+Return to: [Usage](#usage)
+
+**This section further explains the file format required by the argument `-file
+<[fileName].txt`**
+
+Text files used to declare the cards to download should have each line in the
+form...   
+
+- `[amount] [card name]`  
+
+   For Example  
+
+   `1 Rhystic Study`  
+   `2 Faithless Looting`  
+   `1 Gitaxian Probe`  
+
+There are optional parameters to add after the name, declaring which set to get
+the image from, and for cards with multiple images in a set (like lands) which
+collector number to use.
+
+- `[amount] [card name]|[setAcronym]#[collectorNumber]` 
+
+   For Example  
+
+   `1 Island|GK2#132`  
+
+Scryfalldler will ignore any entries of an already declared `<card name>`.  
+- For Example  
+
+    `1 Island|GK2#132`  
+    `1 Island|GK2#131`  
+
+    Scryfalldler will ignore the second entry for Island.   
+
+-------------------------------------------------------------------------------
+
+## Further Information
+
+Return to: [Usage](#usage)
+
+Each command has a shortened, 1 letter, abreviation and short functional
+description.  These are built into Scryfalldler and can be found through a 
+`php scryfallder` or `php scryfallder -help` command, or found below.
+
 ```yaml
 Usage:
   php scryfalldler [arguments] 
 
 Arguments: 
   All arguments also accept "--". 
-    -h, -help		Shows help (this info). 
-    -v, -version	Show version from your downloaded script.
-    -l, -list		List avaiable sets for download with codes from Scryfall. 
-    -s, -set		Launch download cards operation from the specified set from the site. 
-    -z, -size		The size for downloaded images ("image_uris" from Scryfall API).
+    -h, -help        Shows help (this info). 
+    -v, -version    Show version from your downloaded script.
+    -l, -list        List avaiable sets for download with codes from Scryfall. 
+    -s, -set        Launch download cards operation from the specified set from the site. 
+    -z, -size        The size for downloaded images ("image_uris" from Scryfall API).
                         Special value "gatherer" downloads Wizards Gatherer image if avaiable. 
                          Default value: large. 
                          Possible values: small, normal, large, png, art_crop, border_crop, gatherer.  
-    -u, -url		Download a set from the Wizards official site URL.
+    -u, -url        Download a set from the Wizards official site URL.
                         Usefull for new spoilers and for tokens pages. 
-    -g, -gatherer	Download a set from Wizards Gatherer searched by name. 
-    -f, -folder		Destination folder for the zip file (not tested with relative ones). 
-    -r, -force		Force zip and inside folder name (for tokens download, for example).
-    -d, -debug		With this, script only show messages but not download or create folder. 
-    -t, -test		Test your connection with Scryfall. 
-    -p, -proxy		Set proxy for connections (format http://proxy:port).
-    -n, -no-check	By default, script check for updates each execution (requesting to GitHub).
+    -g, -gatherer    Download a set from Wizards Gatherer searched by name. 
+    -f, -folder        Destination folder for the zip file (not tested with relative ones). 
+    -r, -force        Force zip and inside folder name (for tokens download, for example).
+    -d, -debug        With this, script only show messages but not download or create folder. 
+    -t, -test        Test your connection with Scryfall. 
+    -p, -proxy        Set proxy for connections (format http://proxy:port).
+    -n, -no-check    By default, script check for updates each execution (requesting to GitHub).
                         A message will warn you on new versions. You can avoid it with this option.
-    -x, -ext		Extension for card images. Instead .jpg (default value) that XMage uses,
+    -x, -ext        Extension for card images. Instead .jpg (default value) that XMage uses,
                         you could force what will be used, for example "png" 
                          Default value: jpg.
-    -i, -file		Optional file location, with cards-per-line for export a concrete group of
+    -i, -file        Optional file location, with cards-per-line for export a concrete group of
                         cards (a deck for example - allows XMage .dck format) like a set.
                         You could specify optionally the set for card edition (card|set) and collector
                         number (card|set#collnum) (for example, for lands). If not, last published
@@ -141,4 +536,58 @@ Site:
   https://github.com/nachazo/scryfalldler 
 ```
 
-<p align="center"><img src="https://i.imgur.com/I7QEYF6.gif" data-canonical-src="https://i.imgur.com/I7QEYF6.gif" width="500" /></p>
+<p align="center"><img src="https://i.imgur.com/I7QEYF6.gif" 
+data-canonical-src="https://i.imgur.com/I7QEYF6.gif" width="500" /></code>
+
+-------------------------------------------------------------------------------
+
+## Changelog
+
+- **1.4.1** (15/06/18):
+  - Small fix for cards with foil versions causing bad exporting.
+
+- **1.4** (27/04/18):
+  - Added "-g" option for download from Wizards Gatherer without taking 
+    any info from Scryfall. Doing it searching by set name.
+  - Added "-u" option for download from Wizards official set site card 
+    page. Empty cards comes from Gatherer. Also tokens, but "unnamed". 
+    Not works as good as Scryfall, needs some post-renaming, but usefull 
+    in early launched sets.
+
+- **1.3.3** (02/04/18):
+  - Configured error reporting for avoid showing in output high number of 
+    warnings and so on. Now only important errors will be shown.
+
+- **1.3.2** (13/03/18):
+  - Improved the new file list option. Now you could specify the set you 
+    want for the card edition with "card|set" (i.e: Opt|INV) (useful for 
+    lands also you can use collector number with #, i.e. Forest|bfz#273). 
+    Also, can read the XMage .dck format.
+
+- **1.3.1** (12/03/18):
+  - Fixed error saving cards with " in the name. Until now, these cards 
+    doesn't download.
+  - Corrected version naming.
+
+- **1.3** (12/03/18):
+  - Added optional feature for download card images from a file list 
+    (deck file, for example).
+
+- **1.2** (12/03/18):
+  - Fixed error saving split cards (the cards with "//"). Until now, these 
+    cards doesn't download.
+  - Fixed error saving cards with ":" and " * " in name. Replaced by blank, 
+    like XMage does. As strange chars in some systems, until now it caused 
+    that images with that doesn't download.
+  - Added option (-x, -ext) for force the image extension for the cards.
+
+- **1.1** (09/02/18):
+  - Fixed a relevant bug with basic land naming.
+
+- **1.0** (10/01/18):
+  - Initial release.
+
+-------------------------------------------------------------------------------
+
+documentation is fallowing [Carwin's Style
+Guide](https://github.com/carwin/markdown-styleguide)
