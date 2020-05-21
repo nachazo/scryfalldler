@@ -460,7 +460,7 @@ class Scryfall
     {
         if (is_array($cards)) {
             foreach ($cards as $card) {
-                if (is_array(@$card->card_faces) and @$card->layout!="split") {
+                if (is_array(@$card->card_faces) and @$card->layout!="split" and @$card->layout!="adventure") {
                     $pos = 0;
                     foreach ($card->card_faces as $face) {
                         $face->collector_number = $card->collector_number;
