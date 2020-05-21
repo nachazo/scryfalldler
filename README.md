@@ -79,6 +79,8 @@ Of course you can combine parameters, also using short or large reserved words, 
   
 ## Changelog
 
+* **1.4.2** (21/05/20):
+  * Fixed Adventures for set ELD. Made by @huwwevans.
 * **1.4.1** (15/06/18):
   * Small fix for cards with foil versions causing bad exporting.
 * **1.4** (27/04/18):
